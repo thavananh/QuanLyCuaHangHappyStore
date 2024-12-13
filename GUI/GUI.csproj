@@ -1,0 +1,922 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\OpenCvSharp4.runtime.win.4.10.0.20240616\build\netstandard\OpenCvSharp4.runtime.win.props" Condition="Exists('..\packages\OpenCvSharp4.runtime.win.4.10.0.20240616\build\netstandard\OpenCvSharp4.runtime.win.props')" />
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="..\packages\SQLite.3.13.0\build\net45\SQLite.props" Condition="Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8969D39B-6827-4F2C-B5DB-C559CD32E479}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GUI</RootNamespace>
+    <AssemblyName>GUI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Imaging.2.2.5\lib\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math, Version=2.2.5.0, Culture=neutral, PublicKeyToken=abba2e25397ee8c9, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.Core.3.7.304.23\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Kinesis, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.Kinesis.3.7.301.105\lib\net45\AWSSDK.Kinesis.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetZip, Version=1.16.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.16.0\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=5.1.2.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.5.1.2\lib\net45\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.barcodes, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.barcodes.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.bouncy-castle-adapter, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.bouncy-castle-adapter.8.0.4\lib\net461\itext.bouncy-castle-adapter.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.bouncy-castle-connector, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.bouncy-castle-connector.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.commons, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.commons.8.0.4\lib\net461\itext.commons.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.forms, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.forms.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.io, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.io.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.kernel, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.layout, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.layout.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.licensekey, Version=3.1.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.licensekey.3.1.5\lib\net45\itext.licensekey.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.licensekey.volume, Version=3.1.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.licensekey.volume.3.1.5\lib\net45\itext.licensekey.volume.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfa, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfua, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.pdfua.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.sign, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.sign.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.styledxmlparser, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.styledxmlparser.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.svg, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.svg.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.8.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.1\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.8.0.0\lib\net462\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.8.0.1\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.8.0.2\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=1.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp4.4.10.0.20240616\lib\netstandard2.0\OpenCvSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp4.Extensions.4.10.0.20240616\lib\netstandard2.0\OpenCvSharp.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.118.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.8.0.6\lib\net462\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Primitives.4.3.0\lib\net45\System.Drawing.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.3\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="zxing, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net47\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net47\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmAddEquipmentType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddEquipmentType.Designer.cs">
+      <DependentUpon>frmAddEquipmentType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddProductType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddProductType.Designer.cs">
+      <DependentUpon>frmAddProductType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSellProducct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSellProducct.Designer.cs">
+      <DependentUpon>frmSellProducct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmployeeRegistration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEmployeeRegistration.Designer.cs">
+      <DependentUpon>frmEmployeeRegistration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMemberRegistrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMemberRegistrationForm.designer.cs">
+      <DependentUpon>frmMemberRegistrationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPEList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPEList.designer.cs">
+      <DependentUpon>frmPEList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmployeeList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEmployeeList.designer.cs">
+      <DependentUpon>frmEmployeeList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageProduct.Designer.cs">
+      <DependentUpon>frmManageProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProductList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProductList.Designer.cs">
+      <DependentUpon>frmProductList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCustomerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCustomerList.designer.cs">
+      <DependentUpon>frmCustomerList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRestorePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRestorePassword.designer.cs">
+      <DependentUpon>frmRestorePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEquipmentTypeList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEquipmentTypeList.Designer.cs">
+      <DependentUpon>frmEquipmentTypeList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCreateAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCreateAccount.Designer.cs">
+      <DependentUpon>frmCreateAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageCompanyEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageCompanyEmployee.designer.cs">
+      <DependentUpon>frmManageCompanyEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageEquipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageEquipment.designer.cs">
+      <DependentUpon>frmManageEquipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageCustomer.designer.cs">
+      <DependentUpon>frmManageCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddProduct.Designer.cs">
+      <DependentUpon>frmAddProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRevenueReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRevenueReport.Designer.cs">
+      <DependentUpon>frmRevenueReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddEquipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddEquipment.designer.cs">
+      <DependentUpon>frmAddEquipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEquipmentInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEquipmentInfo.designer.cs">
+      <DependentUpon>frmEquipmentInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCustomerInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCustomerInfo.designer.cs">
+      <DependentUpon>frmCustomerInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEployeeInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEployeeInfo.designer.cs">
+      <DependentUpon>frmEployeeInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProductInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProductInfo.Designer.cs">
+      <DependentUpon>frmProductInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainPage.Designer.cs">
+      <DependentUpon>frmMainPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAddEquipmentType.resx">
+      <DependentUpon>frmAddEquipmentType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddProductType.resx">
+      <DependentUpon>frmAddProductType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSellProducct.resx">
+      <DependentUpon>frmSellProducct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEmployeeRegistration.resx">
+      <DependentUpon>frmEmployeeRegistration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMemberRegistrationForm.resx">
+      <DependentUpon>frmMemberRegistrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPEList.resx">
+      <DependentUpon>frmPEList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEmployeeList.resx">
+      <DependentUpon>frmEmployeeList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductList.resx">
+      <DependentUpon>frmProductList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageProduct.resx">
+      <DependentUpon>frmManageProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCustomerList.resx">
+      <DependentUpon>frmCustomerList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRestorePassword.resx">
+      <DependentUpon>frmRestorePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEquipmentTypeList.resx">
+      <DependentUpon>frmEquipmentTypeList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCreateAccount.resx">
+      <DependentUpon>frmCreateAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageCompanyEmployee.resx">
+      <DependentUpon>frmManageCompanyEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageEquipment.resx">
+      <DependentUpon>frmManageEquipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageCustomer.resx">
+      <DependentUpon>frmManageCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddProduct.resx">
+      <DependentUpon>frmAddProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRevenueReport.resx">
+      <DependentUpon>frmRevenueReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddEquipment.resx">
+      <DependentUpon>frmAddEquipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEquipmentInfo.resx">
+      <DependentUpon>frmEquipmentInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCustomerInfo.resx">
+      <DependentUpon>frmCustomerInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEployeeInfo.resx">
+      <DependentUpon>frmEployeeInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductInfo.resx">
+      <DependentUpon>frmProductInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainPage.resx">
+      <DependentUpon>frmMainPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="models\age_deploy.prototxt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="models\age_net.caffemodel">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="models\gender_deploy.prototxt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="models\gender_net.caffemodel">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="models\opencv_face_detector.pbtxt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="models\opencv_face_detector_uint8.pb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="times.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{996873b3-a77b-4a21-9128-8b41e98d1941}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{1de06b7d-15d7-4c5f-8fea-59e9a46a0047}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{5a409991-e727-41a1-a620-015aabc69328}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnQuenMatKhau.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LogoSSM_true.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ptbDangNhap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ptbThoat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tieu de Dang Nhap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\title_Trangchu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrangChu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLKH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLDCTD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLLT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QNLNS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SanPham.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TKDT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DKTV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DSKH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QTV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrangChu1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QTV1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tileQTV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logoTrangChu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3 gach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QuanliKH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quanlikhmauxanh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DSKH1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DKTV1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DanhsachKH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quanliKHmauxanhduong.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dskhmauxanh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThongtinKH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Xuat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chinhsua.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThongtinKH1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dangkithanhvien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\luu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quanlinhansu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\danhsachnhanvien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\danhsachHuanluyenvien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NhanSu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLNS_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dsnvnhoxiu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DSNVBu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thontinnhanvien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thontinnhanvienbu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thontinhlvnho.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThôntinHLVbu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dsHLV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dsHLV1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thontinnhanvienbu1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThôntinHLVbu1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quanlilichtring.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLTT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HLV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NVmauxanh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lamviectuan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lamviecngay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hlvmauxanh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Xoa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tải xuống.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\f5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unknow_avatar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar_unknow.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\xoa anh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLDC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quanlydungcutheduc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DSDCTD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DSTBBT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quanliDCTD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lbDanhsach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThemTB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DSDCmauxanh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lbThemTB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\machine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thongtinTB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TTTB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkKH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\product.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LogoSoftwareSustain.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Đăng Nhập.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DangNhap.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Beginner-Deadlift-Workout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\software-engineer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\software-engineer1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unauthorized-person.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\g2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gymbackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\9902257.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dustbin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LauMinhTam-modified.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NguyenVoMinhDuy-modified.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PhucNguyen-modified.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LamHoaMy-modified.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\anh-conan-cool-ngau_093000879-modified.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\AWSSDK.Kinesis.3.7.301.105\analyzers\dotnet\cs\AWSSDK.Kinesis.CodeAnalysis.dll" />
+    <Analyzer Include="..\packages\AWSSDK.Kinesis.3.7.301.105\analyzers\dotnet\cs\SharedAnalysisCode.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LogoHappyStore_NenTrang.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\banner_sale_noel.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grocery.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\123123.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconQuanLyThietBi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconThongKeDoanhThu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconQuanLyKhachHang.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconQuanLyNhanSu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconQuanLySanPham.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconDSKH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconDKTV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DSThietBiBaoTri.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconThemLoaiVD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconDSVDCH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconDSSP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconBanSanPham.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconThemSanPham.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconThemLoaiSanPham.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLite.3.13.0\build\net45\SQLite.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\OpenCvSharp4.runtime.win.4.10.0.20240616\build\netstandard\OpenCvSharp4.runtime.win.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCvSharp4.runtime.win.4.10.0.20240616\build\netstandard\OpenCvSharp4.runtime.win.props'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+</Project>

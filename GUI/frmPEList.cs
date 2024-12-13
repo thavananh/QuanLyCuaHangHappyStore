@@ -62,7 +62,7 @@ namespace GUI
         {
             List<LOAITHIETBI> listLoaiThietBi = new List<LOAITHIETBI>();
             listLoaiThietBi = loaiThietBiBLL.xemLoaiThietBi();
-            cmbEquipmentType.DisplayMember = "TenLoaiThietBi";
+            cmbEquipmentType.DisplayMember = "TenLoaiTaiKhoan";
             cmbEquipmentType.ValueMember = "MaLoaiThietBi";
             cmbEquipmentType.DataSource = listLoaiThietBi;
             

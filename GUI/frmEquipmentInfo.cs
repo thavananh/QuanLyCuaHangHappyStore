@@ -46,7 +46,7 @@ namespace GUI
             List<LOAITHIETBI> listLoaiThietBi = new List<LOAITHIETBI>();
             listLoaiThietBi = loaiThietBiBLL.xemLoaiThietBi();
             cbEquipmentType.DataSource = listLoaiThietBi;
-            cbEquipmentType.DisplayMember = "TenLoaiThietBi";
+            cbEquipmentType.DisplayMember = "TenLoaiTaiKhoan";
             cbEquipmentType.ValueMember = "MaLoaiThietBi";
         }
         private bool ptbClicked = false;

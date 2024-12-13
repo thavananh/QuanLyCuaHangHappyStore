@@ -79,7 +79,7 @@ namespace DAL
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "CREATE TABLE IF NOT EXISTS \"QUYENTAIKHOAN_LOAITAIKHOAN\" (\"MAQUYENTAIKHOAN\" TEXT, \"MALOAITAIKHOAN\" TEXT, CONSTRAINT \"QTKLTK_MaQuyenTaiKhoan_MaLoaiTaiKhoan\" PRIMARY KEY(\"MAQUYENTAIKHOAN\",\"MALOAITAIKHOAN\"), CONSTRAINT \"LTK_MaLoaiTaiKhoan\" FOREIGN KEY(\"MALOAITAIKHOAN\") REFERENCES \"LOAITAIKHOAN\"(\"MALOAITAIKHOAN\"), CONSTRAINT \"QTK_MaQuyenTaiKhoan\" FOREIGN KEY(\"MAQUYENTAIKHOAN\") REFERENCES \"QUYENTAIKHOAN\"(\"MAQUYENTAIKHOAN\"));";
+                sql = "CREATE TABLE IF NOT EXISTS \"QUYENTAIKHOAN_LOAITAIKHOAN\" (\"MAQUYENTAIKHOAN\" TEXT, \"MALOAITAIKHOAN\" TEXT, \"MIEUTA\" TEXT, CONSTRAINT \"QTKLTK_MaQuyenTaiKhoan_MaLoaiTaiKhoan\" PRIMARY KEY(\"MAQUYENTAIKHOAN\",\"MALOAITAIKHOAN\"), CONSTRAINT \"LTK_MaLoaiTaiKhoan\" FOREIGN KEY(\"MALOAITAIKHOAN\") REFERENCES \"LOAITAIKHOAN\"(\"MALOAITAIKHOAN\"), CONSTRAINT \"QTK_MaQuyenTaiKhoan\" FOREIGN KEY(\"MAQUYENTAIKHOAN\") REFERENCES \"QUYENTAIKHOAN\"(\"MAQUYENTAIKHOAN\"));";
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
@@ -1674,9 +1674,9 @@ namespace DAL
 
 
 
-        public bool CreateQuyenTaiKhoan(QuyenTaiKhoan quyen)
+        public bool CreateQuyenTaiKhoan(QUYENTAIKHOAN quyen)
         {
-            string sql = "INSERT INTO QUYENTAIKHOAN (MAQUYENTAIKHOAN, TENQUYENTAIKHOAN) VALUES (@MaQuyenTaiKhoan, @TenQuyenTaiKhoan)";
+            string sql = "INSERT INTO QUYENTAIKHOAN (MAQUYENTAIKHOAN, TENQUYENTAIKHOAN, MIEUTA) VALUES (@MaQuyenTaiKhoan, @TenQuyenTaiKhoan, @MIEUTA)";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
@@ -1691,10 +1691,10 @@ namespace DAL
         }
 
         // Read All
-        public List<QuyenTaiKhoan> GetAllQuyenTaiKhoan()
+        public List<QUYENTAIKHOAN> GetAllQuyenTaiKhoan()
         {
-            List<QuyenTaiKhoan> list = new List<QuyenTaiKhoan>();
-            string sql = "SELECT MAQUYENTAIKHOAN, TENQUYENTAIKHOAN FROM QUYENTAIKHOAN";
+            List<QUYENTAIKHOAN> list = new List<QUYENTAIKHOAN>();
+            string sql = "SELECT MAQUYENTAIKHOAN, TENQUYENTAIKHOAN, MIEUTA FROM QUYENTAIKHOAN";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
@@ -1703,10 +1703,11 @@ namespace DAL
                 {
                     while (reader.Read())
                     {
-                        QuyenTaiKhoan quyen = new QuyenTaiKhoan
+                        QUYENTAIKHOAN quyen = new QUYENTAIKHOAN
                         {
                             MaQuyenTaiKhoan = reader["MAQUYENTAIKHOAN"].ToString(),
-                            TenQuyenTaiKhoan = reader["TENQUYENTAIKHOAN"].ToString()
+                            TenQuyenTaiKhoan = reader["TENQUYENTAIKHOAN"].ToString(),
+                            MieuTa = reader["MIEUTA"].ToString()
                         };
                         list.Add(quyen);
                     }
@@ -1716,10 +1717,10 @@ namespace DAL
         }
 
         // Read By ID
-        public QuyenTaiKhoan GetQuyenTaiKhoanById(string maQuyenTaiKhoan)
+        public QUYENTAIKHOAN GetQuyenTaiKhoanById(string maQuyenTaiKhoan)
         {
-            QuyenTaiKhoan quyen = null;
-            string sql = "SELECT MAQUYENTAIKHOAN, TENQUYENTAIKHOAN FROM QUYENTAIKHOAN WHERE MAQUYENTAIKHOAN = @MaQuyenTaiKhoan";
+            QUYENTAIKHOAN quyen = null;
+            string sql = "SELECT MAQUYENTAIKHOAN, TENQUYENTAIKHOAN, MIEUTA FROM QUYENTAIKHOAN WHERE MAQUYENTAIKHOAN = @MaQuyenTaiKhoan";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
@@ -1730,10 +1731,11 @@ namespace DAL
                     {
                         if (reader.Read())
                         {
-                            quyen = new QuyenTaiKhoan
+                            quyen = new QUYENTAIKHOAN
                             {
                                 MaQuyenTaiKhoan = reader["MAQUYENTAIKHOAN"].ToString(),
-                                TenQuyenTaiKhoan = reader["TENQUYENTAIKHOAN"].ToString()
+                                TenQuyenTaiKhoan = reader["TENQUYENTAIKHOAN"].ToString(),
+                                MieuTa = reader["MIEUTA"].ToString()
                             };
                         }
                     }
@@ -1743,15 +1745,16 @@ namespace DAL
         }
 
         // Update
-        public bool UpdateQuyenTaiKhoan(QuyenTaiKhoan quyen)
+        public bool UpdateQuyenTaiKhoan(QUYENTAIKHOAN quyen)
         {
-            string sql = "UPDATE QUYENTAIKHOAN SET TENQUYENTAIKHOAN = @TenQuyenTaiKhoan WHERE MAQUYENTAIKHOAN = @MaQuyenTaiKhoan";
+            string sql = "UPDATE QUYENTAIKHOAN SET TENQUYENTAIKHOAN = @TenQuyenTaiKhoan, MIEUTA = @MIEUTA WHERE MAQUYENTAIKHOAN = @MaQuyenTaiKhoan";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
                 using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@TenQuyenTaiKhoan", quyen.TenQuyenTaiKhoan);
+                    cmd.Parameters.AddWithValue("@MIEUTA", quyen.MieuTa);
                     cmd.Parameters.AddWithValue("@MaQuyenTaiKhoan", quyen.MaQuyenTaiKhoan);
                     int rows = cmd.ExecuteNonQuery();
                     return rows > 0;
@@ -1777,7 +1780,7 @@ namespace DAL
 
 
         // Create
-        public bool CreateLoaiTaiKhoan(LoaiTaiKhoan loai)
+        public bool CreateLoaiTaiKhoan(LOAITAIKHOAN loai)
         {
             string sql = "INSERT INTO LOAITAIKHOAN (MALOAITAIKHOAN, TENMALOAITAIKHOAN, MIEUTA) VALUES (@MaLoaiTaiKhoan, @TenLoaiTaiKhoan, @MieuTa)";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -1795,9 +1798,9 @@ namespace DAL
         }
 
         // Read All
-        public List<LoaiTaiKhoan> GetAllLoaiTaiKhoan()
+        public List<LOAITAIKHOAN> GetAllLoaiTaiKhoan()
         {
-            List<LoaiTaiKhoan> list = new List<LoaiTaiKhoan>();
+            List<LOAITAIKHOAN> list = new List<LOAITAIKHOAN>();
             string sql = "SELECT MALOAITAIKHOAN, TENMALOAITAIKHOAN, MIEUTA FROM LOAITAIKHOAN";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
@@ -1807,11 +1810,11 @@ namespace DAL
                 {
                     while (reader.Read())
                     {
-                        LoaiTaiKhoan loai = new LoaiTaiKhoan
+                        LOAITAIKHOAN loai = new LOAITAIKHOAN
                         {
                             MaLoaiTaiKhoan = reader["MALOAITAIKHOAN"].ToString(),
                             TenLoaiTaiKhoan = reader["TENMALOAITAIKHOAN"].ToString(),
-                            MieuTa = Convert.ToInt32(reader["MIEUTA"])
+                            MieuTa = reader["MIEUTA"].ToString()
                         };
                         list.Add(loai);
                     }
@@ -1821,9 +1824,9 @@ namespace DAL
         }
 
         // Read By ID
-        public LoaiTaiKhoan GetLoaiTaiKhoanById(string maLoaiTaiKhoan)
+        public LOAITAIKHOAN GetLoaiTaiKhoanById(string maLoaiTaiKhoan)
         {
-            LoaiTaiKhoan loai = null;
+            LOAITAIKHOAN loai = null;
             string sql = "SELECT MALOAITAIKHOAN, TENMALOAITAIKHOAN, MIEUTA FROM LOAITAIKHOAN WHERE MALOAITAIKHOAN = @MaLoaiTaiKhoan";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
@@ -1835,11 +1838,11 @@ namespace DAL
                     {
                         if (reader.Read())
                         {
-                            loai = new LoaiTaiKhoan
+                            loai = new LOAITAIKHOAN
                             {
                                 MaLoaiTaiKhoan = reader["MALOAITAIKHOAN"].ToString(),
                                 TenLoaiTaiKhoan = reader["TENMALOAITAIKHOAN"].ToString(),
-                                MieuTa = Convert.ToInt32(reader["MIEUTA"])
+                                MieuTa = reader["MIEUTA"].ToString()
                             };
                         }
                     }
@@ -1849,7 +1852,7 @@ namespace DAL
         }
 
         // Update
-        public bool UpdateLoaiTaiKhoan(LoaiTaiKhoan loai)
+        public bool UpdateLoaiTaiKhoan(LOAITAIKHOAN loai)
         {
             string sql = "UPDATE LOAITAIKHOAN SET TENMALOAITAIKHOAN = @TenLoaiTaiKhoan, MIEUTA = @MieuTa WHERE MALOAITAIKHOAN = @MaLoaiTaiKhoan";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -1883,7 +1886,7 @@ namespace DAL
         }
 
         // Create
-        public bool CreateQuyenTaiKhoan_LoaiTaiKhoan(QuyenTaiKhoan_LoaiTaiKhoan qltk)
+        public bool CreateQuyenTaiKhoan_LoaiTaiKhoan(QUYENTAIKHOAN_LOAITAIKHOAN qltk)
         {
             string sql = "INSERT INTO QUYENTAIKHOAN_LOAITAIKHOAN (MAQUYENTAIKHOAN, MALOAITAIKHOAN) VALUES (@MaQuyenTaiKhoan, @MaLoaiTaiKhoan)";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -1900,9 +1903,9 @@ namespace DAL
         }
 
         // Read All
-        public List<QuyenTaiKhoan_LoaiTaiKhoan> GetAllQuyenTaiKhoan_LoaiTaiKhoan()
+        public List<QUYENTAIKHOAN_LOAITAIKHOAN> GetAllQuyenTaiKhoan_LoaiTaiKhoan()
         {
-            List<QuyenTaiKhoan_LoaiTaiKhoan> list = new List<QuyenTaiKhoan_LoaiTaiKhoan>();
+            List<QUYENTAIKHOAN_LOAITAIKHOAN> list = new List<QUYENTAIKHOAN_LOAITAIKHOAN>();
             string sql = "SELECT MAQUYENTAIKHOAN, MALOAITAIKHOAN FROM QUYENTAIKHOAN_LOAITAIKHOAN";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
@@ -1912,7 +1915,7 @@ namespace DAL
                 {
                     while (reader.Read())
                     {
-                        QuyenTaiKhoan_LoaiTaiKhoan qltk = new QuyenTaiKhoan_LoaiTaiKhoan
+                        QUYENTAIKHOAN_LOAITAIKHOAN qltk = new QUYENTAIKHOAN_LOAITAIKHOAN
                         {
                             MaQuyenTaiKhoan = reader["MAQUYENTAIKHOAN"].ToString(),
                             MaLoaiTaiKhoan = reader["MALOAITAIKHOAN"].ToString()
@@ -1925,9 +1928,9 @@ namespace DAL
         }
 
         // Read By IDs
-        public QuyenTaiKhoan_LoaiTaiKhoan GetQuyenTaiKhoan_LoaiTaiKhoan(string maQuyenTaiKhoan, string maLoaiTaiKhoan)
+        public QUYENTAIKHOAN_LOAITAIKHOAN GetQuyenTaiKhoan_LoaiTaiKhoan(string maQuyenTaiKhoan, string maLoaiTaiKhoan)
         {
-            QuyenTaiKhoan_LoaiTaiKhoan qltk = null;
+            QUYENTAIKHOAN_LOAITAIKHOAN qltk = null;
             string sql = "SELECT MAQUYENTAIKHOAN, MALOAITAIKHOAN FROM QUYENTAIKHOAN_LOAITAIKHOAN WHERE MAQUYENTAIKHOAN = @MaQuyenTaiKhoan AND MALOAITAIKHOAN = @MaLoaiTaiKhoan";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
@@ -1940,7 +1943,7 @@ namespace DAL
                     {
                         if (reader.Read())
                         {
-                            qltk = new QuyenTaiKhoan_LoaiTaiKhoan
+                            qltk = new QUYENTAIKHOAN_LOAITAIKHOAN
                             {
                                 MaQuyenTaiKhoan = reader["MAQUYENTAIKHOAN"].ToString(),
                                 MaLoaiTaiKhoan = reader["MALOAITAIKHOAN"].ToString()

@@ -113,8 +113,11 @@
     <Compile Include="HOADON.cs" />
     <Compile Include="KHACHHANG.cs" />
     <Compile Include="LOAISANPHAM.cs" />
+    <Compile Include="LOAITAIKHOAN.cs" />
     <Compile Include="LOAITHIETBI.cs" />
     <Compile Include="NHANVIEN.cs" />
+    <Compile Include="QUYENTAIKHOAN.cs" />
+    <Compile Include="QUYENTAIKHOAN_LOAITAIKHOAN.cs" />
     <Compile Include="SanPham.cs" />
     <Compile Include="TaiKhoan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -133,15 +133,19 @@
   <ItemGroup>
     <Compile Include="BienlaiAccess.cs" />
     <Compile Include="ChiPhiAccess.cs" />
+    <Compile Include="ChucNang_QuyenTaiKhoanAceess.cs" />
     <Compile Include="DatabaseAccess.cs" />
     <Compile Include="DoanhThuAccess.cs" />
     <Compile Include="GoiThanhVienAccess.cs" />
     <Compile Include="HoaDonAccess.cs" />
     <Compile Include="KhachHangAccess.cs" />
     <Compile Include="LoaiSanPhamAccess.cs" />
+    <Compile Include="LoaiTaiKhoanAccess.cs" />
     <Compile Include="LoaiThietBiAccess.cs" />
     <Compile Include="NhanVienAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuyenTaiKhoanAccess.cs" />
+    <Compile Include="QuyenTaiKhoan_LoaiTaiKhoanAccess.cs" />
     <Compile Include="SanPhamAccess.cs" />
     <Compile Include="TaiKhoanAccesss.cs" />
     <Compile Include="ThietBiAccess.cs" />

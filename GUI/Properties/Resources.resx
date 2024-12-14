@@ -136,6 +136,9 @@
   <data name="checkKH" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\checkKH.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="9902257" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\9902257.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DSKH1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DSKH1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -171,6 +174,9 @@
   </data>
   <data name="quanlydungcutheduc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\quanlydungcutheduc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ThôntinHLVbu1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ThôntinHLVbu1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="quanliDCTD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\quanliDCTD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -244,6 +250,9 @@
   <data name="QLKH" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QLKH.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="IconDKNV" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IconDKNV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="thontinnhanvienbu1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\thontinnhanvienbu1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -282,9 +291,6 @@
   </data>
   <data name="Xuat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Xuat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconDKTV" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconDKTV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DKTV" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DKTV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -337,14 +343,17 @@
   <data name="luu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\luu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ThôntinHLVbu1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ThôntinHLVbu1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconDKTV" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconDKTV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="iconThemSanPham" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconThemSanPham.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="lbDanhsach" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lbDanhsach.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iconThemLoaiSanPham" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconThemLoaiSanPham.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="IconBanSanPham" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconBanSanPham.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -388,10 +397,10 @@
   <data name="dsHLV" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dsHLV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="9902257" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\9902257.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconDSNV" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconDSNV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconThemLoaiSanPham" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconThemLoaiSanPham.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconThemLoaiNV" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconThemLoaiNV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

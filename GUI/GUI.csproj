@@ -908,6 +908,15 @@
   <ItemGroup>
     <None Include="Resources\iconThemLoaiSanPham.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconDSNV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconDKNV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconThemLoaiNV.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

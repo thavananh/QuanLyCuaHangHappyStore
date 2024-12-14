@@ -51,7 +51,11 @@ namespace GUI
             taikhoan.MatKhau = tbPassword.Text;
             if (TKBLL.Checklogin(taikhoan))
             {
-                AccountPriority(TKBLL.CheckAccountType(taikhoan));
+                //AccountPriority(TKBLL.CheckAccountType(taikhoan));
+                this.Hide();
+                frmMainPage fTC = new frmMainPage();
+                fTC.ShowDialog();
+                this.Show();
             }
             else
             {
@@ -66,20 +70,21 @@ namespace GUI
 
         void AccountPriority(int ltk)
         {
-            if (ltk == 1)
-            {
-                this.Hide();
-                frmMainPage fTC = new frmMainPage(1);
-                fTC.ShowDialog();
-                this.Show();
-            }
-            else
-            {
-                this.Hide();
-                frmMainPage fTC = new frmMainPage(0);
-                fTC.ShowDialog();
-                this.Show();
-            }
+            //if (ltk == 1)
+            //{
+            //    this.Hide();
+            //    frmMainPage fTC = new frmMainPage(1);
+            //    fTC.ShowDialog();
+            //    this.Show();
+            //}
+            //else
+            //{
+            //    this.Hide();
+            //    frmMainPage fTC = new frmMainPage(0);
+            //    fTC.ShowDialog();
+            //    this.Show();
+            //}
+            frmMainPage fTC = new frmMainPage();
         }
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)

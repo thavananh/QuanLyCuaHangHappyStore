@@ -24,7 +24,7 @@ namespace DTO
     {
         private string maTK;
         private string matkhau;
-        private int loaiTK;
+        private string loaiTK;
         private string email;
         public string MaTaiKhoan
         {
@@ -38,7 +38,7 @@ namespace DTO
             set => matkhau = value;
         }
         
-        public int LoaiTK
+        public string LoaiTK
         {
             get => loaiTK;
             set => loaiTK = value;
@@ -50,12 +50,8 @@ namespace DTO
         }
         public TaiKhoan()
         {
-            loaiTK = 2;
+            
         }
         ~TaiKhoan() { }
-
-
-
-
     }
 }

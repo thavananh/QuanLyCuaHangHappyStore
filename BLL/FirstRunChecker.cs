@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Entity;
+using DAL;
 using Microsoft.Win32;
 
 /*
@@ -31,6 +33,8 @@ namespace BLL
                 if (key == null || key.GetValue(FirstRunValueName) == null)
                 {
                     SetFirstRun();
+                    InitDatabase initDatabase = new InitDatabase();
+                    initDatabase.khoiTaoMotSoGiaTriMacDinh();
                     return true;
                 }
                 return false;

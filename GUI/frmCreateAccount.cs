@@ -56,11 +56,11 @@ namespace GUI
                     taikhoan.MatKhau = tbPassword.Text.Trim();
                     if (rdbQTV.Checked)
                     {
-                        taikhoan.LoaiTK = 1;
+                        taikhoan.LoaiTK = "admin";
                     }
                     else
                     {
-                        taikhoan.LoaiTK = 0;
+                        taikhoan.LoaiTK = "admin";
                     }
                     taikhoan.Email = tbEmail.Text.Trim();
                     if (ConditionClass.IsValidEmail(tbEmail.Text.Trim()) == false)

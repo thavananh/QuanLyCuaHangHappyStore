@@ -15,6 +15,8 @@ using AForge;
 using System.Text.RegularExpressions;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Runtime.Remoting.Messaging;
+using System.Data.Entity;
+using System.Data.OleDb;
 
 /*
  ____   ___  _____ _______        ___    ____  _____ 
@@ -43,10 +45,77 @@ namespace DAL
             new CHUCNANG
             {
                 MaChucNang = Guid.NewGuid().ToString(),
-                TenChucNang = "Test",
-                MieuTa = "Test"
+                TenChucNang = "danh_sach_vat_dung_cua_hang",
+                MieuTa = "Danh sách vật dụng cửa hàng"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "them_vat_dung",
+                MieuTa = "Thêm vật dụng"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "them_loai_vat_dung",
+                MieuTa = "Thêm loại vật dụng"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "thong_ke_doanh_thu",
+                MieuTa = "Thống kê doanh thu"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "danh_sach_khach_hang",
+                MieuTa = "Danh sách khách hàng"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "dang_ky_thanh_vien",
+                MieuTa = "Đăng ký thành viên"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "danh_sach_nhan_vien",
+                MieuTa = "Danh sách nhân viên"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "dang_ky_nhan_vien",
+                MieuTa = "Đăng ký nhân viên"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "danh_sach_san_pham",
+                MieuTa = "Danh sách sản phẩm"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "ban_san_pham",
+                MieuTa = "Bán sản phẩm"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "them_san_pham",
+                MieuTa = "Thêm sản phẩm"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "them_loai_san_pham",
+                MieuTa = "Thêm loại sản phẩm"
             },
         };
+
         public void init()
         {
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -88,6 +157,10 @@ namespace DAL
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
+                sql = "CREATE TABLE IF NOT EXISTS \"QUYENTAIKHOAN\" (\"MAQUYENTAIKHOAN\" TEXT, \"TENQUYENTAIKHOAN\" TEXT, \"MIEUTA\" TEXT, CONSTRAINT \"QTK_MaQuyenTaiKhoan_PK\" PRIMARY KEY(\"MAQUYENTAIKHOAN\"));";
+                cmd = new SQLiteCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
                 sql = "CREATE TABLE IF NOT EXISTS \"QUYENTAIKHOAN_LOAITAIKHOAN\" (\"MAQUYENTAIKHOAN\" TEXT, \"MALOAITAIKHOAN\" TEXT, \"MIEUTA\" TEXT, CONSTRAINT \"QTKLTK_MaQuyenTaiKhoan_MaLoaiTaiKhoan\" PRIMARY KEY(\"MAQUYENTAIKHOAN\",\"MALOAITAIKHOAN\"), CONSTRAINT \"LTK_MaLoaiTaiKhoan\" FOREIGN KEY(\"MALOAITAIKHOAN\") REFERENCES \"LOAITAIKHOAN\"(\"MALOAITAIKHOAN\"), CONSTRAINT \"QTK_MaQuyenTaiKhoan\" FOREIGN KEY(\"MAQUYENTAIKHOAN\") REFERENCES \"QUYENTAIKHOAN\"(\"MAQUYENTAIKHOAN\"));";
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -101,7 +174,7 @@ namespace DAL
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "CREATE TABLE IF NOT EXISTS \"TAIKHOAN\" (\"MATAIKHOAN\" TEXT NOT NULL, \"LOAITAIKHOAN\" INTEGER, \"MATKHAU\" TEXT NOT NULL, \"EMAILCANHAN\" TEXT, \"MATAIKHOANNHANVIEN\" TEXT, CONSTRAINT \"UC_UserId_PK\" PRIMARY KEY(\"MATAIKHOAN\"), CONSTRAINT \"TK_LTK_MaLoaiTaiKhoan\" FOREIGN KEY(\"LOAITAIKHOAN\") REFERENCES \"LOAITAIKHOAN\"(\"MALOAITAIKHOAN\"), CONSTRAINT \"TK_NV_MaNhanVien_FK\" FOREIGN KEY(\"MATAIKHOANNHANVIEN\") REFERENCES \"NHANVIEN\"(\"MANHANVIEN\"));";
+                sql = "CREATE TABLE IF NOT EXISTS \"TAIKHOAN\" (\"MATAIKHOAN\" TEXT NOT NULL, \"LOAITAIKHOAN\" TEXT, \"MATKHAU\" TEXT NOT NULL, \"EMAILCANHAN\" TEXT, \"MATAIKHOANNHANVIEN\" TEXT, CONSTRAINT \"UC_UserId_PK\" PRIMARY KEY(\"MATAIKHOAN\"), CONSTRAINT \"TK_LTK_MaLoaiTaiKhoan\" FOREIGN KEY(\"LOAITAIKHOAN\") REFERENCES \"LOAITAIKHOAN\"(\"MALOAITAIKHOAN\"), CONSTRAINT \"TK_NV_MaNhanVien_FK\" FOREIGN KEY(\"MATAIKHOANNHANVIEN\") REFERENCES \"NHANVIEN\"(\"MANHANVIEN\"));";
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
@@ -120,6 +193,16 @@ namespace DAL
             }
             ThemDoanhThuTheoNgay();
             ThemChiPhiTheoNgay();
+        }
+        public void khoiTaoMotSoGiaTriMacDinh()
+        {
+            ThemCacChucNangMacDinh();
+            ThemQuyenTaiKhoanMacDinh();
+            ThemLoaiTaiKhoanMacDinh();
+            ThemQuyenTaiKhoanGanLienVoiLoaiTaiKhoan();
+            themQuyenVaoChucNangMacDinh();
+            ThemNhanVienMacDinh();
+            ThemTaiKhoanMacDinh();
         }
         public bool Backup(string currentFilePath, string currentDBName, string destFilePath)
         {
@@ -199,7 +282,7 @@ namespace DAL
                 conn.Open();
                 string query = "INSERT OR IGNORE INTO TAIKHOAN(MATAIKHOAN, LOAITAIKHOAN, MATKHAU, EMAILCANHAN, MATAIKHOANNHANVIEN) VALUES(@MATAIKHOAN, @LOAITAIKHOAN, @MATKHAU, @EMAILCANHAN, @MATAIKHOANNHANVIEN)";
                 var cmd = new SQLiteCommand(query, conn);
-                cmd.Parameters.AddWithValue("@MATAIKHOANNHANVIEN", "admin");
+                cmd.Parameters.AddWithValue("@MATAIKHOAN", "admin");
                 cmd.Parameters.AddWithValue("@LOAITAIKHOAN", "admin");
                 cmd.Parameters.AddWithValue("@MATKHAU", BCrypt.Net.BCrypt.HashPassword("admin123"));
                 cmd.Parameters.AddWithValue("@EMAILCANHAN", "admin@example.com");
@@ -239,10 +322,10 @@ namespace DAL
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
-                string query = "INSERT OR IGNORE INTO MALOAITAIKHOAN, TENMALOAITAIKHOAN, MIEUTA VALUES(@MALOAITAIKHOAN, @TENLOAITAIKHOAN, @MIEUTA)";
+                string query = "INSERT OR IGNORE INTO LOAITAIKHOAN (MALOAITAIKHOAN, TENMALOAITAIKHOAN, MIEUTA) VALUES(@MALOAITAIKHOAN, @TENLOAITAIKHOAN, @MIEUTA)";
                 var cmd = new SQLiteCommand(query,conn);
                 cmd.Parameters.AddWithValue("@MALOAITAIKHOAN", maLoaiTaiKhoanMacDinh);
-                cmd.Parameters.AddWithValue("@TENLOAITAIKHOAN", "Admin");
+                cmd.Parameters.AddWithValue("@TENLOAITAIKHOAN", "admin");
                 cmd.Parameters.AddWithValue("MIEUTA", "Có tất cả các quyền");
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -259,7 +342,7 @@ namespace DAL
                 string query = "INSERT OR IGNORE INTO QUYENTAIKHOAN(MAQUYENTAIKHOAN, TENQUYENTAIKHOAN, MIEUTA) VALUES(@MAQUYENTAIKHOAN, @TENQUYENTAIKHOAN, @MIEUTA)";
                 var cmd = new SQLiteCommand(query,conn);
                 cmd.Parameters.AddWithValue("@MAQUYENTAIKHOAN", maQuyenTaiKhoanMacDinh);
-                cmd.Parameters.AddWithValue("@TENQUYENTAIKHOAN", "Admin");
+                cmd.Parameters.AddWithValue("@TENQUYENTAIKHOAN", "admin");
                 cmd.Parameters.AddWithValue("@MIEUTA", "Đây là quyền admin");
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -271,26 +354,112 @@ namespace DAL
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
-                string query = "INSERT OR IGNORE INTO QUYENTAIKHOAN_LOAITAIKHOAN(MAQUYENTAIKHOAN, MALOAITAIKHOAN) VALUES(@MAMAQUYENTAIKHOAN, @MALOAITAIKHOAN)";
+                string query = "INSERT OR IGNORE INTO QUYENTAIKHOAN_LOAITAIKHOAN(MAQUYENTAIKHOAN, MALOAITAIKHOAN) VALUES(@MAQUYENTAIKHOAN, @MALOAITAIKHOAN)";
                 var cmd = new SQLiteCommand(query, conn);
                 cmd.Parameters.AddWithValue("@MAQUYENTAIKHOAN", maQuyenTaiKhoanMacDinh);
-                cmd.Parameters.AddWithValue("@MALOAITAIKHOANMACDINH", maLoaiTaiKhoanMacDinh);
+                cmd.Parameters.AddWithValue("@MALOAITAIKHOAN", maLoaiTaiKhoanMacDinh);
                 cmd.ExecuteNonQuery();
                 conn.Close();
             }
         }
 
-        private void ThemLoaiChucNangVaCacQuyen()
+        public void ThemCacChucNangMacDinh()
         {
-            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            // Kiểm tra nếu danh sách rỗng thì không thực hiện gì cả
+            if (listChucNangMacDinh == null || listChucNangMacDinh.Count == 0)
             {
-                conn.Open();
-                string query = "INSERT OR IGNORE INTO CHUCNANG(MACHUCNANG, TENCHUCNANG, MIEUTA) VALUES(@MACHUCNANG, @TENCHUCNANG, @MIEUTA)";
-                var cmd = new SQLiteCommand(query, conn);
-                cmd.Parameters.AddWithValue("@CHUCNANG", );
-                cmd.Parameters.AddWithValue("@TENCHUCNANG", );
-                cmd.Parameters.AddWithValue("@MIEUTA", );
+                Console.WriteLine("Danh sách chức năng rỗng. Không có gì để thêm vào cơ sở dữ liệu.");
+                return;
+            }
 
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(dbName))
+                {
+                    conn.Open();
+
+                    // Sử dụng transaction để tăng hiệu suất khi thêm nhiều bản ghi
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        string query = @"
+                        INSERT OR IGNORE INTO CHUCNANG (MACHUCNANG, TENCHUCNANG, MIEUTA) 
+                        VALUES (@MACHUCNANG, @TENCHUCNANG, @MIEUTA)";
+
+                        using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                        {
+                            foreach (var chucNang in listChucNangMacDinh)
+                            {
+                                cmd.Parameters.Clear();
+                                cmd.Parameters.AddWithValue("@MACHUCNANG", chucNang.MaChucNang);
+                                cmd.Parameters.AddWithValue("@TENCHUCNANG", chucNang.TenChucNang);
+                                cmd.Parameters.AddWithValue("@MIEUTA", chucNang.MieuTa);
+
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        // Commit transaction sau khi thêm xong tất cả các bản ghi
+                        transaction.Commit();
+                    }
+
+                    conn.Close();
+                }
+
+                Console.WriteLine("Thêm chức năng thành công vào cơ sở dữ liệu.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Đã xảy ra lỗi khi thêm chức năng: {ex.Message}");
+                // Bạn có thể xử lý lỗi thêm ở đây, ví dụ ghi log hoặc ném lại ngoại lệ
+            }
+        }
+
+        private void themQuyenVaoChucNangMacDinh()
+        {
+            // Kiểm tra nếu danh sách chức năng rỗng thì không thực hiện gì cả
+            if (listChucNangMacDinh == null || listChucNangMacDinh.Count == 0)
+            {
+                return;
+            }
+
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(dbName))
+                {
+                    conn.Open();
+
+                    // Sử dụng transaction để tăng hiệu suất khi thêm nhiều bản ghi
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        string query = @"
+                        INSERT OR IGNORE INTO CHUCNANG_QUYENTAIKHOAN (MACHUCNANG, MAQUYENTAIKHOAN) 
+                        VALUES (@MACHUCNANG, @MAQUYENTAIKHOAN)";
+
+                        using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                        {
+                            foreach (var chucNang in listChucNangMacDinh)
+                            {
+                                cmd.Parameters.Clear();
+                                cmd.Parameters.AddWithValue("@MACHUCNANG", chucNang.MaChucNang);
+                                cmd.Parameters.AddWithValue("@MAQUYENTAIKHOAN", maQuyenTaiKhoanMacDinh);
+
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        // Commit transaction sau khi thêm xong tất cả các bản ghi
+                        transaction.Commit();
+                    }
+
+                    conn.Close();
+                }
+
+                Console.WriteLine("Gán quyền admin mặc định cho tất cả các chức năng thành công.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Đã xảy ra lỗi khi gán quyền cho admin: {ex.Message}");
+                // Bạn có thể xử lý lỗi thêm ở đây, ví dụ ghi log hoặc ném lại ngoại lệ
             }
         }
 
@@ -321,6 +490,7 @@ namespace DAL
                 conn.Close();
             }
         }
+        
     }
     public class DatabaseAccess
     {
@@ -1706,7 +1876,7 @@ namespace DAL
 
 
 
-        public bool CreateQuyenTaiKhoan(QUYENTAIKHOAN quyen)
+        public static bool CreateQuyenTaiKhoan(QUYENTAIKHOAN quyen)
         {
             string sql = "INSERT INTO QUYENTAIKHOAN (MAQUYENTAIKHOAN, TENQUYENTAIKHOAN, MIEUTA) VALUES (@MaQuyenTaiKhoan, @TenQuyenTaiKhoan, @MIEUTA)";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -1723,7 +1893,7 @@ namespace DAL
         }
 
         // Read All
-        public List<QUYENTAIKHOAN> GetAllQuyenTaiKhoan()
+        public static List<QUYENTAIKHOAN> GetAllQuyenTaiKhoan()
         {
             List<QUYENTAIKHOAN> list = new List<QUYENTAIKHOAN>();
             string sql = "SELECT MAQUYENTAIKHOAN, TENQUYENTAIKHOAN, MIEUTA FROM QUYENTAIKHOAN";
@@ -1749,7 +1919,7 @@ namespace DAL
         }
 
         // Read By ID
-        public QUYENTAIKHOAN GetQuyenTaiKhoanById(string maQuyenTaiKhoan)
+        public static QUYENTAIKHOAN GetQuyenTaiKhoanById(string maQuyenTaiKhoan)
         {
             QUYENTAIKHOAN quyen = null;
             string sql = "SELECT MAQUYENTAIKHOAN, TENQUYENTAIKHOAN, MIEUTA FROM QUYENTAIKHOAN WHERE MAQUYENTAIKHOAN = @MaQuyenTaiKhoan";
@@ -1777,7 +1947,7 @@ namespace DAL
         }
 
         // Update
-        public bool UpdateQuyenTaiKhoan(QUYENTAIKHOAN quyen)
+        public static bool UpdateQuyenTaiKhoan(QUYENTAIKHOAN quyen)
         {
             string sql = "UPDATE QUYENTAIKHOAN SET TENQUYENTAIKHOAN = @TenQuyenTaiKhoan, MIEUTA = @MIEUTA WHERE MAQUYENTAIKHOAN = @MaQuyenTaiKhoan";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -1795,7 +1965,7 @@ namespace DAL
         }
 
         // Delete
-        public bool DeleteQuyenTaiKhoan(string maQuyenTaiKhoan)
+        public static bool DeleteQuyenTaiKhoan(string maQuyenTaiKhoan)
         {
             string sql = "DELETE FROM QUYENTAIKHOAN WHERE MAQUYENTAIKHOAN = @MaQuyenTaiKhoan";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -1812,7 +1982,7 @@ namespace DAL
 
 
         // Create
-        public bool CreateLoaiTaiKhoan(LOAITAIKHOAN loai)
+        public static bool CreateLoaiTaiKhoan(LOAITAIKHOAN loai)
         {
             string sql = "INSERT INTO LOAITAIKHOAN (MALOAITAIKHOAN, TENMALOAITAIKHOAN, MIEUTA) VALUES (@MaLoaiTaiKhoan, @TenLoaiTaiKhoan, @MieuTa)";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -1830,7 +2000,7 @@ namespace DAL
         }
 
         // Read All
-        public List<LOAITAIKHOAN> GetAllLoaiTaiKhoan()
+        public static List<LOAITAIKHOAN> GetAllLoaiTaiKhoan()
         {
             List<LOAITAIKHOAN> list = new List<LOAITAIKHOAN>();
             string sql = "SELECT MALOAITAIKHOAN, TENMALOAITAIKHOAN, MIEUTA FROM LOAITAIKHOAN";
@@ -1856,7 +2026,7 @@ namespace DAL
         }
 
         // Read By ID
-        public LOAITAIKHOAN GetLoaiTaiKhoanById(string maLoaiTaiKhoan)
+        public static LOAITAIKHOAN GetLoaiTaiKhoanById(string maLoaiTaiKhoan)
         {
             LOAITAIKHOAN loai = null;
             string sql = "SELECT MALOAITAIKHOAN, TENMALOAITAIKHOAN, MIEUTA FROM LOAITAIKHOAN WHERE MALOAITAIKHOAN = @MaLoaiTaiKhoan";
@@ -1884,7 +2054,7 @@ namespace DAL
         }
 
         // Update
-        public bool UpdateLoaiTaiKhoan(LOAITAIKHOAN loai)
+        public static bool UpdateLoaiTaiKhoan(LOAITAIKHOAN loai)
         {
             string sql = "UPDATE LOAITAIKHOAN SET TENMALOAITAIKHOAN = @TenLoaiTaiKhoan, MIEUTA = @MieuTa WHERE MALOAITAIKHOAN = @MaLoaiTaiKhoan";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -1902,7 +2072,7 @@ namespace DAL
         }
 
         // Delete
-        public bool DeleteLoaiTaiKhoan(string maLoaiTaiKhoan)
+        public static bool DeleteLoaiTaiKhoan(string maLoaiTaiKhoan)
         {
             string sql = "DELETE FROM LOAITAIKHOAN WHERE MALOAITAIKHOAN = @MaLoaiTaiKhoan";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -1918,7 +2088,7 @@ namespace DAL
         }
 
         // Create
-        public bool CreateQuyenTaiKhoan_LoaiTaiKhoan(QUYENTAIKHOAN_LOAITAIKHOAN qltk)
+        public static bool ThemQuyenTaiKhoan_LoaiTaiKhoan(QUYENTAIKHOAN_LOAITAIKHOAN qltk)
         {
             string sql = "INSERT INTO QUYENTAIKHOAN_LOAITAIKHOAN (MAQUYENTAIKHOAN, MALOAITAIKHOAN) VALUES (@MaQuyenTaiKhoan, @MaLoaiTaiKhoan)";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -1935,7 +2105,7 @@ namespace DAL
         }
 
         // Read All
-        public List<QUYENTAIKHOAN_LOAITAIKHOAN> GetAllQuyenTaiKhoan_LoaiTaiKhoan()
+        public static List<QUYENTAIKHOAN_LOAITAIKHOAN> GetAllQuyenTaiKhoan_LoaiTaiKhoan()
         {
             List<QUYENTAIKHOAN_LOAITAIKHOAN> list = new List<QUYENTAIKHOAN_LOAITAIKHOAN>();
             string sql = "SELECT MAQUYENTAIKHOAN, MALOAITAIKHOAN FROM QUYENTAIKHOAN_LOAITAIKHOAN";
@@ -1960,7 +2130,7 @@ namespace DAL
         }
 
         // Read By IDs
-        public QUYENTAIKHOAN_LOAITAIKHOAN GetQuyenTaiKhoan_LoaiTaiKhoan(string maQuyenTaiKhoan, string maLoaiTaiKhoan)
+        public static QUYENTAIKHOAN_LOAITAIKHOAN GetQuyenTaiKhoan_LoaiTaiKhoan(string maQuyenTaiKhoan, string maLoaiTaiKhoan)
         {
             QUYENTAIKHOAN_LOAITAIKHOAN qltk = null;
             string sql = "SELECT MAQUYENTAIKHOAN, MALOAITAIKHOAN FROM QUYENTAIKHOAN_LOAITAIKHOAN WHERE MAQUYENTAIKHOAN = @MaQuyenTaiKhoan AND MALOAITAIKHOAN = @MaLoaiTaiKhoan";
@@ -1992,7 +2162,7 @@ namespace DAL
         // updating typically involves deleting the old relationship and inserting a new one.
         // Here, we'll implement a simple update that changes the MaLoaiTaiKhoan for a given MaQuyenTaiKhoan.
 
-        public bool UpdateQuyenTaiKhoan_LoaiTaiKhoan(string maQuyenTaiKhoan, string oldMaLoaiTaiKhoan, string newMaLoaiTaiKhoan)
+        public static bool UpdateQuyenTaiKhoan_LoaiTaiKhoan(string maQuyenTaiKhoan, string oldMaLoaiTaiKhoan, string newMaLoaiTaiKhoan)
         {
             string sql = "UPDATE QUYENTAIKHOAN_LOAITAIKHOAN SET MALOAITAIKHOAN = @NewMaLoaiTaiKhoan WHERE MAQUYENTAIKHOAN = @MaQuyenTaiKhoan AND MALOAITAIKHOAN = @OldMaLoaiTaiKhoan";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -2010,7 +2180,7 @@ namespace DAL
         }
 
         // Delete
-        public bool DeleteQuyenTaiKhoan_LoaiTaiKhoan(string maQuyenTaiKhoan, string maLoaiTaiKhoan)
+        public static bool DeleteQuyenTaiKhoan_LoaiTaiKhoan(string maQuyenTaiKhoan, string maLoaiTaiKhoan)
         {
             string sql = "DELETE FROM QUYENTAIKHOAN_LOAITAIKHOAN WHERE MAQUYENTAIKHOAN = @MaQuyenTaiKhoan AND MALOAITAIKHOAN = @MaLoaiTaiKhoan";
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -2023,6 +2193,84 @@ namespace DAL
                     int rows = cmd.ExecuteNonQuery();
                     return rows > 0;
                 }
+            }
+        }
+
+        public static bool AddChucNang_QuyenTaiKhoan(CHUCNANG_QUYENTAIKHOAN input)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                conn.Open();
+                int i = 0;
+                string query = "INSERT INTO CHUCNANG_QUYENTAIGHOAN (MACHUCNANG, MAQUYENTAIKHOAN) VALUES (@MACHUCNANG, @MAQUYENTAIKHOAN)";
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@MACHUCNANG", input.MaChucNang);
+                    cmd.Parameters.AddWithValue("@MAQUYENTAIKHOAN", input.MaQuyenTaiKhoan);
+                    i = cmd.ExecuteNonQuery();
+                    return i > 0;
+                }
+            }
+        }
+        public static List<CHUCNANG_QUYENTAIKHOAN> GetAllChucNang_QuyenTaiKhoan()
+        {
+            List<CHUCNANG_QUYENTAIKHOAN> listChucNang_QuyenTaiKhoan = new List<CHUCNANG_QUYENTAIKHOAN> ();
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                conn.Open();
+                string query = "SELECT * FROM CHUCNANG_QUYENTAIGHOAN";
+                using (var cmd = new SQLiteCommand(query, conn))
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        CHUCNANG_QUYENTAIKHOAN tmp = new CHUCNANG_QUYENTAIKHOAN
+                        {
+                            MaChucNang = reader["MACHUCNANG"].ToString(),
+                            MaQuyenTaiKhoan = reader["MAQUYENTAIKHOAN"].ToString()
+                        };
+                        listChucNang_QuyenTaiKhoan.Add(tmp);
+                    }
+                }
+                conn.Close();
+            }
+            return listChucNang_QuyenTaiKhoan;
+        }
+        public static bool UpdateChucNang_QuyenTaiKhoan(string maChucNang, string newMaQuyenTaiKhoan, string oldMaQuyenTaiKhoan)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                int row = 0;
+                conn.Open();
+                string query = "UPDATE CHUCNANG_QUYENTAIKHOAN SET MAQUYENTAIKHOAN = @NEW_MAQUYENTAIKHOAN WHERE MACHUCNANG = @MACHUCNANG AND MAQUYENTAIKHOAN = @OLD_MAQUYENTAIKHOAN";
+
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@MACHUCNANG", maChucNang);
+                    cmd.Parameters.AddWithValue("@NEW_MAQUYENTAIKHOAN", newMaQuyenTaiKhoan);
+                    cmd.Parameters.AddWithValue("@OLD_MAQUYENTAIKHOAN", oldMaQuyenTaiKhoan); 
+                    row = cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+                return row > 0;
+            }
+        }
+        public static bool DeleteChucNang_QuyenTaiKhoan(string maChucNang, string maQuyenTaiKhoan)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                int i = 0;
+                conn.Open();
+                string query = "DELETE FROM CHUCNANG_QUYENTAIGHOAN WHERE MACHUCNANG = @MACHUCNANG AND MAQUYENTAIKHOAN = @MAQUYENTAIKHOAN";
+
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@MACHUCNANG", maChucNang);
+                    cmd.Parameters.AddWithValue("@MAQUYENTAIKHOAN", maQuyenTaiKhoan);
+                    i = cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+                return i > 0;
             }
         }
     }

@@ -111,6 +111,8 @@
   <ItemGroup>
     <Compile Include="BienlaiBLL.cs" />
     <Compile Include="ChiPhiBLL.cs" />
+    <Compile Include="ChucNangBLL.cs" />
+    <Compile Include="ChucNang_QuyenTaiKhoanBLL.cs" />
     <Compile Include="ConditionClass.cs" />
     <Compile Include="DoanhThuBLL.cs" />
     <Compile Include="EmailOTPBLL.cs" />
@@ -119,9 +121,13 @@
     <Compile Include="HoaDonBLL.cs" />
     <Compile Include="KHBLL.cs" />
     <Compile Include="LoaiSanPhamBLL.cs" />
+    <Compile Include="LoaiTaiKhoanBLL.cs" />
     <Compile Include="LoaiThietBiBLL.cs" />
     <Compile Include="NhanVienBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuanLyQuyenHanChucNang.cs" />
+    <Compile Include="QuyenTaiKhoanBLL.cs" />
+    <Compile Include="QuyenTaiKhoan_LoaiTaiKhoanBLL.cs" />
     <Compile Include="SanPhamBLL.cs" />
     <Compile Include="TaiKhoanBLL.cs" />
     <Compile Include="ThietBiBLL.cs" />

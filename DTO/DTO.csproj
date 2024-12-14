@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="BIENLAI.CS" />
     <Compile Include="CHIPHI.cs" />
+    <Compile Include="CHUCNANG.cs" />
     <Compile Include="DOANHTHU.CS" />
     <Compile Include="GOITHANHVIEN.cs" />
     <Compile Include="HOADON.cs" />

@@ -38,6 +38,15 @@ namespace DAL
         private string maQuyenTaiKhoanMacDinh = Guid.NewGuid().ToString();
         private string maTaiKhoanNhanVienMacDinh = Guid.NewGuid().ToString();
         private string maLoaiTaiKhoanMacDinh = Guid.NewGuid().ToString();
+        private List<CHUCNANG> listChucNangMacDinh = new List<CHUCNANG>
+        {
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "Test",
+                MieuTa = "Test"
+            },
+        };
         public void init()
         {
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -80,6 +89,15 @@ namespace DAL
                 cmd.ExecuteNonQuery();
 
                 sql = "CREATE TABLE IF NOT EXISTS \"QUYENTAIKHOAN_LOAITAIKHOAN\" (\"MAQUYENTAIKHOAN\" TEXT, \"MALOAITAIKHOAN\" TEXT, \"MIEUTA\" TEXT, CONSTRAINT \"QTKLTK_MaQuyenTaiKhoan_MaLoaiTaiKhoan\" PRIMARY KEY(\"MAQUYENTAIKHOAN\",\"MALOAITAIKHOAN\"), CONSTRAINT \"LTK_MaLoaiTaiKhoan\" FOREIGN KEY(\"MALOAITAIKHOAN\") REFERENCES \"LOAITAIKHOAN\"(\"MALOAITAIKHOAN\"), CONSTRAINT \"QTK_MaQuyenTaiKhoan\" FOREIGN KEY(\"MAQUYENTAIKHOAN\") REFERENCES \"QUYENTAIKHOAN\"(\"MAQUYENTAIKHOAN\"));";
+                cmd = new SQLiteCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+
+                sql = "CREATE TABLE IF NOT EXISTS \"CHUCNANG\" (\"MACHUCNANG\" TEXT, \"TENCHUCNANG\" TEXT, \"MIEUTA\" TEXT, CONSTRAINT \"CN_MaChucNang_PK\" PRIMARY KEY(\"MACHUCNANG\"));";
+                cmd = new SQLiteCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+                sql = "CREATE TABLE IF NOT EXISTS \"CHUCNANG_QUYENTAIKHOAN\" (\"MACHUCNANG\" TEXT, \"MAQUYENTAIKHOAN\" TEXT, CONSTRAINT \"CN_QTK_MaChucNang_MaQuyenTaiKhoan\" PRIMARY KEY(\"MACHUCNANG\",\"MAQUYENTAIKHOAN\"), CONSTRAINT \"CN_MaChucNang\" FOREIGN KEY(\"MACHUCNANG\") REFERENCES \"CHUCNANG\"(\"MACHUCNANG\"), CONSTRAINT \"QTK_MaQuyenTaiKhoan\" FOREIGN KEY(\"MAQUYENTAIKHOAN\") REFERENCES \"QUYENTAIKHOAN\"(\"MAQUYENTAIKHOAN\"));";
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
@@ -259,6 +277,20 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@MALOAITAIKHOANMACDINH", maLoaiTaiKhoanMacDinh);
                 cmd.ExecuteNonQuery();
                 conn.Close();
+            }
+        }
+
+        private void ThemLoaiChucNangVaCacQuyen()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                conn.Open();
+                string query = "INSERT OR IGNORE INTO CHUCNANG(MACHUCNANG, TENCHUCNANG, MIEUTA) VALUES(@MACHUCNANG, @TENCHUCNANG, @MIEUTA)";
+                var cmd = new SQLiteCommand(query, conn);
+                cmd.Parameters.AddWithValue("@CHUCNANG", );
+                cmd.Parameters.AddWithValue("@TENCHUCNANG", );
+                cmd.Parameters.AddWithValue("@MIEUTA", );
+
             }
         }
 

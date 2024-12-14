@@ -134,6 +134,7 @@
     <Compile Include="BienlaiAccess.cs" />
     <Compile Include="ChiPhiAccess.cs" />
     <Compile Include="ChucNang_QuyenTaiKhoanAceess.cs" />
+    <Compile Include="LoaiChucVuAccess.cs" />
     <Compile Include="DatabaseAccess.cs" />
     <Compile Include="DoanhThuAccess.cs" />
     <Compile Include="GoiThanhVienAccess.cs" />

@@ -120,6 +120,7 @@
     <Compile Include="GoiTapBLL.cs" />
     <Compile Include="HoaDonBLL.cs" />
     <Compile Include="KHBLL.cs" />
+    <Compile Include="LoaiChucVuBLL.cs" />
     <Compile Include="LoaiSanPhamBLL.cs" />
     <Compile Include="LoaiTaiKhoanBLL.cs" />
     <Compile Include="LoaiThietBiBLL.cs" />

@@ -251,6 +251,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAddEmployeeType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddEmployeeType.Designer.cs">
+      <DependentUpon>frmAddEmployeeType.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAddEquipmentType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -403,6 +409,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAddEmployeeType.resx">
+      <DependentUpon>frmAddEmployeeType.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAddEquipmentType.resx">
       <DependentUpon>frmAddEquipmentType.cs</DependentUpon>
     </EmbeddedResource>

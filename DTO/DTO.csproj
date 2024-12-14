@@ -110,6 +110,7 @@
     <Compile Include="CHIPHI.cs" />
     <Compile Include="CHUCNANG.cs" />
     <Compile Include="CHUCNANG_QUYENTAIKHOAN.cs" />
+    <Compile Include="LOAICHUCVU.cs" />
     <Compile Include="DOANHTHU.CS" />
     <Compile Include="GOITHANHVIEN.cs" />
     <Compile Include="HOADON.cs" />

@@ -54,6 +54,14 @@ namespace GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
+            frmAddEmployeeType frmadd = new frmAddEmployeeType();
+            this.Hide();
+            frmadd.ShowDialog();
+            this.Show();
+        }
+
+        private void frmManageCompanyEmployee_Load(object sender, EventArgs e)
+        {
 
         }
     }

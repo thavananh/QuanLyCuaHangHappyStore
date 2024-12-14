@@ -40,6 +40,7 @@ namespace DAL
         private string maQuyenTaiKhoanMacDinh = Guid.NewGuid().ToString();
         private string maTaiKhoanNhanVienMacDinh = Guid.NewGuid().ToString();
         private string maLoaiTaiKhoanMacDinh = Guid.NewGuid().ToString();
+        private string maLoaiChucVuMacDinh = Guid.NewGuid().ToString();
         private List<CHUCNANG> listChucNangMacDinh = new List<CHUCNANG>
         {
             new CHUCNANG
@@ -141,6 +142,14 @@ namespace DAL
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
+                sql = "CREATE TABLE IF NOT EXISTS \"LOAICHUCVU\" (\"MALOAICHUCVU\" TEXT, \"TENLOAICHUCVU\" INTEGER, CONSTRAINT \"LCV_MaLoaiChucVu_PK\" PRIMARY KEY(\"MALOAICHUCVU\"));";
+                cmd = new SQLiteCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
+                sql = "CREATE TABLE IF NOT EXISTS \"NHANVIEN\" (\"MANHANVIEN\" TEXT NOT NULL, \"HOTEN\" TEXT, \"NGAYSINH\" TEXT, \"GIOITINH\" TEXT, \"CMND\" TEXT, \"DIACHI\" TEXT, \"SDT\" TEXT, \"EMAIL\" TEXT, \"GHICHU\" TEXT, \"MALOAICHUCVU\" TEXT, \"ANH\" BLOB, CONSTRAINT \"NV_MaNhanVien_PK\" PRIMARY KEY(\"MANHANVIEN\"), CONSTRAINT \"LCV_MaLoaiChucVu\" FOREIGN KEY(\"CHUCVU\") REFERENCES \"LOAICHUCVU\"(\"MALOAICHUCVU\"));";
+                cmd = new SQLiteCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
                 sql = "CREATE TABLE IF NOT EXISTS \"NHANVIEN\" (\"MANHANVIEN\" TEXT NOT NULL, \"HOTEN\" TEXT, \"NGAYSINH\" TEXT, \"GIOITINH\" TEXT, \"CMND\" TEXT, \"DIACHI\" TEXT, \"SDT\" TEXT, \"EMAIL\" TEXT, \"GHICHU\" TEXT, \"CHUCVU\" TEXT, \"ANH\" BLOB, PRIMARY KEY(\"MANHANVIEN\"));";
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -153,7 +162,7 @@ namespace DAL
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "CREATE TABLE IF NOT EXISTS \"LOAITAIKHOAN\" (\"MALOAITAIKHOAN\" TEXT, \"TENMALOAITAIKHOAN\" TEXT, \"MIEUTA\" INTEGER, CONSTRAINT \"LTK_MaLoaiTaiKhoan_PK\" PRIMARY KEY(\"MALOAITAIKHOAN\"));";
+                sql = "CREATE TABLE IF NOT EXISTS \"LOAITAIKHOAN\" (\"MALOAITAIKHOAN\" TEXT, \"TENMALOAITAIKHOAN\" TEXT, \"MIEUTA\" TEXT, CONSTRAINT \"LTK_MaLoaiTaiKhoan_PK\" PRIMARY KEY(\"MALOAITAIKHOAN\"));";
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
@@ -283,7 +292,7 @@ namespace DAL
                 string query = "INSERT OR IGNORE INTO TAIKHOAN(MATAIKHOAN, LOAITAIKHOAN, MATKHAU, EMAILCANHAN, MATAIKHOANNHANVIEN) VALUES(@MATAIKHOAN, @LOAITAIKHOAN, @MATKHAU, @EMAILCANHAN, @MATAIKHOANNHANVIEN)";
                 var cmd = new SQLiteCommand(query, conn);
                 cmd.Parameters.AddWithValue("@MATAIKHOAN", "admin");
-                cmd.Parameters.AddWithValue("@LOAITAIKHOAN", "admin");
+                cmd.Parameters.AddWithValue("@LOAITAIKHOAN", maLoaiTaiKhoanMacDinh);
                 cmd.Parameters.AddWithValue("@MATKHAU", BCrypt.Net.BCrypt.HashPassword("admin123"));
                 cmd.Parameters.AddWithValue("@EMAILCANHAN", "admin@example.com");
                 cmd.Parameters.AddWithValue("@MATAIKHOANNHANVIEN", maTaiKhoanNhanVienMacDinh);
@@ -309,13 +318,25 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@SDT", "0123456879");
                 cmd.Parameters.AddWithValue("@EMAIL", "Unknown");
                 cmd.Parameters.AddWithValue("GHICHU", "Unknown");
-                cmd.Parameters.AddWithValue("CHUCVU", "admin");
+                cmd.Parameters.AddWithValue("CHUCVU", maLoaiChucVuMacDinh);
                 cmd.ExecuteNonQuery();
                 conn.Close();
             }
         }
 
-        
+        private void ThemChucVuMacDinh()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                conn.Open();
+                string query = "INSERT OR IGNORE INTO LOAICHUCVU(MALOAICHUCVU, TENLOAICHUCVU) VALUES(@MALOAICHUCVU, @TENLOAICHUCVU)";
+                var cmd = new SQLiteCommand(query, conn);
+                cmd.Parameters.AddWithValue("@MALOAICHUCVU", maLoaiChucVuMacDinh);
+                cmd.Parameters.AddWithValue("@TENLOAICHUCVU", "Quản lý");
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
 
         private void ThemLoaiTaiKhoanMacDinh()
         {
@@ -2271,6 +2292,89 @@ namespace DAL
                 }
                 conn.Close();
                 return i > 0;
+            }
+        }
+
+        // CREATE
+        public static bool CreateLoaiChucVu(LOAICHUCVU loaiChucVu)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                conn.Open();
+                string query = "INSERT INTO LOAICHUCVU (MALOAICHUCVU, TENLOAICHUCVU) VALUES (@MALOAICHUCVU, @TENLOAICHUCVU);";
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                {
+                    int i = 0;
+                    cmd.Parameters.AddWithValue("@MALOAICHUCVU", loaiChucVu.MaLoaiChucVu);
+                    cmd.Parameters.AddWithValue("@TENLOAICHUCVU", loaiChucVu.TenLoaiChucVu);
+                    i = cmd.ExecuteNonQuery();
+                    conn.Close();
+                    return i > 0;
+                }
+            }
+        }
+
+        // READ
+        public static List<LOAICHUCVU> ReadLoaiChucVu()
+        {
+            List<LOAICHUCVU> listLoaiChucVu = new List<LOAICHUCVU> ();
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                conn.Open();
+                string query = "SELECT * FROM LOAICHUCVU;";
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                {
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            LOAICHUCVU loaiChucVu = new LOAICHUCVU
+                            {
+                                MaLoaiChucVu = reader["MALOAICHUCVU"].ToString(),
+                                TenLoaiChucVu = reader["TENLOAICHUCVU"].ToString()
+                            };
+                            listLoaiChucVu.Add(loaiChucVu);
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            return listLoaiChucVu;
+        }
+
+        // UPDATE
+        public static bool UpdateLoaiChucVu(LOAICHUCVU loaiChucVu)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                conn.Open();
+                string query = "UPDATE LOAICHUCVU SET TENLOAICHUCVU = @NEW_TENLOAICHUCVU WHERE MALOAICHUCVU = @MALOAICHUCVU;";
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@NEW_TENLOAICHUCVU", loaiChucVu.TenLoaiChucVu);
+                    cmd.Parameters.AddWithValue("@MALOAICHUCVU", loaiChucVu.MaLoaiChucVu);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    conn.Close();
+                    return rowsAffected > 0;
+                    
+                }
+            }
+        }
+
+        // DELETE
+        public static bool DeleteLoaiChucVu(string maLoaiChucVu)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                conn.Open();
+                string query = "DELETE FROM LOAICHUCVU WHERE MALOAICHUCVU = @MALOAICHUCVU;";
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@MALOAICHUCVU", maLoaiChucVu);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    conn.Close();
+                    return rowsAffected > 0;
+                }
             }
         }
     }

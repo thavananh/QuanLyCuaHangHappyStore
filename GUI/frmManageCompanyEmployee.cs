@@ -80,5 +80,10 @@ namespace GUI
             addEmployeeAccountType.ShowDialog();
             this.Show();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -513,6 +513,16 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconPhanQuyenTaiKhoan {
+            get {
+                object obj = ResourceManager.GetObject("iconPhanQuyenTaiKhoan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IconQuanLyKhachHang {
             get {
                 object obj = ResourceManager.GetObject("IconQuanLyKhachHang", resourceCulture);

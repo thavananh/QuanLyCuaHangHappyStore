@@ -23,13 +23,13 @@ namespace GUI
         LoaiChucVuBLL loaiChucVuBLL = new LoaiChucVuBLL();
         LOAICHUCVU loaiChucVu = new LOAICHUCVU();
 
-        //private void loadLoaiChucVu()
-        //{
-        //    List<LOAICHUCVU> loaiChucVu = loaiChucVuBLL.ReadLoaiChucVu();
-        //    cmbLoaiNhanVienDeXuat.DisplayMember = "TenLoaiChucVu";
-        //    cmbLoaiNhanVienDeXuat.ValueMember = "MaLoaiChucVu";
-        //    cmbLoaiNhanVienDeXuat.DataSource = loaiChucVu;
-        //}
+        private void loadLoaiChucVu()
+        {
+            List<LOAICHUCVU> loaiChucVu = loaiChucVuBLL.ReadLoaiChucVu();
+            cmbLoaiNhanVienDeXuat.DisplayMember = "TenLoaiChucVu";
+            cmbLoaiNhanVienDeXuat.ValueMember = "MaLoaiChucVu";
+            cmbLoaiNhanVienDeXuat.DataSource = loaiChucVu;
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -78,7 +78,7 @@ namespace GUI
 
         private void cmbLoaiNhanVienDeXuat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbLoaiNhanVienDeXuat.SelectedItem.ToString() == "Tự đề xuất loại nhân viên")
+            if (cmbLoaiNhanVienDeXuat.SelectedItem.ToString() == "Tự đề xuất loại chức vụ")
             {
                 tbLoaiChucVu.Enabled = true;
             }
@@ -90,7 +90,13 @@ namespace GUI
 
         private void frmAddEmployeeType_Load(object sender, EventArgs e)
         {
+            loadLoaiChucVu();
             cmbLoaiNhanVienDeXuat.SelectedIndex = 0;
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

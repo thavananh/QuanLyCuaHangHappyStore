@@ -94,6 +94,30 @@ namespace DAL
             new CHUCNANG
             {
                 MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "them_loai_chuc_vu",
+                MieuTa = "Thêm loại chức vụ"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "them_loai_tai_khoan",
+                MieuTa = "Thêm loại tài khoản"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "phan_quyen_tai_khoan",
+                MieuTa = "Phân quyền tài khoản"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "phan_quyen_chuc_nang",
+                MieuTa = "Phân quyền chức năng"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
                 TenChucNang = "danh_sach_san_pham",
                 MieuTa = "Danh sách sản phẩm"
             },

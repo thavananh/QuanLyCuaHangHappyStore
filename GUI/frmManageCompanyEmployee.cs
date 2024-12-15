@@ -83,6 +83,14 @@ namespace GUI
 
         private void button4_Click(object sender, EventArgs e)
         {
+            frmFormPermission formPermission = new frmFormPermission();
+            this.Hide();
+            formPermission.ShowDialog();
+            this.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
 
         }
     }

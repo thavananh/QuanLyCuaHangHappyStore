@@ -25,6 +25,9 @@ namespace DAL
         {
             return DatabaseAccess.DeleteChucNang_QuyenTaiKhoan(maChucNang, maQuyenTaiKhoan);
         }
-        
+        public List<CHUCNANG_QUYENTAIKHOAN> GetAllChucNang_QuyenTaiKhoan_ById(string maChucNang)
+        {
+            return DatabaseAccess.GetAllChucNang_QuyenTaiKhoan_ById(maChucNang);
+        }
     }
 }

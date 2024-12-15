@@ -27,6 +27,10 @@ namespace BLL
         {
             return chucNang_QuyenTaiKhoanAceess.DeleteChucNang_QuyenTaiKhoan(maChucNang, maQuyenTaiKhoan);
         }
-        
+        public List<CHUCNANG_QUYENTAIKHOAN> GetAllChucNang_QuyenTaiKhoan_ById(string maChucNang)
+        {
+            return chucNang_QuyenTaiKhoanAceess.GetAllChucNang_QuyenTaiKhoan_ById(maChucNang);
+        }
+
     }
 }

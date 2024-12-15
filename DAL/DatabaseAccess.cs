@@ -2311,6 +2311,32 @@ namespace DAL
             }
             return listChucNang_QuyenTaiKhoan;
         }
+        public static List<CHUCNANG_QUYENTAIKHOAN> GetAllChucNang_QuyenTaiKhoan_ById(string maChucNang)
+        {
+            List<CHUCNANG_QUYENTAIKHOAN> listChucNang_QuyenTaiKhoan = new List<CHUCNANG_QUYENTAIKHOAN>();
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                conn.Open();
+                string query = "SELECT * FROM CHUCNANG_QUYENTAIGHOAN WHERE MACHUCNANG=@MACHUCNANG";
+                var cmd = new SQLiteCommand(query, conn);
+                cmd.Parameters.AddWithValue("@MACHUCNANG", maChucNang);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        CHUCNANG_QUYENTAIKHOAN tmp = new CHUCNANG_QUYENTAIKHOAN
+                        {
+                            MaChucNang = reader["MACHUCNANG"].ToString(),
+                            MaQuyenTaiKhoan = reader["MAQUYENTAIKHOAN"].ToString(),
+
+                        };
+                        listChucNang_QuyenTaiKhoan.Add(tmp);
+                    }
+                }
+                conn.Close();
+            }
+            return listChucNang_QuyenTaiKhoan;
+        }
         public static bool UpdateChucNang_QuyenTaiKhoan(string maChucNang, string newMaQuyenTaiKhoan, string oldMaQuyenTaiKhoan)
         {
             using (SQLiteConnection conn = new SQLiteConnection(dbName))

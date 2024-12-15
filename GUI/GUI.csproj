@@ -278,6 +278,12 @@
     <Compile Include="frmAddProductType.Designer.cs">
       <DependentUpon>frmAddProductType.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmFormPermission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFormPermission.Designer.cs">
+      <DependentUpon>frmFormPermission.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPermissionManage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -435,6 +441,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddProductType.resx">
       <DependentUpon>frmAddProductType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFormPermission.resx">
+      <DependentUpon>frmFormPermission.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPermissionManage.resx">
       <DependentUpon>frmPermissionManage.cs</DependentUpon>
@@ -973,6 +982,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\iconPhanQuyenTaiKhoan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconThemQuyenTaiKhoan.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

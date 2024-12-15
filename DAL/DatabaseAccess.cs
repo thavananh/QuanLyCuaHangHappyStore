@@ -347,14 +347,12 @@ namespace DAL
                 string query = "INSERT OR IGNORE INTO LOAITAIKHOAN (MALOAITAIKHOAN, TENMALOAITAIKHOAN, MIEUTA) VALUES(@MALOAITAIKHOAN, @TENLOAITAIKHOAN, @MIEUTA)";
                 var cmd = new SQLiteCommand(query,conn);
                 cmd.Parameters.AddWithValue("@MALOAITAIKHOAN", maLoaiTaiKhoanMacDinh);
-                cmd.Parameters.AddWithValue("@TENLOAITAIKHOAN", "Admin");
+                cmd.Parameters.AddWithValue("@TENLOAITAIKHOAN", "Tài khoản admin");
                 cmd.Parameters.AddWithValue("MIEUTA", "Có tất cả các quyền");
                 cmd.ExecuteNonQuery();
                 conn.Close();
             }
         }
-
-        
 
         private void ThemQuyenTaiKhoanMacDinh()
         {

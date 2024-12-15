@@ -80,12 +80,13 @@ namespace GUI
             this.button2.Size = new System.Drawing.Size(354, 71);
             this.button2.TabIndex = 131;
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
             this.button1.AutoSize = true;
             this.button1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.BackgroundImage = global::GUI.Properties.Resources.iconThemLoaiNV;
+            this.button1.BackgroundImage = global::GUI.Properties.Resources.IconThemLoaiChucVu;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

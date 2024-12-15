@@ -72,5 +72,13 @@ namespace GUI
             permissionManage.ShowDialog();
             this.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            frmAddEmployeeAccountType addEmployeeAccountType = new frmAddEmployeeAccountType();
+            this.Hide();
+            addEmployeeAccountType.ShowDialog();
+            this.Show();
+        }
     }
 }

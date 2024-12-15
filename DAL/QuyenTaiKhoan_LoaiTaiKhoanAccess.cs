@@ -29,5 +29,9 @@ namespace DAL
         {
             return DatabaseAccess.DeleteQuyenTaiKhoan_LoaiTaiKhoan(maQuyenTaiKhoan, maLoaiTaiKhoan);
         }
+        public List<QUYENTAIKHOAN_LOAITAIKHOAN> GetQuyenTaiKhoan_LoaiTaiKhoan_ByMaLoaiTaiKhoan(string maLoaiTaiKhoan)
+        {
+            return DatabaseAccess.GetQuyenTaiKhoan_LoaiTaiKhoan_ByMaLoaiTaiKhoan(maLoaiTaiKhoan);
+        }
     }
 }

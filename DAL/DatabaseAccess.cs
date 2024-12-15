@@ -146,7 +146,7 @@ namespace DAL
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "CREATE TABLE IF NOT EXISTS \"NHANVIEN\" (\"MANHANVIEN\" TEXT NOT NULL, \"HOTEN\" TEXT, \"NGAYSINH\" TEXT, \"GIOITINH\" TEXT, \"CMND\" TEXT, \"DIACHI\" TEXT, \"SDT\" TEXT, \"EMAIL\" TEXT, \"GHICHU\" TEXT, \"MALOAICHUCVU\" TEXT, \"ANH\" BLOB, CONSTRAINT \"NV_MaNhanVien_PK\" PRIMARY KEY(\"MANHANVIEN\"), CONSTRAINT \"LCV_MaLoaiChucVu\" FOREIGN KEY(\"CHUCVU\") REFERENCES \"LOAICHUCVU\"(\"MALOAICHUCVU\"));";
+                sql = "CREATE TABLE IF NOT EXISTS \"NHANVIEN\" (\"MANHANVIEN\" TEXT NOT NULL, \"HOTEN\" TEXT, \"NGAYSINH\" TEXT, \"GIOITINH\" TEXT, \"CMND\" TEXT, \"DIACHI\" TEXT, \"SDT\" TEXT, \"EMAIL\" TEXT, \"GHICHU\" TEXT, \"MALOAICHUCVU\" TEXT, \"ANH\" BLOB, CONSTRAINT \"NV_MaNhanVien_PK\" PRIMARY KEY(\"MANHANVIEN\"), CONSTRAINT \"LCV_MaLoaiChucVu\" FOREIGN KEY(\"MALOAICHUCVU\") REFERENCES \"LOAICHUCVU\"(\"MALOAICHUCVU\"));";
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
@@ -207,6 +207,7 @@ namespace DAL
         {
             ThemCacChucNangMacDinh();
             ThemQuyenTaiKhoanMacDinh();
+            ThemChucVuMacDinh();
             ThemLoaiTaiKhoanMacDinh();
             ThemQuyenTaiKhoanGanLienVoiLoaiTaiKhoan();
             themQuyenVaoChucNangMacDinh();
@@ -306,7 +307,7 @@ namespace DAL
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
-                string query = "INSERT OR IGNORE INTO NHANVIEN(MANHANVIEN,HOTEN,NGAYSINH,GIOITINH,CMND,DIACHI,SDT,EMAIL,GHICHU,CHUCVU) VALUES(@MANHANVIEN,@HOTEN,@NGAYSINH,@GIOITINH,@CMND,@DIACHI,@SDT,@EMAIL,@GHICHU,@CHUCVU)";
+                string query = "INSERT OR IGNORE INTO NHANVIEN(MANHANVIEN,HOTEN,NGAYSINH,GIOITINH,CMND,DIACHI,SDT,EMAIL,GHICHU,MALOAICHUCVU) VALUES(@MANHANVIEN,@HOTEN,@NGAYSINH,@GIOITINH,@CMND,@DIACHI,@SDT,@EMAIL,@GHICHU,@MALOAICHUCVU)";
                 DateTime ngaySinhMacDinh = new DateTime(2000, 1, 1);
                 var cmd = new SQLiteCommand(query, conn);
                 cmd.Parameters.AddWithValue("@MANHANVIEN", maTaiKhoanNhanVienMacDinh);
@@ -318,7 +319,7 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@SDT", "0123456879");
                 cmd.Parameters.AddWithValue("@EMAIL", "Unknown");
                 cmd.Parameters.AddWithValue("GHICHU", "Unknown");
-                cmd.Parameters.AddWithValue("CHUCVU", maLoaiChucVuMacDinh);
+                cmd.Parameters.AddWithValue("MALOAICHUCVU", maLoaiChucVuMacDinh);
                 cmd.ExecuteNonQuery();
                 conn.Close();
             }
@@ -346,7 +347,7 @@ namespace DAL
                 string query = "INSERT OR IGNORE INTO LOAITAIKHOAN (MALOAITAIKHOAN, TENMALOAITAIKHOAN, MIEUTA) VALUES(@MALOAITAIKHOAN, @TENLOAITAIKHOAN, @MIEUTA)";
                 var cmd = new SQLiteCommand(query,conn);
                 cmd.Parameters.AddWithValue("@MALOAITAIKHOAN", maLoaiTaiKhoanMacDinh);
-                cmd.Parameters.AddWithValue("@TENLOAITAIKHOAN", "admin");
+                cmd.Parameters.AddWithValue("@TENLOAITAIKHOAN", "Admin");
                 cmd.Parameters.AddWithValue("MIEUTA", "Có tất cả các quyền");
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -2178,6 +2179,36 @@ namespace DAL
             return qltk;
         }
 
+        public static List<QUYENTAIKHOAN_LOAITAIKHOAN> GetQuyenTaiKhoan_LoaiTaiKhoan_ByMaLoaiTaiKhoan(string maLoaiTaiKhoan)
+        {
+            List<QUYENTAIKHOAN_LOAITAIKHOAN> list = new List<QUYENTAIKHOAN_LOAITAIKHOAN>();
+            string query = "SELECT MaQuyenTaiKhoan, MaLoaiTaiKhoan FROM QuyenTaiKhoan_LoaiTaiKhoan WHERE MaLoaiTaiKhoan = @MaLoaiTaiKhoan";
+            using (SqlConnection conn = new SqlConnection(dbName))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@MaLoaiTaiKhoan", maLoaiTaiKhoan);
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        QUYENTAIKHOAN_LOAITAIKHOAN item = new QUYENTAIKHOAN_LOAITAIKHOAN
+                        {
+                            MaQuyenTaiKhoan = reader["MaQuyenTaiKhoan"].ToString(),
+                            MaLoaiTaiKhoan = reader["MaLoaiTaiKhoan"].ToString()
+                        };
+                        list.Add(item);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Xử lý lỗi (log hoặc throw lại)
+                }
+            }
+            return list;
+        }
+
         // Update
         // Note: Since QUYENTAIKHOAN_LOAITAIKHOAN is a junction table with a composite primary key,
         // updating typically involves deleting the old relationship and inserting a new one.
@@ -2248,7 +2279,8 @@ namespace DAL
                         CHUCNANG_QUYENTAIKHOAN tmp = new CHUCNANG_QUYENTAIKHOAN
                         {
                             MaChucNang = reader["MACHUCNANG"].ToString(),
-                            MaQuyenTaiKhoan = reader["MAQUYENTAIKHOAN"].ToString()
+                            MaQuyenTaiKhoan = reader["MAQUYENTAIKHOAN"].ToString(),
+
                         };
                         listChucNang_QuyenTaiKhoan.Add(tmp);
                     }
@@ -2376,6 +2408,48 @@ namespace DAL
                     return rowsAffected > 0;
                 }
             }
+        }
+        public static CHUCNANG TimChucNangTheoTen(string tenChucNang)
+        {
+            CHUCNANG tmp = new CHUCNANG();
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                conn.Open();
+                string query = "SELECT * FROM CHUCNANG WHERE TENCHUCNANG=@TENCHUCNANG";
+                var cmd = new SQLiteCommand(query, conn);
+                cmd.Parameters.AddWithValue("@TENCHUCNANG", tenChucNang);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    tmp.MaChucNang = reader["MACHUCNANG"].ToString();
+                    tmp.TenChucNang = reader["TENCHUCNANG"].ToString();
+                }
+                conn.Close();
+            }
+            return tmp;
+        }
+        public static List<CHUCNANG> LayTatCaChucNang()
+        {
+            List<CHUCNANG> listChucNang = new List<CHUCNANG>();
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                conn.Open();
+                string query = "SELECT * FROM CHUCNANG";
+                var cmd = new SQLiteCommand(query, conn);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    CHUCNANG tmp = new CHUCNANG
+                    {
+                        MaChucNang = reader["MACHUCNANG"].ToString(),
+                        TenChucNang = reader["TENCHUCNANG"].ToString(),
+                        MieuTa = reader["MIEUTA"].ToString()
+                    };
+                    listChucNang.Add(tmp);
+                }
+                conn.Close();
+            }
+            return listChucNang;
         }
     }
 }

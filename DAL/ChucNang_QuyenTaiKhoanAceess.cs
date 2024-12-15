@@ -25,5 +25,6 @@ namespace DAL
         {
             return DatabaseAccess.DeleteChucNang_QuyenTaiKhoan(maChucNang, maQuyenTaiKhoan);
         }
+        
     }
 }

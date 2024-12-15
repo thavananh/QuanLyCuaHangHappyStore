@@ -31,5 +31,9 @@ namespace BLL
         {
             return quyenTaiKhoan_LoaiTaiKhoanAccess.DeleteQuyenTaiKhoan_LoaiTaiKhoan(maQuyenTaiKhoan, maLoaiTaiKhoan);
         }
+        public List<QUYENTAIKHOAN_LOAITAIKHOAN> GetQuyenTaiKhoan_LoaiTaiKhoan_ByMaLoaiTaiKhoan(string maLoaiTaiKhoan)
+        {
+            return quyenTaiKhoan_LoaiTaiKhoanAccess.GetQuyenTaiKhoan_LoaiTaiKhoan_ByMaLoaiTaiKhoan(maLoaiTaiKhoan);
+        }
     }
 }

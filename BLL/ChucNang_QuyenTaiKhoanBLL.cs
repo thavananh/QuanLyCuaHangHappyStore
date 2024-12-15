@@ -27,5 +27,6 @@ namespace BLL
         {
             return chucNang_QuyenTaiKhoanAceess.DeleteChucNang_QuyenTaiKhoan(maChucNang, maQuyenTaiKhoan);
         }
+        
     }
 }

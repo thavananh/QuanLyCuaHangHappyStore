@@ -89,6 +89,9 @@
     <Reference Include="DotNetZip, Version=1.16.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.16.0\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
+    <Reference Include="DropDownControls">
+      <HintPath>..\..\..\Downloads\DropDownControl_Ex\DropDownControl_Ex\DropDownControl_Ex\bin\Debug\DropDownControls.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -269,6 +272,12 @@
     <Compile Include="frmAddProductType.Designer.cs">
       <DependentUpon>frmAddProductType.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPermissionManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPermissionManage.Designer.cs">
+      <DependentUpon>frmPermissionManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSellProducct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -417,6 +426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddProductType.resx">
       <DependentUpon>frmAddProductType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPermissionManage.resx">
+      <DependentUpon>frmPermissionManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSellProducct.resx">
       <DependentUpon>frmSellProducct.cs</DependentUpon>
@@ -925,6 +937,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\iconThemLoaiNV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconThemLoaiTaiKhoan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconPhanQuyenChucNang.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconCapQuyen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconCapQuyen123.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconCapQuyen345.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconCapQuyen456.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconCapQuyen789.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

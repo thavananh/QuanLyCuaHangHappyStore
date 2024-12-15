@@ -64,5 +64,13 @@ namespace GUI
         {
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            frmPermissionManage permissionManage = new frmPermissionManage();
+            this.Hide();
+            permissionManage.ShowDialog();
+            this.Show();
+        }
     }
 }

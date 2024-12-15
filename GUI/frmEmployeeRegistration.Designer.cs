@@ -58,6 +58,10 @@ namespace GUI
             this.ptbAvatar = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbUsername = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tbPassword = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -68,7 +72,7 @@ namespace GUI
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Teal;
-            this.label11.Location = new System.Drawing.Point(477, 159);
+            this.label11.Location = new System.Drawing.Point(477, 129);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(66, 17);
@@ -77,7 +81,7 @@ namespace GUI
             // 
             // tbGender
             // 
-            this.tbGender.Location = new System.Drawing.Point(399, 191);
+            this.tbGender.Location = new System.Drawing.Point(399, 161);
             this.tbGender.Margin = new System.Windows.Forms.Padding(2);
             this.tbGender.Name = "tbGender";
             this.tbGender.Size = new System.Drawing.Size(48, 20);
@@ -89,7 +93,7 @@ namespace GUI
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Teal;
-            this.label10.Location = new System.Drawing.Point(330, 192);
+            this.label10.Location = new System.Drawing.Point(330, 162);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(69, 17);
@@ -98,7 +102,7 @@ namespace GUI
             // 
             // tbNote
             // 
-            this.tbNote.Location = new System.Drawing.Point(214, 348);
+            this.tbNote.Location = new System.Drawing.Point(214, 318);
             this.tbNote.Margin = new System.Windows.Forms.Padding(2);
             this.tbNote.Name = "tbNote";
             this.tbNote.Size = new System.Drawing.Size(233, 20);
@@ -106,7 +110,7 @@ namespace GUI
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(214, 317);
+            this.tbEmail.Location = new System.Drawing.Point(214, 287);
             this.tbEmail.Margin = new System.Windows.Forms.Padding(2);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(233, 20);
@@ -115,7 +119,7 @@ namespace GUI
             // 
             // tbPhoneNumber
             // 
-            this.tbPhoneNumber.Location = new System.Drawing.Point(214, 284);
+            this.tbPhoneNumber.Location = new System.Drawing.Point(214, 254);
             this.tbPhoneNumber.Margin = new System.Windows.Forms.Padding(2);
             this.tbPhoneNumber.Name = "tbPhoneNumber";
             this.tbPhoneNumber.Size = new System.Drawing.Size(233, 20);
@@ -124,7 +128,7 @@ namespace GUI
             // 
             // tbAddress
             // 
-            this.tbAddress.Location = new System.Drawing.Point(214, 253);
+            this.tbAddress.Location = new System.Drawing.Point(214, 223);
             this.tbAddress.Margin = new System.Windows.Forms.Padding(2);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(233, 20);
@@ -132,7 +136,7 @@ namespace GUI
             // 
             // tbNationId
             // 
-            this.tbNationId.Location = new System.Drawing.Point(214, 223);
+            this.tbNationId.Location = new System.Drawing.Point(214, 193);
             this.tbNationId.Margin = new System.Windows.Forms.Padding(2);
             this.tbNationId.Name = "tbNationId";
             this.tbNationId.Size = new System.Drawing.Size(157, 20);
@@ -141,7 +145,7 @@ namespace GUI
             // 
             // tbDOB
             // 
-            this.tbDOB.Location = new System.Drawing.Point(214, 191);
+            this.tbDOB.Location = new System.Drawing.Point(214, 161);
             this.tbDOB.Margin = new System.Windows.Forms.Padding(2);
             this.tbDOB.Name = "tbDOB";
             this.tbDOB.Size = new System.Drawing.Size(116, 20);
@@ -150,7 +154,7 @@ namespace GUI
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(214, 161);
+            this.tbName.Location = new System.Drawing.Point(214, 131);
             this.tbName.Margin = new System.Windows.Forms.Padding(2);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(233, 20);
@@ -162,7 +166,7 @@ namespace GUI
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Teal;
-            this.label9.Location = new System.Drawing.Point(115, 348);
+            this.label9.Location = new System.Drawing.Point(96, 317);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(64, 17);
@@ -174,7 +178,7 @@ namespace GUI
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Teal;
-            this.label8.Location = new System.Drawing.Point(115, 317);
+            this.label8.Location = new System.Drawing.Point(96, 287);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(47, 17);
@@ -186,7 +190,7 @@ namespace GUI
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Teal;
-            this.label7.Location = new System.Drawing.Point(116, 284);
+            this.label7.Location = new System.Drawing.Point(96, 256);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(39, 17);
@@ -198,7 +202,7 @@ namespace GUI
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Teal;
-            this.label6.Location = new System.Drawing.Point(116, 253);
+            this.label6.Location = new System.Drawing.Point(96, 225);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(58, 17);
@@ -210,7 +214,7 @@ namespace GUI
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Teal;
-            this.label5.Location = new System.Drawing.Point(115, 223);
+            this.label5.Location = new System.Drawing.Point(96, 195);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 17);
@@ -222,7 +226,7 @@ namespace GUI
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Teal;
-            this.label4.Location = new System.Drawing.Point(116, 191);
+            this.label4.Location = new System.Drawing.Point(96, 163);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 17);
@@ -234,7 +238,7 @@ namespace GUI
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Teal;
-            this.label3.Location = new System.Drawing.Point(115, 161);
+            this.label3.Location = new System.Drawing.Point(96, 131);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 17);
@@ -248,24 +252,24 @@ namespace GUI
             "LETAN",
             "HUANLUYENVIEN",
             "BAOVE"});
-            this.cbJobtitle.Location = new System.Drawing.Point(548, 157);
+            this.cbJobtitle.Location = new System.Drawing.Point(548, 127);
             this.cbJobtitle.Margin = new System.Windows.Forms.Padding(2);
             this.cbJobtitle.Name = "cbJobtitle";
-            this.cbJobtitle.Size = new System.Drawing.Size(122, 21);
+            this.cbJobtitle.Size = new System.Drawing.Size(168, 21);
             this.cbJobtitle.TabIndex = 8;
             this.cbJobtitle.SelectedIndexChanged += new System.EventHandler(this.cbJobtitle_SelectedIndexChanged);
             // 
             // cbCamera
             // 
             this.cbCamera.FormattingEnabled = true;
-            this.cbCamera.Location = new System.Drawing.Point(548, 369);
+            this.cbCamera.Location = new System.Drawing.Point(548, 339);
             this.cbCamera.Name = "cbCamera";
             this.cbCamera.Size = new System.Drawing.Size(121, 21);
             this.cbCamera.TabIndex = 151;
             // 
             // btnCameraCapture
             // 
-            this.btnCameraCapture.Location = new System.Drawing.Point(675, 369);
+            this.btnCameraCapture.Location = new System.Drawing.Point(675, 339);
             this.btnCameraCapture.Name = "btnCameraCapture";
             this.btnCameraCapture.Size = new System.Drawing.Size(97, 23);
             this.btnCameraCapture.TabIndex = 150;
@@ -296,7 +300,7 @@ namespace GUI
             this.btnExportQR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnExportQR.FlatAppearance.BorderSize = 0;
             this.btnExportQR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExportQR.Location = new System.Drawing.Point(543, 392);
+            this.btnExportQR.Location = new System.Drawing.Point(543, 362);
             this.btnExportQR.Margin = new System.Windows.Forms.Padding(2);
             this.btnExportQR.Name = "btnExportQR";
             this.btnExportQR.Size = new System.Drawing.Size(105, 53);
@@ -312,7 +316,7 @@ namespace GUI
             this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Location = new System.Drawing.Point(652, 392);
+            this.btnSave.Location = new System.Drawing.Point(652, 362);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(120, 53);
@@ -339,7 +343,7 @@ namespace GUI
             // ptbAvatar
             // 
             this.ptbAvatar.Image = global::GUI.Properties.Resources._9902257;
-            this.ptbAvatar.Location = new System.Drawing.Point(548, 182);
+            this.ptbAvatar.Location = new System.Drawing.Point(548, 152);
             this.ptbAvatar.Margin = new System.Windows.Forms.Padding(2);
             this.ptbAvatar.Name = "ptbAvatar";
             this.ptbAvatar.Size = new System.Drawing.Size(224, 182);
@@ -369,12 +373,56 @@ namespace GUI
             this.label1.TabIndex = 156;
             this.label1.Text = "Developed by HappyStore Dev";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Teal;
+            this.label12.Location = new System.Drawing.Point(96, 360);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(108, 17);
+            this.label12.TabIndex = 157;
+            this.label12.Text = "Tên tài khoản";
+            // 
+            // tbUsername
+            // 
+            this.tbUsername.Location = new System.Drawing.Point(214, 360);
+            this.tbUsername.Margin = new System.Windows.Forms.Padding(2);
+            this.tbUsername.Name = "tbUsername";
+            this.tbUsername.Size = new System.Drawing.Size(233, 20);
+            this.tbUsername.TabIndex = 158;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Teal;
+            this.label13.Location = new System.Drawing.Point(96, 389);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(74, 17);
+            this.label13.TabIndex = 159;
+            this.label13.Text = "Mật khẩu";
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Location = new System.Drawing.Point(214, 389);
+            this.tbPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(233, 20);
+            this.tbPassword.TabIndex = 160;
+            // 
             // frmEmployeeRegistration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(886, 481);
+            this.Controls.Add(this.tbPassword);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.tbUsername);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnExportQR);
             this.Controls.Add(this.label2);
@@ -445,5 +493,9 @@ namespace GUI
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Button btnExportQR;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tbUsername;
     }
 }

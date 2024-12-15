@@ -393,6 +393,56 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap IconCapQuyen {
+            get {
+                object obj = ResourceManager.GetObject("IconCapQuyen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IconCapQuyen123 {
+            get {
+                object obj = ResourceManager.GetObject("IconCapQuyen123", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IconCapQuyen345 {
+            get {
+                object obj = ResourceManager.GetObject("IconCapQuyen345", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IconCapQuyen456 {
+            get {
+                object obj = ResourceManager.GetObject("IconCapQuyen456", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IconCapQuyen789 {
+            get {
+                object obj = ResourceManager.GetObject("IconCapQuyen789", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IconDKNV {
             get {
                 object obj = ResourceManager.GetObject("IconDKNV", resourceCulture);
@@ -453,6 +503,16 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconPhanQuyenChucNang {
+            get {
+                object obj = ResourceManager.GetObject("iconPhanQuyenChucNang", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IconQuanLyKhachHang {
             get {
                 object obj = ResourceManager.GetObject("IconQuanLyKhachHang", resourceCulture);
@@ -506,6 +566,16 @@ namespace GUI.Properties {
         internal static System.Drawing.Bitmap iconThemLoaiSanPham {
             get {
                 object obj = ResourceManager.GetObject("iconThemLoaiSanPham", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconThemLoaiTaiKhoan {
+            get {
+                object obj = ResourceManager.GetObject("iconThemLoaiTaiKhoan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

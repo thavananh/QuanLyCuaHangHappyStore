@@ -47,6 +47,15 @@ namespace GUI
         public bool checkupdateanh = false;
         private VideoCaptureDevice videoCapture;
         private FilterInfoCollection filterInfo;
+
+        //private void loadLoaiChucVu()
+        //{
+        //    List<LOAICHUCVU> loaiChucVu = loaiChucVuBLL.ReadLoaiChucVu();
+        //    cmbLoaiNhanVienDeXuat.DisplayMember = "TenLoaiChucVu";
+        //    cmbLoaiNhanVienDeXuat.ValueMember = "MaLoaiChucVu";
+        //    cmbLoaiNhanVienDeXuat.DataSource = loaiChucVu;
+        //}
+
         private void cbJobtitle_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(cbJobtitle.SelectedItem.ToString() == "LETAN" )

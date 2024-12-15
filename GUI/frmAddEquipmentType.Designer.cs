@@ -34,8 +34,8 @@
             this.tbLoaiVatDung = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.btnBack = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmbLoaiVatDungDeXuat
@@ -109,22 +109,6 @@
             this.label7.TabIndex = 160;
             this.label7.Text = "Loại vật dụng đề xuất";
             // 
-            // btnBack
-            // 
-            this.btnBack.AutoSize = true;
-            this.btnBack.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnBack.BackgroundImage = global::GUI.Properties.Resources.back;
-            this.btnBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnBack.FlatAppearance.BorderSize = 0;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Location = new System.Drawing.Point(364, 212);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(76, 38);
-            this.btnBack.TabIndex = 164;
-            this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
             // btnSave
             // 
             this.btnSave.AutoSize = true;
@@ -141,12 +125,28 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // btnBack
+            // 
+            this.btnBack.AutoSize = true;
+            this.btnBack.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnBack.BackgroundImage = global::GUI.Properties.Resources.back;
+            this.btnBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Location = new System.Drawing.Point(351, 212);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(76, 38);
+            this.btnBack.TabIndex = 164;
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // frmAddEquipmentType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(451, 261);
+            this.ClientSize = new System.Drawing.Size(436, 261);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.cmbLoaiVatDungDeXuat);
             this.Controls.Add(this.btnBack);

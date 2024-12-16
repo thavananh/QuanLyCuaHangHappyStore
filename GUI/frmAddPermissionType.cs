@@ -84,7 +84,7 @@ namespace GUI
 
         private void frmAddPermissionType_Load(object sender, EventArgs e)
         {
-            
+            cboQuyenDeXuat.SelectedIndex = 0;
         }
 
         private void cboQuyenDeXuat_SelectedIndexChanged(object sender, EventArgs e)

@@ -13,12 +13,24 @@ namespace GUI
         {
             InitializeComponent();
         }
+        string maTaiKhoan = "";
+        string maLoaiTaiKhoan = "";
+
+        public frmPermissionManage(string inputMaTaiKhoan, string inputMaLoaiTaiKhoan)
+        {
+            InitializeComponent();
+            this.maTaiKhoan = inputMaTaiKhoan;
+            this.maLoaiTaiKhoan = inputMaLoaiTaiKhoan;
+        }
 
         // Danh sách quyền có sẵn và quyền đã chọn
         private List<QUYENTAIKHOAN> listQuyenTaiKhoan = new List<QUYENTAIKHOAN>();
         private List<LOAITAIKHOAN> listLoaiTaiKhoan = new List<LOAITAIKHOAN>();
         private List<QUYENTAIKHOAN> listAvailableQuyenTaiKhoan = new List<QUYENTAIKHOAN>();
         private List<QUYENTAIKHOAN> listAssignedQuyenTaiKhoan = new List<QUYENTAIKHOAN>();
+        private List<QUYENTAIKHOAN> tmp = new List<QUYENTAIKHOAN>();
+        private List<QUYENTAIKHOAN_LOAITAIKHOAN> listQuyenTaiKhoan_LoaiTaiKhoan = new List<QUYENTAIKHOAN_LOAITAIKHOAN>();
+       
 
         // BLL
         private QuyenTaiKhoanBLL quyenTaiKhoanBLL = new QuyenTaiKhoanBLL();
@@ -33,7 +45,7 @@ namespace GUI
         }
 
         private void LoadComboBox()
-        {
+         {
             // Lấy tất cả các loại tài khoản
             listLoaiTaiKhoan = loaiTaiKhoanBLL.GetAllLoaiTaiKhoan();
             cboLoaiTaiKhoan.DisplayMember = "TenLoaiTaiKhoan";
@@ -44,7 +56,34 @@ namespace GUI
 
             // Lấy tất cả các quyền tài khoản
             listQuyenTaiKhoan = quyenTaiKhoanBLL.GetAllQuyenTaiKhoan();
-            
+            listQuyenTaiKhoan_LoaiTaiKhoan = quyenTaiKhoan_LoaiTaiKhoanBLL.GetQuyenTaiKhoan_LoaiTaiKhoan_ByMaLoaiTaiKhoan(maLoaiTaiKhoan);
+
+            List<QUYENTAIKHOAN> tmp1 = new List<QUYENTAIKHOAN>();
+
+            foreach (var item in listQuyenTaiKhoan)
+            {
+                tmp1.Add(item);
+            }
+
+            foreach (var item in tmp1)
+            {
+                foreach (var item1 in listQuyenTaiKhoan_LoaiTaiKhoan)
+                {
+                    if (item.MaQuyenTaiKhoan == item1.MaQuyenTaiKhoan)
+                    {
+                        tmp.Add(item);
+                        listQuyenTaiKhoan.Remove(item);
+                    }
+                }
+            }
+
+            cbChonQuyenLoaiTaiKhoan.DisplayMember = "TenQuyenTaiKhoan";
+            cbChonQuyenLoaiTaiKhoan.ValueMember = "MaQuyenTaiKhoan";
+            cbChonQuyenLoaiTaiKhoan.DataSource = listQuyenTaiKhoan;
+
+            cboQuyenDaChon.DisplayMember = "TenQuyenTaiKhoan";
+            cboQuyenDaChon.ValueMember = "MaQuyenTaiKhoan";
+            cboQuyenDaChon.DataSource = tmp;
 
             // Đăng ký sự kiện khi chọn loại tài khoản thay đổi
             cboLoaiTaiKhoan.SelectedIndexChanged += CboLoaiTaiKhoan_SelectedIndexChanged;

@@ -94,7 +94,7 @@ namespace GUI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            frmPermissionManage permissionManage = new frmPermissionManage();
+            frmPermissionManage permissionManage = new frmPermissionManage(maTaiKhoan, maLoaiTaiKhoan);
             if (!quanLyQuyenHanChucNang.KiemTraQuyenTruyCapVaoChucNang(frmPermissionManage.tenChucNang, maTaiKhoan, maLoaiTaiKhoan))
             {
                 MessageBox.Show("Bạn không đủ quyền hạn để sử dụng chức năng này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -23,13 +23,13 @@ namespace GUI
         LoaiChucVuBLL loaiChucVuBLL = new LoaiChucVuBLL();
         LOAICHUCVU loaiChucVu = new LOAICHUCVU();
 
-        private void loadLoaiChucVu()
-        {
-            List<LOAICHUCVU> loaiChucVu = loaiChucVuBLL.ReadLoaiChucVu();
-            cmbLoaiNhanVienDeXuat.DisplayMember = "TenLoaiChucVu";
-            cmbLoaiNhanVienDeXuat.ValueMember = "MaLoaiChucVu";
-            cmbLoaiNhanVienDeXuat.DataSource = loaiChucVu;
-        }
+        //private void loadLoaiChucVu()
+        //{
+        //    List<LOAICHUCVU> loaiChucVu = loaiChucVuBLL.ReadLoaiChucVu();
+        //    cmbLoaiNhanVienDeXuat.DisplayMember = "TenLoaiChucVu";
+        //    cmbLoaiNhanVienDeXuat.ValueMember = "MaLoaiChucVu";
+        //    cmbLoaiNhanVienDeXuat.DataSource = loaiChucVu;
+        //}
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -90,7 +90,7 @@ namespace GUI
 
         private void frmAddEmployeeType_Load(object sender, EventArgs e)
         {
-            loadLoaiChucVu();
+            //loadLoaiChucVu();
             cmbLoaiNhanVienDeXuat.SelectedIndex = 0;
         }
 

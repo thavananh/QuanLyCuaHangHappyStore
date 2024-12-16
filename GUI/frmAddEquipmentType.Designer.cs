@@ -157,6 +157,7 @@
             this.Controls.Add(this.label7);
             this.Name = "frmAddEquipmentType";
             this.Text = "frmAddEquipmentType";
+            this.Load += new System.EventHandler(this.frmAddEquipmentType_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

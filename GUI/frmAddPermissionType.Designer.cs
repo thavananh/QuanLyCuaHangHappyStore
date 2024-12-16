@@ -33,7 +33,7 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.tbLoaiVatDung = new System.Windows.Forms.TextBox();
+            this.tbQuyen = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -61,7 +61,7 @@
             "Quyền quản lý thiết bị",
             "Quyền quản lý bán hàng",
             "Quyền quản lý nhập hàng",
-            "Tự đề xuất loại vật dụng"});
+            "Tự đề xuất loại quyền"});
             this.cboQuyenDeXuat.Location = new System.Drawing.Point(193, 74);
             this.cboQuyenDeXuat.Margin = new System.Windows.Forms.Padding(2);
             this.cboQuyenDeXuat.Name = "cboQuyenDeXuat";
@@ -106,13 +106,13 @@
             this.label12.TabIndex = 170;
             this.label12.Text = "Thông tin loại quyền mới";
             // 
-            // tbLoaiVatDung
+            // tbQuyen
             // 
-            this.tbLoaiVatDung.Location = new System.Drawing.Point(193, 106);
-            this.tbLoaiVatDung.Margin = new System.Windows.Forms.Padding(2);
-            this.tbLoaiVatDung.Name = "tbLoaiVatDung";
-            this.tbLoaiVatDung.Size = new System.Drawing.Size(233, 20);
-            this.tbLoaiVatDung.TabIndex = 167;
+            this.tbQuyen.Location = new System.Drawing.Point(193, 106);
+            this.tbQuyen.Margin = new System.Windows.Forms.Padding(2);
+            this.tbQuyen.Name = "tbQuyen";
+            this.tbQuyen.Size = new System.Drawing.Size(233, 20);
+            this.tbQuyen.TabIndex = 167;
             // 
             // label8
             // 
@@ -149,7 +149,7 @@
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.tbLoaiVatDung);
+            this.Controls.Add(this.tbQuyen);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Name = "frmAddPermissionType";
@@ -167,7 +167,7 @@
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox tbLoaiVatDung;
+        private System.Windows.Forms.TextBox tbQuyen;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
     }

@@ -85,5 +85,10 @@ namespace GUI
         {
             this.Hide();
         }
+
+        private void frmAddEquipmentType_Load(object sender, EventArgs e)
+        {
+            cmbLoaiVatDungDeXuat.SelectedIndex = 0; 
+        }
     }
 }

@@ -30,6 +30,7 @@ namespace GUI
         private void InitializeComponent()
         {
             this.label5 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -38,7 +39,6 @@ namespace GUI
             this.btnBack = new System.Windows.Forms.Button();
             this.btnDSNV = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,6 +51,22 @@ namespace GUI
             this.label5.Size = new System.Drawing.Size(197, 16);
             this.label5.TabIndex = 129;
             this.label5.Text = "Developed by HappyStore Dev";
+            // 
+            // button5
+            // 
+            this.button5.AutoSize = true;
+            this.button5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button5.BackgroundImage = global::GUI.Properties.Resources.iconThemQuyenTaiKhoan;
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(29, 367);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(354, 71);
+            this.button5.TabIndex = 134;
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -175,22 +191,6 @@ namespace GUI
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             // 
-            // button5
-            // 
-            this.button5.AutoSize = true;
-            this.button5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button5.BackgroundImage = global::GUI.Properties.Resources.iconThemQuyenTaiKhoan;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(29, 367);
-            this.button5.Margin = new System.Windows.Forms.Padding(2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(354, 71);
-            this.button5.TabIndex = 134;
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // frmManageCompanyEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -222,7 +222,6 @@ namespace GUI
 
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnDSNV;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnRegisterEmployee;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
@@ -230,5 +229,6 @@ namespace GUI
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

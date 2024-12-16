@@ -272,6 +272,12 @@
     <Compile Include="frmAddEquipmentType.Designer.cs">
       <DependentUpon>frmAddEquipmentType.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAddPermissionType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddPermissionType.Designer.cs">
+      <DependentUpon>frmAddPermissionType.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAddProductType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -438,6 +444,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddEquipmentType.resx">
       <DependentUpon>frmAddEquipmentType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddPermissionType.resx">
+      <DependentUpon>frmAddPermissionType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddProductType.resx">
       <DependentUpon>frmAddProductType.cs</DependentUpon>

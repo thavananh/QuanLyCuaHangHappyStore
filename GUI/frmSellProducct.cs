@@ -74,7 +74,7 @@ namespace GUI
         CultureInfo culture = new CultureInfo("vi-VN");
         LoaiSanPhamBLL loaiSanPhamBLL = new LoaiSanPhamBLL();
         List<LOAISANPHAM> listLoaiSanPham = new List<LOAISANPHAM>();
-
+        public static string tenChucNang = "ban_san_pham";
         private void loadLoaiSanPham()
         {
             listLoaiSanPham = loaiSanPhamBLL.xemLoaiSanPham();

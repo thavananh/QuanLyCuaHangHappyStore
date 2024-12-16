@@ -57,7 +57,7 @@ namespace BLL
         public bool themNV(NHANVIEN nv)
         {
             DateTime now = DateTime.Now;
-            nv.maNhanVien = nv.Chucvu + now.Year + now.Month.ToString("D2") + now.Day.ToString("D2") + now.Hour.ToString() + now.Minute.ToString() + now.Second.ToString();
+            nv.maNhanVien = nv.MaLoaiChucVu + now.Year + now.Month.ToString("D2") + now.Day.ToString("D2") + now.Hour.ToString() + now.Minute.ToString() + now.Second.ToString();
             return nvaccess.ThemNV(nv);
         }
         public bool XoaNV(string manv)

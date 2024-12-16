@@ -35,6 +35,10 @@ namespace GUI
         {
             InitializeComponent();
         }
+        public static string tenChucNang = "danh_sach_vat_dung_cua_hang";
+        
+
+        
         ThietBiBLL tbbll = new ThietBiBLL();
         LoaiThietBiBLL loaiThietBiBLL = new LoaiThietBiBLL();
         private string loaitb;

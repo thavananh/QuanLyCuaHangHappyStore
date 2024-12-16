@@ -33,11 +33,15 @@ namespace GUI
         SqlConnection sqlconnect;
         TaiKhoan taikhoan = new TaiKhoan();
         TaiKhoanBLL TKBLL = new TaiKhoanBLL();
-       
+        LoaiTaiKhoanBLL loaiTaiKhoanBLL = new LoaiTaiKhoanBLL();
+
+        
+
         public frmLogin()
         {
             InitializeComponent();
         }
+
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
@@ -52,8 +56,9 @@ namespace GUI
             if (TKBLL.Checklogin(taikhoan))
             {
                 //AccountPriority(TKBLL.CheckAccountType(taikhoan));
+                TaiKhoan tmp = TKBLL.layTaiKhoanTheoMa(taikhoan.MaTaiKhoan);
                 this.Hide();
-                frmMainPage fTC = new frmMainPage();
+                frmMainPage fTC = new frmMainPage(tmp.MaTaiKhoan, tmp.LoaiTK);
                 fTC.ShowDialog();
                 this.Show();
             }

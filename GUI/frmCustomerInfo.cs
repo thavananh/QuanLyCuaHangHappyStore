@@ -49,6 +49,7 @@ namespace GUI
         }
         private bool btnRemoveImgClick = false;
         private bool ptbClicked = false;
+
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Hide();

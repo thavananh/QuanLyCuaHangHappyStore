@@ -39,8 +39,11 @@ namespace GUI
         {
             InitializeComponent();
             loadThietBi();
+            
         }
-        
+
+        public static string tenChucNang = "them_vat_dung";
+
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -95,7 +98,7 @@ namespace GUI
             cbEquipmentType.DataSource = listLoaiThietBi;
             cbEquipmentType.DisplayMember = "TenLoaiTaiKhoan";
             cbEquipmentType.ValueMember = "MaLoaiThietBi";
-            cbEquipmentType.SelectedIndex = 0;
+            
         }
 
         private byte[] imageToByteArray(PictureBox ptb)
@@ -121,7 +124,7 @@ namespace GUI
 
         private void cmbloaithietbi_SelectedValueChanged(object sender, EventArgs e)
         {
-            tb.Loaithietbi = cbEquipmentType.SelectedValue.ToString();
+           
         }
 
         private void cmbTinhTrang_SelectedValueChanged(object sender, EventArgs e)
@@ -216,6 +219,14 @@ namespace GUI
         private void btnExportQR_Click(object sender, EventArgs e)
         {
             SaveQRCodeToFile();
+        }
+
+        private void cbEquipmentType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbEquipmentType.SelectedItem != null)
+            {
+                tb.Loaithietbi = cbEquipmentType.SelectedItem.ToString();
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BLL;
 
 /*
  ____   ___  _____ _______        ___    ____  _____ 
@@ -26,14 +27,28 @@ namespace GUI
 {
     public partial class frmManageCustomer : Form
     {
+        private string maTaiKhoan = "";
+        private string maLoaiTaiKhoan = "";
         public frmManageCustomer()
         {
             InitializeComponent();
         }
-
+        public frmManageCustomer(string inputMaTaiKhoan, string inputMaLoaiTaiKhoan)
+        {
+            InitializeComponent();
+            this.maTaiKhoan = inputMaTaiKhoan;
+            this.maLoaiTaiKhoan = inputMaLoaiTaiKhoan;
+        }
+        QuanLyQuyenHanChucNang quanLyQuyenHanChucNang = new QuanLyQuyenHanChucNang();
+        
         private void btnMemberRegistrationForm_Click(object sender, EventArgs e)
         {
             frmMemberRegistrationForm fdktv = new frmMemberRegistrationForm();
+            if (!quanLyQuyenHanChucNang.KiemTraQuyenTruyCapVaoChucNang(frmMemberRegistrationForm.tenChucNang, maTaiKhoan, maLoaiTaiKhoan))
+            {
+                MessageBox.Show("Bạn không đủ quyền hạn để sử dụng chức năng này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             this.Hide();
             fdktv.ShowDialog();
             this.Show();
@@ -47,6 +62,11 @@ namespace GUI
         private void btnCustomerList_Click(object sender, EventArgs e)
         {
             frmCustomerList fdskh = new frmCustomerList();
+            if (!quanLyQuyenHanChucNang.KiemTraQuyenTruyCapVaoChucNang(frmCustomerList.tenChucNang, maTaiKhoan, maLoaiTaiKhoan))
+            {
+                MessageBox.Show("Bạn không đủ quyền hạn để sử dụng chức năng này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             this.Hide();
             fdskh.ShowDialog();
             this.Show();

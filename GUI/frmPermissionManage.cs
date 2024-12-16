@@ -25,6 +25,8 @@ namespace GUI
         private LoaiTaiKhoanBLL loaiTaiKhoanBLL = new LoaiTaiKhoanBLL();
         private QuyenTaiKhoan_LoaiTaiKhoanBLL quyenTaiKhoan_LoaiTaiKhoanBLL = new QuyenTaiKhoan_LoaiTaiKhoanBLL();
 
+        public static string tenChucNang = "them_quyen_tai_khoan";
+
         private void frmPermissionManage_Load(object sender, EventArgs e)
         {
             LoadComboBox();

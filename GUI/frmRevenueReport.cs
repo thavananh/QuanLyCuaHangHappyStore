@@ -37,6 +37,16 @@ namespace GUI
         CultureInfo culture = new CultureInfo("vi-VN");
         int stt1 = 1;
 
+        public static string tenChucNang = "thong_ke_doanh_thu";
+        private string maTaiKhoan = "";
+        private string maLoaiTaiKhoan = "";
+        public frmRevenueReport(string inputMaTaiKhoan, string inputMaLoaiTaiKhoan)
+        {
+            InitializeComponent();
+            this.maTaiKhoan = inputMaTaiKhoan;
+            this.maLoaiTaiKhoan = inputMaLoaiTaiKhoan;
+        }
+
         private void updateDaysOfMonth_Chart()
         {
             DateTime startDate = hop_month;

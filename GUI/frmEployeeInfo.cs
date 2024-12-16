@@ -61,7 +61,7 @@ namespace GUI
             tbSDT.Text = nv.SDT.ToString();
             tbEMail.Text = nv.Email;
             tbGHichu.Text = nv.GhiChu;
-            tbChucVu.Text = nv.Chucvu;
+            tbChucVu.Text = nv.MaLoaiChucVu;
             tbChucVu.Enabled = false;
             using (MemoryStream ms = new MemoryStream(nv.Anh))
             {

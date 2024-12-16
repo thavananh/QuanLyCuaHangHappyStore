@@ -69,6 +69,19 @@ namespace GUI
         Net faceNet, ageNet, genderNet;
         string[] ageList = { "0-2", "4-6", "8-12", "15-20", "25-32", "38-43", "48-53", "60-80" };
         string[] genderList = { "NAM", "NU" };
+
+        public static string tenChucNang = "dang_ky_thanh_vien";
+        private string maTaiKhoan = "";
+        private string maLoaiTaiKhoan = "";
+
+        public frmMemberRegistrationForm(string inputMaTaiKhoan, string inputMaLoaiTaiKhoan)
+        {
+            InitializeComponent();
+            loadGoiThanhVien();
+            this.maTaiKhoan = inputMaTaiKhoan;
+            this.maLoaiTaiKhoan = inputMaLoaiTaiKhoan;
+        }
+
         private void btnBack_Click(object sender, EventArgs e)
         {
             if (isCustomerRegister == 0)

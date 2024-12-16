@@ -101,6 +101,7 @@ namespace GUI
             this.cbEquipmentType.Name = "cbEquipmentType";
             this.cbEquipmentType.Size = new System.Drawing.Size(182, 21);
             this.cbEquipmentType.TabIndex = 113;
+            this.cbEquipmentType.SelectedIndexChanged += new System.EventHandler(this.cbEquipmentType_SelectedIndexChanged);
             this.cbEquipmentType.SelectedValueChanged += new System.EventHandler(this.cmbloaithietbi_SelectedValueChanged);
             // 
             // label4

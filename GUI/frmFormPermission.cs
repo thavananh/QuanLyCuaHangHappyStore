@@ -24,6 +24,7 @@ namespace GUI
         private QuyenTaiKhoanBLL quyenTaiKhoanBLL = new QuyenTaiKhoanBLL();
         private ChucNangBLL chucNangBLL = new ChucNangBLL();
         private ChucNang_QuyenTaiKhoanBLL chucNang_QuyenTaiKhoanBLL = new ChucNang_QuyenTaiKhoanBLL();
+        public static string tenChucNang = "phan_quyen_chuc_nang";
         public frmFormPermission()
         {
             InitializeComponent();

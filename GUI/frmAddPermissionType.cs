@@ -31,6 +31,7 @@ namespace GUI
         //    cboQuyenDeXuat.DataSource = listQuyenTaiKhoan;
         //}
 
+        public static string tenChucNang= "them_quyen_tai_khoan";
         private void btnSave_Click(object sender, EventArgs e)
         {
             quyenTaiKhoan.MaQuyenTaiKhoan = Guid.NewGuid().ToString();

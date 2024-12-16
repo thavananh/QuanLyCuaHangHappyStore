@@ -39,6 +39,7 @@ namespace GUI
         private string loaisp;
         List<SanPham> lsp = new List<SanPham>();
         LoaiSanPhamBLL loaiSanPhamBLL = new LoaiSanPhamBLL();
+        public static string tenChucNang = "danh_sach_san_pham";
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             

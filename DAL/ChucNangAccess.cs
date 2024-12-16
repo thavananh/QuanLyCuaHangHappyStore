@@ -13,6 +13,12 @@ namespace DAL
         {
             return DatabaseAccess.TimChucNangTheoTen(tenChucNang);
         }
+
+        public CHUCNANG TimChucNangTheoMieuTa(string mieuTa)
+        {
+            return DatabaseAccess.TimChucNangTheoMieuTa(mieuTa);
+        }
+
         public  List<CHUCNANG> LayTatCaChucNang()
         {
             return DatabaseAccess.LayTatCaChucNang();

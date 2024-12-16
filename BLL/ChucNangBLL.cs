@@ -15,6 +15,12 @@ namespace BLL
         {
             return chucNangAccess.TimChucNangTheoTen(tenChucNang);
         }
+
+        public CHUCNANG TimChucNangTheoMieuTa(string mieuTa)
+        {
+            return chucNangAccess.TimChucNangTheoMieuTa(mieuTa);
+        }
+
         public List<CHUCNANG> LayTatCaChucNang()
         {
             return chucNangAccess.LayTatCaChucNang();

@@ -22,6 +22,7 @@ namespace GUI
         private List<LOAITAIKHOAN> listLoaiTaiKhoan = new List<LOAITAIKHOAN>();
         private LoaiTaiKhoanBLL loaiTaiKhoanBLL = new LoaiTaiKhoanBLL();
         private LOAITAIKHOAN loaiTaiKhoan = new LOAITAIKHOAN();
+        public static string tenChucNang = "them_loai_tai_khoan";
         private void loadComboBox()
         {
             listLoaiTaiKhoan = loaiTaiKhoanBLL.GetAllLoaiTaiKhoan();

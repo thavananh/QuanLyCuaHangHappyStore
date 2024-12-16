@@ -21,6 +21,8 @@ namespace GUI
             tbLoaiVatDung.Enabled = false;
         }
 
+        public static string tenChucNang = "them_loai_vat_dung";
+
         LOAITHIETBI loaiThietBi = new LOAITHIETBI();
         LoaiThietBiBLL loaiThietBiBLL = new LoaiThietBiBLL();
 

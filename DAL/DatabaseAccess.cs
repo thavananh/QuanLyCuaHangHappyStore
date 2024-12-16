@@ -106,6 +106,12 @@ namespace DAL
             new CHUCNANG
             {
                 MaChucNang = Guid.NewGuid().ToString(),
+                TenChucNang = "them_quyen_tai_khoan",
+                MieuTa = "Thêm quyền tài khoản"
+            },
+            new CHUCNANG
+            {
+                MaChucNang = Guid.NewGuid().ToString(),
                 TenChucNang = "phan_quyen_tai_khoan",
                 MieuTa = "Phân quyền tài khoản"
             },
@@ -139,6 +145,7 @@ namespace DAL
                 TenChucNang = "them_loai_san_pham",
                 MieuTa = "Thêm loại sản phẩm"
             },
+            
         };
 
         public void init()
@@ -642,6 +649,31 @@ namespace DAL
             }
         }
 
+        public static TaiKhoan LayTaiKhoanTheoMa(string maTaiKhoan)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                TaiKhoan taiKhoan = new TaiKhoan();
+                conn.Open();
+                string sql = "SELECT MATAIKHOAN, LOAITAIKHOAN FROM TAIKHOAN WHERE MATAIKHOAN=@MATAIKHOAN";
+
+                var cmd = new SQLiteCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@MATAIKHOAN", maTaiKhoan);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    taiKhoan = new TaiKhoan
+                    {
+                        MaTaiKhoan = reader["MATAIKHOAN"].ToString(),
+                        LoaiTK = reader["LOAITAIKHOAN"].ToString()
+                    };
+                }
+
+                conn.Close();
+                return taiKhoan;
+            }
+        }
+
         public static bool updatePasswordToDB(TaiKhoan taikhoan)
         {
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -949,7 +981,7 @@ namespace DAL
                         diaChi = reader["DIACHI"].ToString(),
                         SDT = reader["SDT"].ToString(),
                         GhiChu = reader["GHICHU"].ToString(),
-                        Chucvu = reader["CHUCVU"].ToString()
+                        MaLoaiChucVu = reader["CHUCVU"].ToString()
                     };
                     listNV.Add(nhanvien);
                 }
@@ -1044,9 +1076,9 @@ namespace DAL
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
-                string readInf = "SELECT MANHANVIEN,HOTEN,NGAYSINH,GIOITINH,CMND,DIACHI,SDT,EMAIL,GHICHU,CHUCVU FROM NHANVIEN WHERE CHUCVU=@CHUCVU";
+                string readInf = "SELECT MANHANVIEN,HOTEN,NGAYSINH,GIOITINH,CMND,DIACHI,SDT,EMAIL,GHICHU,MALOAICHUCVU FROM NHANVIEN WHERE MALOAICHUCVU=@MALOAICHUCVU";
                 var cmd = new SQLiteCommand(readInf, conn);
-                cmd.Parameters.AddWithValue("CHUCVU", chucVu);
+                cmd.Parameters.AddWithValue("MALOAICHUCVU", chucVu);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -1061,7 +1093,7 @@ namespace DAL
                         diaChi = reader["DIACHI"].ToString(),
                         SDT = reader["SDT"].ToString(),
                         GhiChu = reader["GHICHU"].ToString(),
-                        Chucvu = reader["CHUCVU"].ToString()
+                        MaLoaiChucVu = reader["MALOAICHUCVU"].ToString()
                     };
                     listHLV.Add(nhanvien);
                 }
@@ -1273,7 +1305,7 @@ namespace DAL
                     command.Parameters.AddWithValue("@SDT", nv.SDT);
                     command.Parameters.AddWithValue("@EMAIL", nv.Email);
                     command.Parameters.AddWithValue("@GHICHU", nv.GhiChu);
-                    command.Parameters.AddWithValue("@CHUCVU", nv.Chucvu);
+                    command.Parameters.AddWithValue("@CHUCVU", nv.MaLoaiChucVu);
                     command.Parameters.AddWithValue("@ANH", nv.Anh);
                     int rowsAffected = command.ExecuteNonQuery();
                     conn.Close();
@@ -1691,7 +1723,7 @@ namespace DAL
                     nv.diaChi = reader["DIACHI"].ToString();
                     nv.SDT = reader["SDT"].ToString();
                     nv.GhiChu = reader["GHICHU"].ToString();
-                    nv.Chucvu = reader["CHUCVU"].ToString();
+                    nv.MaLoaiChucVu = reader["CHUCVU"].ToString();
                     nv.Anh = (byte[])reader["ANH"];
                 }
                 reader.Close();
@@ -1930,6 +1962,7 @@ namespace DAL
                 {
                     cmd.Parameters.AddWithValue("@MaQuyenTaiKhoan", quyen.MaQuyenTaiKhoan);
                     cmd.Parameters.AddWithValue("@TenQuyenTaiKhoan", quyen.TenQuyenTaiKhoan);
+                    cmd.Parameters.AddWithValue("MIEUTA", quyen.MieuTa);
                     int rows = cmd.ExecuteNonQuery();
                     return rows > 0;
                 }
@@ -2204,15 +2237,15 @@ namespace DAL
         public static List<QUYENTAIKHOAN_LOAITAIKHOAN> GetQuyenTaiKhoan_LoaiTaiKhoan_ByMaLoaiTaiKhoan(string maLoaiTaiKhoan)
         {
             List<QUYENTAIKHOAN_LOAITAIKHOAN> list = new List<QUYENTAIKHOAN_LOAITAIKHOAN>();
-            string query = "SELECT MaQuyenTaiKhoan, MaLoaiTaiKhoan FROM QuyenTaiKhoan_LoaiTaiKhoan WHERE MaLoaiTaiKhoan = @MaLoaiTaiKhoan";
-            using (SqlConnection conn = new SqlConnection(dbName))
+            string query = "SELECT MAQUYENTAIKHOAN, MALOAITAIKHOAN FROM QUYENTAIKHOAN_LOAITAIKHOAN WHERE MALOAITAIKHOAN = @MALOAITAIKHOAN";
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@MaLoaiTaiKhoan", maLoaiTaiKhoan);
                 try
                 {
                     conn.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    var cmd = new SQLiteCommand(query, conn); 
+                    cmd.Parameters.AddWithValue("@MALOAITAIKHOAN", maLoaiTaiKhoan);
+                    var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         QUYENTAIKHOAN_LOAITAIKHOAN item = new QUYENTAIKHOAN_LOAITAIKHOAN
@@ -2317,7 +2350,7 @@ namespace DAL
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
-                string query = "SELECT * FROM CHUCNANG_QUYENTAIGHOAN WHERE MACHUCNANG=@MACHUCNANG";
+                string query = "SELECT * FROM CHUCNANG_QUYENTAIKHOAN WHERE MACHUCNANG=@MACHUCNANG";
                 var cmd = new SQLiteCommand(query, conn);
                 cmd.Parameters.AddWithValue("@MACHUCNANG", maChucNang);
                 using (var reader = cmd.ExecuteReader())
@@ -2337,6 +2370,9 @@ namespace DAL
             }
             return listChucNang_QuyenTaiKhoan;
         }
+
+        
+
         public static bool UpdateChucNang_QuyenTaiKhoan(string maChucNang, string newMaQuyenTaiKhoan, string oldMaQuyenTaiKhoan)
         {
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -2471,11 +2507,34 @@ namespace DAL
                 {
                     tmp.MaChucNang = reader["MACHUCNANG"].ToString();
                     tmp.TenChucNang = reader["TENCHUCNANG"].ToString();
+                    tmp.MieuTa = reader["MIEUTA"].ToString();
                 }
                 conn.Close();
             }
             return tmp;
         }
+
+        public static CHUCNANG TimChucNangTheoMieuTa(string mieuTa)
+        {
+            CHUCNANG tmp = new CHUCNANG();
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                conn.Open();
+                string query = "SELECT * FROM CHUCNANG WHERE MIEUTA=@MIEUTA";
+                var cmd = new SQLiteCommand(query, conn);
+                cmd.Parameters.AddWithValue("@MIEUTA", mieuTa);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    tmp.MaChucNang = reader["MACHUCNANG"].ToString();
+                    tmp.TenChucNang = reader["TENCHUCNANG"].ToString();
+                    tmp.MieuTa = reader["MIEUTA"].ToString();
+                }
+                conn.Close();
+            }
+            return tmp;
+        }
+
         public static List<CHUCNANG> LayTatCaChucNang()
         {
             List<CHUCNANG> listChucNang = new List<CHUCNANG>();

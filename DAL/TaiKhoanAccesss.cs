@@ -82,5 +82,10 @@ namespace DAL
         {
             return DatabaseAccess.ifAccountExsitsInDB(maTaiKhoan);
         }
+
+        public TaiKhoan LayTaiKhoanTheoMa(string maTaiKhoan)
+        {
+            return DatabaseAccess.LayTaiKhoanTheoMa(maTaiKhoan);
+        }
     }
 }

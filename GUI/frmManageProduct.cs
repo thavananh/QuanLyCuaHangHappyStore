@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BLL;
 
 /*
  ____   ___  _____ _______        ___    ____  _____ 
@@ -30,6 +31,16 @@ namespace GUI
         {
             InitializeComponent();
         }
+        QuanLyQuyenHanChucNang quanLyQuyenHanChucNang = new QuanLyQuyenHanChucNang();
+        private string maTaiKhoan = "";
+        private string maLoaiTaiKhoan = "";
+
+        public frmManageProduct(string inputMaTaiKhoan, string inputMaLoaiTaiKhoan)
+        {
+            InitializeComponent();
+            this.maTaiKhoan = inputMaTaiKhoan;
+            this.maLoaiTaiKhoan = inputMaLoaiTaiKhoan;
+        }
 
         private void btnProductList_Click(object sender, EventArgs e)
         {
@@ -42,6 +53,11 @@ namespace GUI
         private void btnSellProduct_Click(object sender, EventArgs e)
         {
             frmSellProducct sellProduct = new frmSellProducct();
+            if (!quanLyQuyenHanChucNang.KiemTraQuyenTruyCapVaoChucNang(frmSellProducct.tenChucNang, maTaiKhoan, maLoaiTaiKhoan))
+            {
+                MessageBox.Show("Bạn không đủ quyền hạn để sử dụng chức năng này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             this.Hide();
             sellProduct.ShowDialog();
             this.Show();
@@ -50,6 +66,11 @@ namespace GUI
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
             frmAddProduct addProduct = new frmAddProduct();
+            if (!quanLyQuyenHanChucNang.KiemTraQuyenTruyCapVaoChucNang(frmAddProduct.tenChucNang, maTaiKhoan, maLoaiTaiKhoan))
+            {
+                MessageBox.Show("Bạn không đủ quyền hạn để sử dụng chức năng này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             this.Hide();
             addProduct.ShowDialog();
             this.Show();
@@ -68,6 +89,11 @@ namespace GUI
         private void button1_Click(object sender, EventArgs e)
         {
             frmAddProductType addProductType = new frmAddProductType();
+            if (!quanLyQuyenHanChucNang.KiemTraQuyenTruyCapVaoChucNang(frmAddProductType.tenChucNang, maTaiKhoan, maLoaiTaiKhoan))
+            {
+                MessageBox.Show("Bạn không đủ quyền hạn để sử dụng chức năng này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             this.Hide();
             addProductType.ShowDialog();
             this.Show();

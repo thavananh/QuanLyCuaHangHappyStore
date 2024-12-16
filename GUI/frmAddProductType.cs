@@ -24,6 +24,7 @@ namespace GUI
         LOAISANPHAM loaiSanPham = new LOAISANPHAM();
         LoaiSanPhamBLL loaiSanPhamBLL = new LoaiSanPhamBLL();
 
+        public static string tenChucNang = "them_san_pham";
 
         private void btnBack_Click(object sender, EventArgs e)
         {

@@ -995,6 +995,9 @@
   <ItemGroup>
     <None Include="Resources\iconThemQuyenTaiKhoan.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IconThemVatDung.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

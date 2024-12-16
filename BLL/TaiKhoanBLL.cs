@@ -79,5 +79,10 @@ namespace BLL
         {
             return BCrypt.Net.BCrypt.Verify(specialPass, FirstRunChecker.GetSpecialPassword());
         }
+        
+        public TaiKhoan layTaiKhoanTheoMa(string maTaiKhoan)
+        {
+            return tkaccess.LayTaiKhoanTheoMa(maTaiKhoan);
+        }
     }
 }

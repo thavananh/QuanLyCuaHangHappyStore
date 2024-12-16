@@ -76,12 +76,12 @@ namespace DTO
             get => ghichu;
             set => ghichu = value;
         }
-        private string chucvu;
-        public string Chucvu
+        private string maLoaiChucVu;
+        public string MaLoaiChucVu
         {
             
-            get => chucvu;
-            set => chucvu = value;
+            get => maLoaiChucVu;
+            set => maLoaiChucVu = value;
         }
         private Byte[] anh;
         public Byte[] Anh

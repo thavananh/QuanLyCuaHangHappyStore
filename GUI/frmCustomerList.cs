@@ -44,7 +44,8 @@ namespace GUI
         {
             this.Hide();
         }
-        
+
+        public static string tenChucNang = "danh_sach_khach_hang";
         private void loadList()
         {
             int i = 1;

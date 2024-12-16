@@ -31,6 +31,8 @@ namespace GUI
         //    cmbLoaiNhanVienDeXuat.DataSource = loaiChucVu;
         //}
 
+        public static string tenChucNang = "them_loai_chuc_vu";
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             loaiChucVu.MaLoaiChucVu = Guid.NewGuid().ToString();

@@ -40,6 +40,8 @@ namespace GUI
         TaiKhoanBLL tkbll = new TaiKhoanBLL();
         NhanVienBLL nvbll = new NhanVienBLL();
         List<NHANVIEN> lNV = new List<NHANVIEN>();
+
+        public static string tenChucNang = "danh_sach_nhan_vien";
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -58,7 +60,7 @@ namespace GUI
             dgvEmployee.Columns.Add("CHUCVU", "Chức vụ");
             foreach (NHANVIEN nhanvien in lNV)
             {
-                dgvEmployee.Rows.Add(i, nhanvien.maNhanVien, nhanvien.Hoten, nhanvien.SDT, nhanvien.CMND, nhanvien.Chucvu);
+                dgvEmployee.Rows.Add(i, nhanvien.maNhanVien, nhanvien.Hoten, nhanvien.SDT, nhanvien.CMND, nhanvien.MaLoaiChucVu);
                 i++;
             }
             autoLoadRow();
@@ -187,7 +189,7 @@ namespace GUI
                         ws.Cells[hang, cot++].Value = item.diaChi;
                         ws.Cells[hang, cot++].Value = item.Email;
                         ws.Cells[hang, cot++].Value = item.CMND;
-                        ws.Cells[hang, cot++].Value = item.Chucvu;
+                        ws.Cells[hang, cot++].Value = item.MaLoaiChucVu;
                         ws.Cells[hang, cot++].Value = item.GhiChu;
                         ws.Cells.AutoFitColumns();
                     }

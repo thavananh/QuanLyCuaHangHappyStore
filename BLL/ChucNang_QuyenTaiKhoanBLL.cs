@@ -31,6 +31,6 @@ namespace BLL
         {
             return chucNang_QuyenTaiKhoanAceess.GetAllChucNang_QuyenTaiKhoan_ById(maChucNang);
         }
-
+        
     }
 }

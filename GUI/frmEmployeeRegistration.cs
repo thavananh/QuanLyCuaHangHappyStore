@@ -47,6 +47,7 @@ namespace GUI
         public bool checkupdateanh = false;
         private VideoCaptureDevice videoCapture;
         private FilterInfoCollection filterInfo;
+        public static string tenChucNang = "dang_ky_nhan_vien";
 
         //private void loadLoaiChucVu()
         //{
@@ -60,15 +61,15 @@ namespace GUI
         {
             if(cbJobtitle.SelectedItem.ToString() == "LETAN" )
             {
-                nv.Chucvu = "LETAN";
+                nv.MaLoaiChucVu = "LETAN";
             }
             else if(cbJobtitle.SelectedItem.ToString() == "HUANLUYENVIEN")
             {
-                nv.Chucvu = "HUANLUYENVIEN";
+                nv.MaLoaiChucVu = "HUANLUYENVIEN";
             }
             else if (cbJobtitle.SelectedItem.ToString() == "BAOVE")
             {
-                nv.Chucvu = "BAOVE";
+                nv.MaLoaiChucVu = "BAOVE";
             }
         }
         private void ptbAvatar_Click(object sender, EventArgs e)

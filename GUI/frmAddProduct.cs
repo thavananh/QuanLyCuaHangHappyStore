@@ -48,6 +48,7 @@ namespace GUI
         GoiTapBLL gtBLL = new GoiTapBLL();
         ChiPhiBLL cpBLL = new ChiPhiBLL();
         LoaiSanPhamBLL loaiSanPhamBLL = new LoaiSanPhamBLL();
+        public static string tenChucNang = "them_san_pham";
         private byte[] imageToByteArray(PictureBox ptb)
         {
             using (MemoryStream ms = new MemoryStream())

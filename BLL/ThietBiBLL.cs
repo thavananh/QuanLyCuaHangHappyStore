@@ -27,8 +27,7 @@ namespace BLL
         ThietBiAccess tbaccess = new ThietBiAccess();
         public bool themdulieu(THIETBI tb)
         {
-            DateTime now = DateTime.Now;
-            tb.Mathietbi = tb.Loaithietbi + now.Year.ToString() + now.Month.ToString("D2") + now.Day.ToString("D2") + now.Hour.ToString() + now.Minute.ToString() + now.Second.ToString();
+            tb.Mathietbi = Guid.NewGuid().ToString();   
             return tbaccess.ThemDuLieuThietBi(tb);
 
         }

@@ -79,6 +79,7 @@ namespace GUI
                 tb.Tenthietbi = tbEquipmentName.Text;
             }
             tb.Anh = imageToByteArray(ptbEquipment);
+            tb.Loaithietbi = cbEquipmentType.SelectedValue.ToString();
             bool getinsert = tbll.themdulieu(tb);
             switch(getinsert)
             {
@@ -96,7 +97,7 @@ namespace GUI
         {
             List<LOAITHIETBI> listLoaiThietBi = loaiThietBiBLL.xemLoaiThietBi();
             cbEquipmentType.DataSource = listLoaiThietBi;
-            cbEquipmentType.DisplayMember = "TenLoaiTaiKhoan";
+            cbEquipmentType.DisplayMember = "TenLoaiThietBi";
             cbEquipmentType.ValueMember = "MaLoaiThietBi";
             
         }

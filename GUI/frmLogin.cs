@@ -121,7 +121,7 @@ namespace GUI
         {
             if (FirstRunChecker.IsFirstRun() == true)
             {
-                MessageBox.Show("Xin chào người dùng mới, bảng thông báo này chỉ xuất hiện 1 lần. Vui lòng cẩn thận lưu trữ mật khẩu đặc biệt !!!\n\nMật khẩu đặc biệt dùng để tạo tài khoản admin và phân quyền đăng nhập là: " + FirstRunChecker.userSpecialPass + " (nhấn ok để copy đoạn mật khẩu)", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Xin chào người dùng mới. Cảm ơn bạn đã sử dụng phần mềm. Tên tài khoản đăng nhập mặc định là admin. Mật khẩu đăng nhập mặc định là admin123 ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Clipboard.SetText(FirstRunChecker.userSpecialPass);
             }
         }

@@ -79,10 +79,12 @@ namespace GUI
 
             cbChonQuyenLoaiTaiKhoan.DisplayMember = "TenQuyenTaiKhoan";
             cbChonQuyenLoaiTaiKhoan.ValueMember = "MaQuyenTaiKhoan";
+            cbChonQuyenLoaiTaiKhoan.DataSource = null;
             cbChonQuyenLoaiTaiKhoan.DataSource = listQuyenTaiKhoan;
 
             cboQuyenDaChon.DisplayMember = "TenQuyenTaiKhoan";
             cboQuyenDaChon.ValueMember = "MaQuyenTaiKhoan";
+            cboQuyenDaChon.DataSource = null;
             cboQuyenDaChon.DataSource = tmp;
 
             // Đăng ký sự kiện khi chọn loại tài khoản thay đổi
@@ -157,6 +159,7 @@ namespace GUI
                 cboQuyenDaChon.DataSource = listAssignedQuyenTaiKhoan;
                 cboQuyenDaChon.DisplayMember = "TenQuyenTaiKhoan";
                 cboQuyenDaChon.ValueMember = "MaQuyenTaiKhoan";
+                cboQuyenDaChon.SelectedIndex = cboQuyenDaChon.Items.Count - 1;
             }
             else
             {
@@ -193,8 +196,10 @@ namespace GUI
                         cboQuyenDaChon.DataSource = listAssignedQuyenTaiKhoan;
                         cboQuyenDaChon.DisplayMember = "TenQuyenTaiKhoan";
                         cboQuyenDaChon.ValueMember = "MaQuyenTaiKhoan";
+                        
 
                         MessageBox.Show("Xoá quyền thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        
                     }
                     else
                     {
@@ -258,6 +263,8 @@ namespace GUI
                     if (isSuccess)
                     {
                         MessageBox.Show("Cấp quyền thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadComboBox();
+                        
                     }
                     else
                     {

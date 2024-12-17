@@ -185,6 +185,7 @@
             this.btnBack.Size = new System.Drawing.Size(76, 43);
             this.btnBack.TabIndex = 186;
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click_1);
             // 
             // frmFormPermission
             // 

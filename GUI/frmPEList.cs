@@ -66,7 +66,7 @@ namespace GUI
         {
             List<LOAITHIETBI> listLoaiThietBi = new List<LOAITHIETBI>();
             listLoaiThietBi = loaiThietBiBLL.xemLoaiThietBi();
-            cmbEquipmentType.DisplayMember = "TenLoaiTaiKhoan";
+            cmbEquipmentType.DisplayMember = "TenLoaiThietBi";
             cmbEquipmentType.ValueMember = "MaLoaiThietBi";
             cmbEquipmentType.DataSource = listLoaiThietBi;
             
@@ -317,7 +317,7 @@ namespace GUI
                     string tbID = value.ToString();
                     if (tbbll.ifEquipmentInDB(tbID) <= 0)
                     {
-                        MessageBox.Show("Dụng cụ thể dục không tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Vật dụng cửa hàng không tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                     frmEquipmentInfo equipmentInfo = new frmEquipmentInfo(tbID);

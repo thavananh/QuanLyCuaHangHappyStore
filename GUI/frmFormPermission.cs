@@ -39,8 +39,8 @@ namespace GUI
         {
             
             listChucNang = chucNangBLL.LayTatCaChucNang();
-            cboChucNang.DisplayMember = "MaChucNang";
-            cboChucNang.ValueMember = "TenChucNang";
+            cboChucNang.DisplayMember = "TenChucNang";
+            cboChucNang.ValueMember = "MaChucNang";
             cboChucNang.DataSource = listChucNang;
 
 
@@ -121,6 +121,7 @@ namespace GUI
                 cboQuyenDaChon.DataSource = listAssignedQuyenTaiKhoan;
                 cboQuyenDaChon.DisplayMember = "TenQuyenTaiKhoan";
                 cboQuyenDaChon.ValueMember = "MaQuyenTaiKhoan";
+                cboQuyenDaChon.SelectedIndex = cboQuyenDaChon.Items.Count - 1;
             }
             else
             {
@@ -243,7 +244,8 @@ namespace GUI
             }
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
+       
+        private void btnBack_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }

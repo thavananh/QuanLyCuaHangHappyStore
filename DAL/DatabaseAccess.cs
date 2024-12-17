@@ -173,7 +173,7 @@ namespace DAL
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "CREATE TABLE IF NOT EXISTS \"LOAICHUCVU\" (\"MALOAICHUCVU\" TEXT, \"TENLOAICHUCVU\" INTEGER, CONSTRAINT \"LCV_MaLoaiChucVu_PK\" PRIMARY KEY(\"MALOAICHUCVU\"));";
+                sql = "CREATE TABLE IF NOT EXISTS \"LOAICHUCVU\" (\"MALOAICHUCVU\" TEXT, \"TENLOAICHUCVU\" TEXT, CONSTRAINT \"LCV_MaLoaiChucVu_PK\" PRIMARY KEY(\"MALOAICHUCVU\"));";
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
@@ -566,13 +566,14 @@ namespace DAL
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
-                string sql = "INSERT OR IGNORE INTO TAIKHOAN(MATAIKHOAN, LOAITAIKHOAN, MATKHAU, EMAILCANHAN) " +
-                      "VALUES(@MATAIKHOAN, @LOAITAIKHOAN, @MATKHAU, @EMAILCANHAN)";
+                string sql = "INSERT OR IGNORE INTO TAIKHOAN(MATAIKHOAN, LOAITAIKHOAN, MATKHAU, EMAILCANHAN, MATAIKHOANNHANVIEN) " +
+                      "VALUES(@MATAIKHOAN, @LOAITAIKHOAN, @MATKHAU, @EMAILCANHAN, @MATAIKHOANNHANVIEN)";
                 var cmd = new SQLiteCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@MATAIKHOAN", taikhoan.MaTaiKhoan);
                 cmd.Parameters.AddWithValue("@LOAITAIKHOAN", taikhoan.LoaiTK);
                 cmd.Parameters.AddWithValue("@MATKHAU", taikhoan.MatKhau);
                 cmd.Parameters.AddWithValue("@EMAILCANHAN", taikhoan.Email);
+                cmd.Parameters.AddWithValue("@MATAIKHOANNHANVIEN", taikhoan.MaTaiKhoanNhanVien);
                 int i = cmd.ExecuteNonQuery();
                 conn.Close();
                 return i > 0;
@@ -1070,7 +1071,7 @@ namespace DAL
             return listTB;
         }
 
-        public static List<NHANVIEN> xemHuanLuyenVien(string chucVu)
+        public static List<NHANVIEN> xemNhanVienTheoLoaiChucVu(string maChucVu)
         {
             List<NHANVIEN> listHLV = new List<NHANVIEN>();
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
@@ -1078,7 +1079,7 @@ namespace DAL
                 conn.Open();
                 string readInf = "SELECT MANHANVIEN,HOTEN,NGAYSINH,GIOITINH,CMND,DIACHI,SDT,EMAIL,GHICHU,MALOAICHUCVU FROM NHANVIEN WHERE MALOAICHUCVU=@MALOAICHUCVU";
                 var cmd = new SQLiteCommand(readInf, conn);
-                cmd.Parameters.AddWithValue("MALOAICHUCVU", chucVu);
+                cmd.Parameters.AddWithValue("MALOAICHUCVU", maChucVu);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -1292,7 +1293,7 @@ namespace DAL
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
-                string query = "INSERT OR IGNORE INTO NHANVIEN(MANHANVIEN,HOTEN,NGAYSINH,GIOITINH,CMND,DIACHI,SDT,EMAIL,GHICHU,CHUCVU,ANH) VALUES(@MANHANVIEN,@HOTEN,@NGAYSINH,@GIOITINH,@CMND,@DIACHI,@SDT,@EMAIL,@GHICHU,@CHUCVU,@ANH)";
+                string query = "INSERT OR IGNORE INTO NHANVIEN(MANHANVIEN,HOTEN,NGAYSINH,GIOITINH,CMND,DIACHI,SDT,EMAIL,GHICHU,MALOAICHUCVU,ANH) VALUES(@MANHANVIEN,@HOTEN,@NGAYSINH,@GIOITINH,@CMND,@DIACHI,@SDT,@EMAIL,@GHICHU,@MALOAICHUCVU,@ANH)";
                 var command = new SQLiteCommand(query, conn);
                 if (!kiemtraNhanVien(nv.maNhanVien))
                 {
@@ -1305,7 +1306,7 @@ namespace DAL
                     command.Parameters.AddWithValue("@SDT", nv.SDT);
                     command.Parameters.AddWithValue("@EMAIL", nv.Email);
                     command.Parameters.AddWithValue("@GHICHU", nv.GhiChu);
-                    command.Parameters.AddWithValue("@CHUCVU", nv.MaLoaiChucVu);
+                    command.Parameters.AddWithValue("@MALOAICHUCVU", nv.MaLoaiChucVu);
                     command.Parameters.AddWithValue("@ANH", nv.Anh);
                     int rowsAffected = command.ExecuteNonQuery();
                     conn.Close();
@@ -1463,7 +1464,7 @@ namespace DAL
             }
         }
 
-        public static bool ifEmployeeExistsInDB(string manv)
+        public static int ifEmployeeExistsInDB(string manv)
         {
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
@@ -1471,9 +1472,10 @@ namespace DAL
                 string query = "SELECT COUNT(*) FROM NHANVIEN WHERE MANHANVIEN=@MANHANVIEN";
                 var cmd = new SQLiteCommand(query, conn);
                 cmd.Parameters.AddWithValue("@MANHANVIEN", manv);
-                int count = cmd.ExecuteNonQuery();
+                int i = Convert.ToInt16(cmd.ExecuteScalar());
                 conn.Close();
-                return count > 0;
+                return i;
+                
             }
         }
 
@@ -1708,7 +1710,7 @@ namespace DAL
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
-                string readInf = "SELECT MANHANVIEN,HOTEN,NGAYSINH,GIOITINH,CMND,DIACHI,SDT,EMAIL,GHICHU,CHUCVU,ANH FROM NHANVIEN WHERE MANHANVIEN=@MANHANVIEN";
+                string readInf = "SELECT MANHANVIEN,HOTEN,NGAYSINH,GIOITINH,CMND,DIACHI,SDT,EMAIL,GHICHU,MALOAICHUCVU,ANH FROM NHANVIEN WHERE MANHANVIEN=@MANHANVIEN";
                 var cmd = new SQLiteCommand(readInf, conn);
                 cmd.Parameters.AddWithValue("@MANHANVIEN", manv);
                 var reader = cmd.ExecuteReader();
@@ -1723,8 +1725,16 @@ namespace DAL
                     nv.diaChi = reader["DIACHI"].ToString();
                     nv.SDT = reader["SDT"].ToString();
                     nv.GhiChu = reader["GHICHU"].ToString();
-                    nv.MaLoaiChucVu = reader["CHUCVU"].ToString();
-                    nv.Anh = (byte[])reader["ANH"];
+                    nv.MaLoaiChucVu = reader["MALOAICHUCVU"].ToString();
+                    int anhIndex = reader.GetOrdinal("ANH");
+                    if (!reader.IsDBNull(anhIndex))
+                    {
+                        nv.Anh = (byte[])reader["ANH"];
+                    }
+                    else
+                    {
+                        nv.Anh = new byte[0]; // Gán mảng byte rỗng nếu ANH là null
+                    }
                 }
                 reader.Close();
                 conn.Close();
@@ -2437,25 +2447,52 @@ namespace DAL
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
-                string query = "SELECT * FROM LOAICHUCVU;";
+                string query = "SELECT MALOAICHUCVU, TENLOAICHUCVU FROM LOAICHUCVU;";
                 using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                 {
-                    using (SQLiteDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
+                    var reader123 = cmd.ExecuteReader();
+                    while (reader123.Read())
                         {
                             LOAICHUCVU loaiChucVu = new LOAICHUCVU
                             {
-                                MaLoaiChucVu = reader["MALOAICHUCVU"].ToString(),
-                                TenLoaiChucVu = reader["TENLOAICHUCVU"].ToString()
+                                MaLoaiChucVu = reader123["MALOAICHUCVU"].ToString(),
+                                TenLoaiChucVu = reader123["TENLOAICHUCVU"].ToString()
                             };
                             listLoaiChucVu.Add(loaiChucVu);
                         }
-                    }
+                    
                     conn.Close();
                 }
             }
             return listLoaiChucVu;
+        }
+
+        public static LOAICHUCVU ReadLoaiChucVuById(string maChucVu)
+        {
+            
+            using (SQLiteConnection conn = new SQLiteConnection(dbName))
+            {
+                conn.Open();
+                string query = "SELECT MALOAICHUCVU, TENLOAICHUCVU FROM LOAICHUCVU WHERE MALOAICHUCVU=@maChucVu;";
+                LOAICHUCVU loaiChucVu = new LOAICHUCVU();
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@maChucVu", maChucVu);
+                    var reader123 = cmd.ExecuteReader();
+                    while (reader123.Read())
+                    {
+                        loaiChucVu = new LOAICHUCVU
+                        {
+                            MaLoaiChucVu = reader123["MALOAICHUCVU"].ToString(),
+                            TenLoaiChucVu = reader123["TENLOAICHUCVU"].ToString()
+                        };
+                        
+                    }
+                    conn.Close();
+                    return loaiChucVu;
+                }
+            }
+            
         }
 
         // UPDATE

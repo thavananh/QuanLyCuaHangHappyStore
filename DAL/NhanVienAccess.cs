@@ -40,10 +40,10 @@ namespace DAL
             lnv = DatabaseAccess.xemNhanVien();
             return lnv;
         }
-        public List<NHANVIEN> xemHuanLuyenVien(string chucVu)
+        public List<NHANVIEN> xemNhanVienTheoLoaiChucVu(string maChucVu)
         {
             List<NHANVIEN> lhlv = new List<NHANVIEN>();
-            lhlv = DatabaseAccess.xemHuanLuyenVien(chucVu);
+            lhlv = DatabaseAccess.xemNhanVienTheoLoaiChucVu(maChucVu);
             return lhlv;
         }
         public NHANVIEN xemthongTinNV(string manv)
@@ -66,7 +66,7 @@ namespace DAL
         {
             return DatabaseAccess.XoaThongtinNV(manv);
         }
-        public bool ifEmployeeExistsInDB(string manv)
+        public int ifEmployeeExistsInDB(string manv)
         {
             return DatabaseAccess.ifEmployeeExistsInDB(manv);
         }

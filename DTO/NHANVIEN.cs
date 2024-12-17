@@ -83,12 +83,13 @@ namespace DTO
             get => maLoaiChucVu;
             set => maLoaiChucVu = value;
         }
-        private Byte[] anh;
-        public Byte[] Anh
+        private byte[] anh = new byte[0]; // Khởi tạo với mảng byte rỗng
+        public byte[] Anh
         {
             get => anh;
-            set => anh = value;
+            set => anh = value ?? new byte[0]; // Nếu value là null, gán mảng byte rỗng
         }
+
         public NHANVIEN()
         {   
 

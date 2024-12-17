@@ -40,6 +40,8 @@ namespace GUI
         TaiKhoanBLL tkbll = new TaiKhoanBLL();
         NhanVienBLL nvbll = new NhanVienBLL();
         List<NHANVIEN> lNV = new List<NHANVIEN>();
+        LoaiChucVuBLL loaiChucVuBLL = new LoaiChucVuBLL();
+        List<LOAICHUCVU> listLoaiChucVu = new List<LOAICHUCVU>();
 
         public static string tenChucNang = "danh_sach_nhan_vien";
         private void btnBack_Click(object sender, EventArgs e)
@@ -50,17 +52,18 @@ namespace GUI
         {
             int i = 1;
             dgvEmployee.Columns.Clear();
-            string selectedJobTitle = ((KeyValuePair<string, string>)cbJobtitle.SelectedItem).Key;
-            lNV = nvbll.xemHuanLuyenVien(selectedJobTitle);
+            lNV = nvbll.xemNhanVienTheoLoaiChucVu(cbJobtitle.SelectedValue.ToString());
             dgvEmployee.Columns.Add("STT", "STT");
             dgvEmployee.Columns.Add("MANHANVIEN", "Mã nhân viên");
             dgvEmployee.Columns.Add("HOTEN", "Họ tên");
             dgvEmployee.Columns.Add("SDT", "Số ĐT");
             dgvEmployee.Columns.Add("CMND", "CMND");
             dgvEmployee.Columns.Add("CHUCVU", "Chức vụ");
+            
             foreach (NHANVIEN nhanvien in lNV)
             {
-                dgvEmployee.Rows.Add(i, nhanvien.maNhanVien, nhanvien.Hoten, nhanvien.SDT, nhanvien.CMND, nhanvien.MaLoaiChucVu);
+                LOAICHUCVU tmp = loaiChucVuBLL.ReadLoaiChucVuById(nhanvien.MaLoaiChucVu);
+                dgvEmployee.Rows.Add(i, nhanvien.maNhanVien, nhanvien.Hoten, nhanvien.SDT, nhanvien.CMND, tmp.TenLoaiChucVu);
                 i++;
             }
             autoLoadRow();
@@ -68,24 +71,18 @@ namespace GUI
 
         private void loadComboBox()
         {
-            var comboBoxItems = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("LETAN", "Lễ Tân"),
-                new KeyValuePair<string, string>("HUANLUYENVIEN", "Huấn luyện viên"),
-                new KeyValuePair<string, string>("BAOVE", "Bảo vệ")
-            };
+            
+            listLoaiChucVu = loaiChucVuBLL.ReadLoaiChucVu();
 
-            // Gán DataSource, DisplayMember và ValueMember
-            cbJobtitle.DataSource = comboBoxItems;
-            cbJobtitle.DisplayMember = "Value";
-            cbJobtitle.ValueMember = "Key";
+            cbJobtitle.DisplayMember = "TenLoaiChucVu";
+            cbJobtitle.ValueMember = "MaLoaiChucVu";
+            cbJobtitle.DataSource = listLoaiChucVu;
         }
 
         private void frmEmployeeList_Load(object sender, EventArgs e)
         {
             loadComboBox(); 
-            cbJobtitle.SelectedIndex = 0;
-            cbJobtitle.DropDownStyle = ComboBoxStyle.DropDownList;
+            
             LoadList();
         }
 
@@ -121,9 +118,9 @@ namespace GUI
             SaveFileDialog save = new SaveFileDialog();
             // file filter
             save.Filter = "Excel Workbook|*.xlsx ";
-            string selectedJobTitle = ((KeyValuePair<string, string>)cbJobtitle.SelectedItem).Value;
+            string selectedJobTitle = cbJobtitle.GetItemText(cbJobtitle.SelectedItem); ;
             DateTime now = DateTime.Now;
-            save.FileName = "DS" + ((KeyValuePair<string, string>)cbJobtitle.SelectedItem).Key + now.Year.ToString() + now.Month.ToString("D2") + now.Day.ToString("D2") + now.Hour.ToString() + now.Minute.ToString() + now.Second.ToString();
+            save.FileName = "DS-" + selectedJobTitle + "-" + now.Year.ToString() + now.Month.ToString("D2") + now.Day.ToString("D2") + now.Hour.ToString() + now.Minute.ToString() + now.Second.ToString();
             if (save.ShowDialog() == DialogResult.OK)
             {
                 filepath = save.FileName;
@@ -138,7 +135,7 @@ namespace GUI
             {
                 using (ExcelPackage excel = new ExcelPackage())
                 {
-                    excel.Workbook.Properties.Author = "GymHCMUE";
+                    excel.Workbook.Properties.Author = "HappyStore";
                     string title = "Danh sách " + selectedJobTitle;
                     excel.Workbook.Properties.Title = title;
                     excel.Workbook.Worksheets.Add(title);
@@ -177,8 +174,10 @@ namespace GUI
                         cell.AutoFitColumns();
                         cot++;
                     }
+                    
                     foreach (var item in lNV)
                     {
+                        LOAICHUCVU tmp = loaiChucVuBLL.ReadLoaiChucVuById(item.MaLoaiChucVu);
                         cot = 1;
                         hang++;
                         ws.Cells[hang, cot++].Value = item.maNhanVien;
@@ -189,7 +188,7 @@ namespace GUI
                         ws.Cells[hang, cot++].Value = item.diaChi;
                         ws.Cells[hang, cot++].Value = item.Email;
                         ws.Cells[hang, cot++].Value = item.CMND;
-                        ws.Cells[hang, cot++].Value = item.MaLoaiChucVu;
+                        ws.Cells[hang, cot++].Value = tmp.TenLoaiChucVu;
                         ws.Cells[hang, cot++].Value = item.GhiChu;
                         ws.Cells.AutoFitColumns();
                     }
@@ -244,7 +243,7 @@ namespace GUI
                     // Đọc giá trị từ mã QR
                     string value = ReadQRCodeFromFile(filePath);
                     string employeeId = value.ToString();
-                    if (nvbll.ifEmployeeExistsInDB(employeeId) == false)
+                    if (nvbll.ifEmployeeExistsInDB(employeeId) <= 0)
                     {
                         MessageBox.Show("Nhân viên không tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
@@ -291,10 +290,10 @@ namespace GUI
             bool check = nvbll.XoaNV(maNV);
             if (check == true)
             {
-                MessageBox.Show("Xóa nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Xóa nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else { 
-                MessageBox.Show("Xóa nhân viên thất bại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                MessageBox.Show("Xóa nhân viên thất bại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
             }
         }
 
@@ -304,6 +303,11 @@ namespace GUI
         }
 
         private void cbJobtitle_SelectedValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cbJobtitle_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadList();
         }

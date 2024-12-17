@@ -106,6 +106,7 @@ namespace GUI
             this.cbJobtitle.Name = "cbJobtitle";
             this.cbJobtitle.Size = new System.Drawing.Size(122, 21);
             this.cbJobtitle.TabIndex = 127;
+            this.cbJobtitle.SelectedIndexChanged += new System.EventHandler(this.cbJobtitle_SelectedIndexChanged);
             this.cbJobtitle.SelectedValueChanged += new System.EventHandler(this.cbJobtitle_SelectedValueChanged);
             // 
             // btnRefresh

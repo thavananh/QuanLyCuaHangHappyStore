@@ -19,6 +19,10 @@ namespace BLL
         {
             return loaiChucVuAccess.ReadLoaiChucVu();
         }
+        public LOAICHUCVU ReadLoaiChucVuById(string maChucVu)
+        {
+            return loaiChucVuAccess.ReadLoaiChucVuById(maChucVu);
+        }
         public bool UpdateLoaiChucVu(LOAICHUCVU loaiChucVu)
         {
             return loaiChucVuAccess.UpdateLoaiChucVu(loaiChucVu);

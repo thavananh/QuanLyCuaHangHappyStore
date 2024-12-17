@@ -17,6 +17,10 @@ namespace DAL
         {
             return DatabaseAccess.ReadLoaiChucVu();
         }
+        public LOAICHUCVU ReadLoaiChucVuById(string maChucVu)
+        {
+            return DatabaseAccess.ReadLoaiChucVuById(maChucVu);
+        }
         public bool UpdateLoaiChucVu(LOAICHUCVU loaiChucVu)
         {
             return DatabaseAccess.UpdateLoaiChucVu(loaiChucVu);

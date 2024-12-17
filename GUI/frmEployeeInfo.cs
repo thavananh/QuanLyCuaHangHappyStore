@@ -63,9 +63,12 @@ namespace GUI
             tbGHichu.Text = nv.GhiChu;
             tbChucVu.Text = nv.MaLoaiChucVu;
             tbChucVu.Enabled = false;
-            using (MemoryStream ms = new MemoryStream(nv.Anh))
+            if (nv.Anh != null && nv.Anh.Length > 0)
             {
-                ptbAvatar.Image = Image.FromStream(ms);
+                using (MemoryStream ms = new MemoryStream(nv.Anh))
+                {
+                    ptbAvatar.Image = Image.FromStream(ms);
+                }
             }
 
         }

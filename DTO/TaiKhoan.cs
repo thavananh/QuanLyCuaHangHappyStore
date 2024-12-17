@@ -48,6 +48,12 @@ namespace DTO
             get => email;
             set => email = value;
         }
+        private string maTaiKhoanNhanVien;
+        public string MaTaiKhoanNhanVien
+        {
+            get => maTaiKhoanNhanVien;
+            set => maTaiKhoanNhanVien = value;
+        }
         public TaiKhoan()
         {
             

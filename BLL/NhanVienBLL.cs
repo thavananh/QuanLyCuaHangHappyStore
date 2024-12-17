@@ -36,10 +36,10 @@ namespace BLL
             string updatenv = nvaccess.UpdateNV(nv);
             return updatenv;
         }
-        public List<NHANVIEN> xemHuanLuyenVien(string chucVu)
+        public List<NHANVIEN> xemNhanVienTheoLoaiChucVu(string chucVu)
         {
             List<NHANVIEN> lhlv = new List<NHANVIEN>();
-            lhlv= nvaccess.xemHuanLuyenVien(chucVu);
+            lhlv= nvaccess.xemNhanVienTheoLoaiChucVu(chucVu);
             return lhlv;
         }
         public NHANVIEN xemThongTinNV(string manv)
@@ -56,8 +56,6 @@ namespace BLL
         }
         public bool themNV(NHANVIEN nv)
         {
-            DateTime now = DateTime.Now;
-            nv.maNhanVien = nv.MaLoaiChucVu + now.Year + now.Month.ToString("D2") + now.Day.ToString("D2") + now.Hour.ToString() + now.Minute.ToString() + now.Second.ToString();
             return nvaccess.ThemNV(nv);
         }
         public bool XoaNV(string manv)
@@ -65,7 +63,7 @@ namespace BLL
             return nvaccess.xoaNV(manv);
         }
 
-        public bool ifEmployeeExistsInDB(string manv)
+        public int ifEmployeeExistsInDB(string manv)
         {
             return nvaccess.ifEmployeeExistsInDB(manv);
         }

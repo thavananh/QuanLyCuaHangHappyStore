@@ -19,6 +19,8 @@ using OpenCvSharp;
 using AForge.Video;
 using ZXing.Common;
 using ZXing;
+using iText.Layout.Element;
+using Org.BouncyCastle.Asn1.X500;
 
 /*
  ____   ___  _____ _______        ___    ____  _____ 
@@ -48,29 +50,20 @@ namespace GUI
         private VideoCaptureDevice videoCapture;
         private FilterInfoCollection filterInfo;
         public static string tenChucNang = "dang_ky_nhan_vien";
+        LoaiChucVuBLL loaiChucVuBLL = new LoaiChucVuBLL();
+        TaiKhoanBLL tkbll = new TaiKhoanBLL();
 
-        //private void loadLoaiChucVu()
-        //{
-        //    List<LOAICHUCVU> loaiChucVu = loaiChucVuBLL.ReadLoaiChucVu();
-        //    cmbLoaiNhanVienDeXuat.DisplayMember = "TenLoaiChucVu";
-        //    cmbLoaiNhanVienDeXuat.ValueMember = "MaLoaiChucVu";
-        //    cmbLoaiNhanVienDeXuat.DataSource = loaiChucVu;
-        //}
+        private void loadLoaiChucVu()
+        {
+            List<LOAICHUCVU> loaiChucVu = loaiChucVuBLL.ReadLoaiChucVu();
+            cbJobtitle.DisplayMember = "TenLoaiChucVu";
+            cbJobtitle.ValueMember = "MaLoaiChucVu";
+            cbJobtitle.DataSource = loaiChucVu;
+        }
 
         private void cbJobtitle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbJobtitle.SelectedItem.ToString() == "LETAN" )
-            {
-                nv.MaLoaiChucVu = "LETAN";
-            }
-            else if(cbJobtitle.SelectedItem.ToString() == "HUANLUYENVIEN")
-            {
-                nv.MaLoaiChucVu = "HUANLUYENVIEN";
-            }
-            else if (cbJobtitle.SelectedItem.ToString() == "BAOVE")
-            {
-                nv.MaLoaiChucVu = "BAOVE";
-            }
+            
         }
         private void ptbAvatar_Click(object sender, EventArgs e)
         {
@@ -159,12 +152,50 @@ namespace GUI
             { nv.GhiChu = tbNote.Text; }
            
              nv.Anh = imageToByteArray(ptbAvatar);
-            
+            nv.maNhanVien = Guid.NewGuid().ToString();
             bool check = nvbll.themNV(nv);
            if(check == true)
             {
                 MessageBox.Show("Thêm nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 isAddEmployee = true;
+                if (tbUserId.Text.Trim().Length != 0 && tbPassword.Text.Trim().Length != 0 && tbEmail.Text.Trim().Length != 0)
+                {
+                    if (tbPassword.Text.Trim().Length < 8)
+                    {
+                        MessageBox.Show("Mật khẩu yếu, vui lòng tạo tài khoản trên 8 ký tự", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        TaiKhoan taikhoan = new TaiKhoan();
+                        taikhoan.MaTaiKhoan = tbUserId.Text.Trim();
+                        taikhoan.MatKhau = tbPassword.Text.Trim();
+                        taikhoan.Email = tbEmail.Text.Trim();
+                        taikhoan.MaTaiKhoanNhanVien = nv.maNhanVien;
+                        if (ConditionClass.IsValidEmail(tbEmail.Text.Trim()) == false)
+                        {
+                            MessageBox.Show("Email không đúng định dạng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        if (tkbll.checkEmail(tbEmail.Text.Trim()) > 0)
+                        {
+                            MessageBox.Show("Email đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        if (tkbll.AddAccount(taikhoan))
+                        {
+                            MessageBox.Show("Tạo tài khoản thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            
+                        }
+                        else
+                        {
+                            MessageBox.Show("Tài khoản đã tồn tại hoặc có lỗi xảy ra, vui lòng thử lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ các thông tin", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
@@ -207,6 +238,7 @@ namespace GUI
 
         private void frmEmployeeRegistration_Load(object sender, EventArgs e)
         {
+            loadLoaiChucVu();
             videoCapture = new VideoCaptureDevice();
             filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             foreach (FilterInfo filterInfo in filterInfo)

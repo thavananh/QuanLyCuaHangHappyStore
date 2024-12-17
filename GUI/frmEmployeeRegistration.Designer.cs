@@ -59,7 +59,7 @@ namespace GUI
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.tbUsername = new System.Windows.Forms.TextBox();
+            this.tbUserId = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -385,13 +385,13 @@ namespace GUI
             this.label12.TabIndex = 157;
             this.label12.Text = "Tên tài khoản";
             // 
-            // tbUsername
+            // tbUserId
             // 
-            this.tbUsername.Location = new System.Drawing.Point(214, 360);
-            this.tbUsername.Margin = new System.Windows.Forms.Padding(2);
-            this.tbUsername.Name = "tbUsername";
-            this.tbUsername.Size = new System.Drawing.Size(233, 20);
-            this.tbUsername.TabIndex = 158;
+            this.tbUserId.Location = new System.Drawing.Point(214, 360);
+            this.tbUserId.Margin = new System.Windows.Forms.Padding(2);
+            this.tbUserId.Name = "tbUserId";
+            this.tbUserId.Size = new System.Drawing.Size(233, 20);
+            this.tbUserId.TabIndex = 158;
             // 
             // label13
             // 
@@ -421,7 +421,7 @@ namespace GUI
             this.ClientSize = new System.Drawing.Size(886, 481);
             this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.tbUsername);
+            this.Controls.Add(this.tbUserId);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnExportQR);
@@ -496,6 +496,6 @@ namespace GUI
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox tbUsername;
+        private System.Windows.Forms.TextBox tbUserId;
     }
 }

@@ -30,7 +30,7 @@ namespace GUI
         private List<QUYENTAIKHOAN> listAssignedQuyenTaiKhoan = new List<QUYENTAIKHOAN>();
         private List<QUYENTAIKHOAN> tmp = new List<QUYENTAIKHOAN>();
         private List<QUYENTAIKHOAN_LOAITAIKHOAN> listQuyenTaiKhoan_LoaiTaiKhoan = new List<QUYENTAIKHOAN_LOAITAIKHOAN>();
-       
+        private bool isFirstTime = true;
 
         // BLL
         private QuyenTaiKhoanBLL quyenTaiKhoanBLL = new QuyenTaiKhoanBLL();
@@ -46,17 +46,22 @@ namespace GUI
 
         private void LoadComboBox()
          {
+            if (isFirstTime)
+            {
+                listLoaiTaiKhoan = loaiTaiKhoanBLL.GetAllLoaiTaiKhoan();
+                cboLoaiTaiKhoan.DisplayMember = "TenLoaiTaiKhoan";
+                cboLoaiTaiKhoan.ValueMember = "MaLoaiTaiKhoan";
+                cboLoaiTaiKhoan.DataSource = listLoaiTaiKhoan;
+                isFirstTime = false;
+            }
             // Lấy tất cả các loại tài khoản
-            listLoaiTaiKhoan = loaiTaiKhoanBLL.GetAllLoaiTaiKhoan();
-            cboLoaiTaiKhoan.DisplayMember = "TenLoaiTaiKhoan";
-            cboLoaiTaiKhoan.ValueMember = "MaLoaiTaiKhoan";
-            cboLoaiTaiKhoan.DataSource = listLoaiTaiKhoan;
-
             
+
+            tmp = new List<QUYENTAIKHOAN>();
 
             // Lấy tất cả các quyền tài khoản
             listQuyenTaiKhoan = quyenTaiKhoanBLL.GetAllQuyenTaiKhoan();
-            listQuyenTaiKhoan_LoaiTaiKhoan = quyenTaiKhoan_LoaiTaiKhoanBLL.GetQuyenTaiKhoan_LoaiTaiKhoan_ByMaLoaiTaiKhoan(maLoaiTaiKhoan);
+            listQuyenTaiKhoan_LoaiTaiKhoan = quyenTaiKhoan_LoaiTaiKhoanBLL.GetQuyenTaiKhoan_LoaiTaiKhoan_ByMaLoaiTaiKhoan(cboLoaiTaiKhoan.SelectedValue.ToString());
 
             List<QUYENTAIKHOAN> tmp1 = new List<QUYENTAIKHOAN>();
 
@@ -77,30 +82,28 @@ namespace GUI
                 }
             }
 
+            cbChonQuyenLoaiTaiKhoan.DataSource = null;
+            cboQuyenDaChon.DataSource = null;
+
+            // Xóa sạch dữ liệu trong các combo box
+            cbChonQuyenLoaiTaiKhoan.Items.Clear();
+            cboQuyenDaChon.Items.Clear();
+
             cbChonQuyenLoaiTaiKhoan.DisplayMember = "TenQuyenTaiKhoan";
             cbChonQuyenLoaiTaiKhoan.ValueMember = "MaQuyenTaiKhoan";
-            cbChonQuyenLoaiTaiKhoan.DataSource = null;
+            
             cbChonQuyenLoaiTaiKhoan.DataSource = listQuyenTaiKhoan;
 
             cboQuyenDaChon.DisplayMember = "TenQuyenTaiKhoan";
             cboQuyenDaChon.ValueMember = "MaQuyenTaiKhoan";
-            cboQuyenDaChon.DataSource = null;
+            
             cboQuyenDaChon.DataSource = tmp;
 
-            // Đăng ký sự kiện khi chọn loại tài khoản thay đổi
-            cboLoaiTaiKhoan.SelectedIndexChanged += CboLoaiTaiKhoan_SelectedIndexChanged;
-
             // Nếu có loại tài khoản được chọn mặc định, load quyền tương ứng
-            if (cboLoaiTaiKhoan.Items.Count > 0)
-            {
-                cboLoaiTaiKhoan.SelectedIndex = 0;
-            }
+            
         }
 
-        private void CboLoaiTaiKhoan_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadPermissionsForSelectedLoaiTaiKhoan();
-        }
+        
 
         private void LoadPermissionsForSelectedLoaiTaiKhoan()
         {
@@ -289,6 +292,11 @@ namespace GUI
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cboLoaiTaiKhoan_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            LoadComboBox();
         }
     }
 }

@@ -23,17 +23,17 @@ namespace GUI
         private LoaiTaiKhoanBLL loaiTaiKhoanBLL = new LoaiTaiKhoanBLL();
         private LOAITAIKHOAN loaiTaiKhoan = new LOAITAIKHOAN();
         public static string tenChucNang = "them_loai_tai_khoan";
-        private void loadComboBox()
-        {
-            listLoaiTaiKhoan = loaiTaiKhoanBLL.GetAllLoaiTaiKhoan();
-            cmbLoaiTaiKhoanDeXuat.DisplayMember = "TenLoaiTaiKhoan";
-            cmbLoaiTaiKhoanDeXuat.ValueMember = "MaLoaiTaiKhoan";
-            cmbLoaiTaiKhoanDeXuat.DataSource = listLoaiTaiKhoan;
-        }
+        //private void loadComboBox()
+        //{
+        //    listLoaiTaiKhoan = loaiTaiKhoanBLL.GetAllLoaiTaiKhoan();
+        //    cmbLoaiTaiKhoanDeXuat.DisplayMember = "TenLoaiTaiKhoan";
+        //    cmbLoaiTaiKhoanDeXuat.ValueMember = "MaLoaiTaiKhoan";
+        //    cmbLoaiTaiKhoanDeXuat.DataSource = listLoaiTaiKhoan;
+        //}
 
         private void frmAddEmployeeAccountType_Load(object sender, EventArgs e)
         {
-            loadComboBox();
+            cmbLoaiTaiKhoanDeXuat.SelectedIndex = 0;
             tbLoaiTaiKhoan.Enabled = false;
         }
 

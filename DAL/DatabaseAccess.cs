@@ -378,7 +378,7 @@ namespace DAL
                 string query = "INSERT OR IGNORE INTO LOAITAIKHOAN (MALOAITAIKHOAN, TENMALOAITAIKHOAN, MIEUTA) VALUES(@MALOAITAIKHOAN, @TENLOAITAIKHOAN, @MIEUTA)";
                 var cmd = new SQLiteCommand(query,conn);
                 cmd.Parameters.AddWithValue("@MALOAITAIKHOAN", maLoaiTaiKhoanMacDinh);
-                cmd.Parameters.AddWithValue("@TENLOAITAIKHOAN", "Tài khoản admin");
+                cmd.Parameters.AddWithValue("@TENLOAITAIKHOAN", "Tài khoản người quản lý");
                 cmd.Parameters.AddWithValue("MIEUTA", "Có tất cả các quyền");
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -2319,7 +2319,7 @@ namespace DAL
             {
                 conn.Open();
                 int i = 0;
-                string query = "INSERT INTO CHUCNANG_QUYENTAIGHOAN (MACHUCNANG, MAQUYENTAIKHOAN) VALUES (@MACHUCNANG, @MAQUYENTAIKHOAN)";
+                string query = "INSERT INTO CHUCNANG_QUYENTAIKHOAN (MACHUCNANG, MAQUYENTAIKHOAN) VALUES (@MACHUCNANG, @MAQUYENTAIKHOAN)";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@MACHUCNANG", input.MaChucNang);

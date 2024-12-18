@@ -49,6 +49,7 @@
             this.cboChucNang.Name = "cboChucNang";
             this.cboChucNang.Size = new System.Drawing.Size(307, 21);
             this.cboChucNang.TabIndex = 192;
+            this.cboChucNang.SelectedIndexChanged += new System.EventHandler(this.cboChucNang_SelectedIndexChanged_1);
             // 
             // cboQuyenDaChon
             // 
@@ -65,6 +66,7 @@
             this.cboChonQuyenChucNang.Name = "cboChonQuyenChucNang";
             this.cboChonQuyenChucNang.Size = new System.Drawing.Size(307, 21);
             this.cboChonQuyenChucNang.TabIndex = 190;
+            this.cboChonQuyenChucNang.SelectedIndexChanged += new System.EventHandler(this.cboChonQuyenChucNang_SelectedIndexChanged);
             // 
             // label3
             // 

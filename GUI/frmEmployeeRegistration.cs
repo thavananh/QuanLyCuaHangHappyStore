@@ -52,6 +52,7 @@ namespace GUI
         public static string tenChucNang = "dang_ky_nhan_vien";
         LoaiChucVuBLL loaiChucVuBLL = new LoaiChucVuBLL();
         TaiKhoanBLL tkbll = new TaiKhoanBLL();
+        LoaiTaiKhoanBLL loaiTaiKhoanBLL = new LoaiTaiKhoanBLL();
 
         private void loadLoaiChucVu()
         {
@@ -59,6 +60,14 @@ namespace GUI
             cbJobtitle.DisplayMember = "TenLoaiChucVu";
             cbJobtitle.ValueMember = "MaLoaiChucVu";
             cbJobtitle.DataSource = loaiChucVu;
+        }
+
+        private void loadLoaiTaiKhoan()
+        {
+            List<LOAITAIKHOAN> listLoaiTaiKhoan = loaiTaiKhoanBLL.GetAllLoaiTaiKhoan();
+            cmbLoaiTaiKhoan.DisplayMember = "TenLoaiTaiKhoan";
+            cmbLoaiTaiKhoan.ValueMember = "MaLoaiTaiKhoan";
+            cmbLoaiTaiKhoan.DataSource = listLoaiTaiKhoan;
         }
 
         private void cbJobtitle_SelectedIndexChanged(object sender, EventArgs e)
@@ -171,11 +180,6 @@ namespace GUI
                         taikhoan.MatKhau = tbPassword.Text.Trim();
                         taikhoan.Email = tbEmail.Text.Trim();
                         taikhoan.MaTaiKhoanNhanVien = nv.maNhanVien;
-                        if (ConditionClass.IsValidEmail(tbEmail.Text.Trim()) == false)
-                        {
-                            MessageBox.Show("Email không đúng định dạng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
                         if (tkbll.checkEmail(tbEmail.Text.Trim()) > 0)
                         {
                             MessageBox.Show("Email đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -183,7 +187,7 @@ namespace GUI
                         }
                         if (tkbll.AddAccount(taikhoan))
                         {
-                            MessageBox.Show("Tạo tài khoản thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Tạo tài khoản nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             
                         }
                         else
@@ -239,6 +243,8 @@ namespace GUI
         private void frmEmployeeRegistration_Load(object sender, EventArgs e)
         {
             loadLoaiChucVu();
+            loadLoaiTaiKhoan();
+            tbPassword.PasswordChar = '*';
             videoCapture = new VideoCaptureDevice();
             filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             foreach (FilterInfo filterInfo in filterInfo)

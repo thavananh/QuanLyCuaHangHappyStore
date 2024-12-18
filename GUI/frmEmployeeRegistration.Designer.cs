@@ -62,6 +62,8 @@ namespace GUI
             this.tbUserId = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.cmbLoaiTaiKhoan = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbAvatar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -413,12 +415,34 @@ namespace GUI
             this.tbPassword.Size = new System.Drawing.Size(233, 20);
             this.tbPassword.TabIndex = 160;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Teal;
+            this.label14.Location = new System.Drawing.Point(96, 417);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(111, 17);
+            this.label14.TabIndex = 161;
+            this.label14.Text = "Loại tài khoản";
+            // 
+            // cmbLoaiTaiKhoan
+            // 
+            this.cmbLoaiTaiKhoan.FormattingEnabled = true;
+            this.cmbLoaiTaiKhoan.Location = new System.Drawing.Point(214, 415);
+            this.cmbLoaiTaiKhoan.Name = "cmbLoaiTaiKhoan";
+            this.cmbLoaiTaiKhoan.Size = new System.Drawing.Size(170, 21);
+            this.cmbLoaiTaiKhoan.TabIndex = 162;
+            // 
             // frmEmployeeRegistration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(886, 481);
+            this.Controls.Add(this.cmbLoaiTaiKhoan);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.tbUserId);
@@ -497,5 +521,7 @@ namespace GUI
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tbUserId;
+        private System.Windows.Forms.ComboBox cmbLoaiTaiKhoan;
+        private System.Windows.Forms.Label label14;
     }
 }

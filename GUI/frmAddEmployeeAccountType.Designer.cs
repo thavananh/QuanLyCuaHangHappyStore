@@ -44,6 +44,8 @@
             this.cmbLoaiTaiKhoanDeXuat.Items.AddRange(new object[] {
             "Tài khoản nhân viên kho",
             "Tài khoản nhân viên bán hàng",
+            "Tài khoản nhân viên kỹ thuật",
+            "Tài khoản người quản lý",
             "Tự đề xuất loại tài khoản"});
             this.cmbLoaiTaiKhoanDeXuat.Location = new System.Drawing.Point(194, 78);
             this.cmbLoaiTaiKhoanDeXuat.Margin = new System.Windows.Forms.Padding(2);

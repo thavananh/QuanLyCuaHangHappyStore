@@ -122,6 +122,7 @@
             this.cboLoaiTaiKhoan.Name = "cboLoaiTaiKhoan";
             this.cboLoaiTaiKhoan.Size = new System.Drawing.Size(307, 21);
             this.cboLoaiTaiKhoan.TabIndex = 180;
+            this.cboLoaiTaiKhoan.SelectedIndexChanged += new System.EventHandler(this.cboLoaiTaiKhoan_SelectedIndexChanged_1);
             // 
             // btnCapQuyen
             // 

@@ -20,11 +20,15 @@ namespace GUI
         private List<QUYENTAIKHOAN> listAvailableQuyenTaiKhoan = new List<QUYENTAIKHOAN>();
         private List<QUYENTAIKHOAN> listAssignedQuyenTaiKhoan = new List<QUYENTAIKHOAN>();
 
+        private List<CHUCNANG_QUYENTAIKHOAN> listChucNang_QuyenTaiKhoan = new List<CHUCNANG_QUYENTAIKHOAN>();
+        private List<QUYENTAIKHOAN> tmp = new List<QUYENTAIKHOAN>();
+
         // BLL
         private QuyenTaiKhoanBLL quyenTaiKhoanBLL = new QuyenTaiKhoanBLL();
         private ChucNangBLL chucNangBLL = new ChucNangBLL();
         private ChucNang_QuyenTaiKhoanBLL chucNang_QuyenTaiKhoanBLL = new ChucNang_QuyenTaiKhoanBLL();
         public static string tenChucNang = "phan_quyen_chuc_nang";
+        private bool isFirstTime = true;
         public frmFormPermission()
         {
             InitializeComponent();
@@ -37,32 +41,61 @@ namespace GUI
 
         private void LoadComboBox()
         {
+            if (isFirstTime)
+            {
+                listChucNang = chucNangBLL.LayTatCaChucNang();
+                cboChucNang.DisplayMember = "MieuTa";
+                cboChucNang.ValueMember = "MaChucNang";
+                cboChucNang.DataSource = listChucNang;
+                isFirstTime = false;
+            }
             
-            listChucNang = chucNangBLL.LayTatCaChucNang();
-            cboChucNang.DisplayMember = "TenChucNang";
-            cboChucNang.ValueMember = "MaChucNang";
-            cboChucNang.DataSource = listChucNang;
 
-
+            tmp = new List<QUYENTAIKHOAN>();
 
             // Lấy tất cả các quyền tài khoản
             listQuyenTaiKhoan = quyenTaiKhoanBLL.GetAllQuyenTaiKhoan();
+            listChucNang_QuyenTaiKhoan = chucNang_QuyenTaiKhoanBLL.GetAllChucNang_QuyenTaiKhoan_ById(cboChucNang.SelectedValue.ToString());
 
+            List<QUYENTAIKHOAN> tmp1 = new List<QUYENTAIKHOAN>();
 
-            // Đăng ký sự kiện khi chọn loại tài khoản thay đổi
-            cboChucNang.SelectedIndexChanged += CboChucNang_SelectedIndexChanged;
-
-            // Nếu có loại tài khoản được chọn mặc định, load quyền tương ứng
-            if (cboChucNang.Items.Count > 0)
+            foreach(var item in listQuyenTaiKhoan)
             {
-                cboChucNang.SelectedIndex = 0;
+                tmp1.Add(item);
             }
+
+            foreach (var item in tmp1)
+            {
+                foreach (var item1 in listChucNang_QuyenTaiKhoan)
+                {
+                    if (item.MaQuyenTaiKhoan == item1.MaQuyenTaiKhoan)
+                    {
+                        tmp.Add(item);
+                        listQuyenTaiKhoan.Remove(item);
+                    }
+                }
+            }
+
+            cboChonQuyenChucNang.DataSource = null;
+            cboQuyenDaChon.DataSource = null;
+
+            // Xóa sạch dữ liệu trong các combo box
+            cboChonQuyenChucNang.Items.Clear();
+            cboQuyenDaChon.Items.Clear();
+
+            cboChonQuyenChucNang.DisplayMember = "TenQuyenTaiKhoan";
+            cboChonQuyenChucNang.ValueMember = "MaQuyenTaiKhoan";
+            cboChonQuyenChucNang.DataSource = listQuyenTaiKhoan;
+
+         
+            cboQuyenDaChon.DisplayMember = "TenQuyenTaiKhoan";
+            cboQuyenDaChon.ValueMember = "MaQuyenTaiKhoan";
+            cboQuyenDaChon.DataSource = tmp;
+
+            
         }
 
-        private void CboChucNang_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadPermissionsForSelectedChucNang();
-        }
+        
 
         private void LoadPermissionsForSelectedChucNang()
         {
@@ -230,8 +263,7 @@ namespace GUI
                         MessageBox.Show(failedMessage, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
-                    // Reload permissions để cập nhật danh sách đã chọn và có sẵn
-                    LoadPermissionsForSelectedChucNang();
+                    LoadComboBox();
                 }
                 else
                 {
@@ -248,6 +280,16 @@ namespace GUI
         private void btnBack_Click_1(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cboChonQuyenChucNang_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cboChucNang_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            LoadComboBox();
         }
     }
 }

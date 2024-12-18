@@ -60,7 +60,22 @@ namespace GUI
                 MaLoaiSanPham = "Gói thành viên",
                 TenLoaiSanPham = "Gói thành viên"
             };
-            listLoaiSanPham.Add(temp);
+
+            List<LOAISANPHAM> tmp = new List<LOAISANPHAM>();
+            foreach (var item in listLoaiSanPham)
+            {
+                tmp.Add(item);
+            }
+
+            foreach (var item in tmp)
+            {
+                if (item.TenLoaiSanPham == "Gói thành viên")
+                {
+                    listLoaiSanPham.Remove(item);
+                    break;
+                }
+            }
+
             cbProductType.DisplayMember = "TenLoaiSanPham";
             cbProductType.ValueMember = "MaLoaiSanPham";
             cbProductType.DataSource = listLoaiSanPham;
@@ -331,6 +346,7 @@ namespace GUI
 
         private void cbProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            loaisp = cbProductType.SelectedValue.ToString(); 
             LoadListSPtheoLoai(loaisp);
             autoLoadRow();
         }

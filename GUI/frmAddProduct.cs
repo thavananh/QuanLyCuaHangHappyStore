@@ -258,7 +258,7 @@ namespace GUI
                 }
                 sp.Anh = imageToByteArray(ptbProduct);
                 sp.LoaiSP = cbProductType.SelectedValue.ToString();
-                sp.MaSP = Guid.NewGuid().ToString(); 
+                
                 bool addSP = spbll.themSP(sp);
                 if (addSP == true)
                 {

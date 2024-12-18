@@ -132,7 +132,7 @@ namespace GUI
             this.btnBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnBack.FlatAppearance.BorderSize = 0;
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Location = new System.Drawing.Point(799, 466);
+            this.btnBack.Location = new System.Drawing.Point(773, 466);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(76, 38);
@@ -203,7 +203,7 @@ namespace GUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(886, 513);
+            this.ClientSize = new System.Drawing.Size(863, 513);
             this.Controls.Add(this.btnCheckQR);
             this.Controls.Add(this.btnExportExcel);
             this.Controls.Add(this.label1);

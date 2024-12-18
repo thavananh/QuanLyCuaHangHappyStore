@@ -74,6 +74,7 @@ namespace GUI
         CultureInfo culture = new CultureInfo("vi-VN");
         LoaiSanPhamBLL loaiSanPhamBLL = new LoaiSanPhamBLL();
         List<LOAISANPHAM> listLoaiSanPham = new List<LOAISANPHAM>();
+        List<string> listKhachHang = new List<string>();
         public static string tenChucNang = "ban_san_pham";
         private void loadLoaiSanPham()
         {
@@ -98,6 +99,7 @@ namespace GUI
                     break;
                 }
             }
+
         }
 
         private void LoadGioHang()
@@ -202,7 +204,9 @@ namespace GUI
         {
             lblTongTien.Text = hoadon.TongTien.ToString("C", culture);
             LoadGioHang();
-            foreach(string mathe in LoadListKH())
+            listKhachHang = LoadListKH();
+            listKhachHang.Add("Khách hàng vãng lai");
+            foreach (string mathe in listKhachHang)
             {
                 cmbMaKH.Items.Add(mathe);
             }
@@ -448,16 +452,21 @@ namespace GUI
         bool isSellProduct = false;
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if(cmbMaKH.SelectedIndex == -1)
+            if (cmbMaKH.SelectedIndex == -1)
             {
-                MessageBox.Show("Chọn mã khách hàng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn khách hàng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+            else if (cmbMaKH.SelectedItem.ToString() == "Khách hàng vãng lai") 
+            {
+                hoadon.MaThe = "5b5ed6cc-72eb-407a-8465-a6a577a657fd";
             }
             else
             {
                 hoadon.MaThe = cmbMaKH.SelectedItem.ToString();
-            }    
-            foreach(DataGridViewRow row in dtgDSSP.Rows)
+            }
+            
+            foreach (DataGridViewRow row in dtgDSSP.Rows)
             {
                 string cellvalue = row.Cells["MASP"].Value.ToString();
                 hoadon.MaSP += cellvalue + "_";
@@ -544,9 +553,12 @@ namespace GUI
                     Paragraph mabl = new Paragraph("Mã hoá đơn: " + hoadon.MaHoaDon)
                         .SetFont(font);
                     doc.Add(mabl);
+                    if (cmbMaKH.SelectedItem.ToString() != "Khách hàng vãng lai")
+                    {
+                        Paragraph makh = new Paragraph("Mã khách hàng thanh toán: " + cmbMaKH.SelectedItem.ToString()).SetFont(font);
+                        doc.Add(makh);
+                    }
 
-                    Paragraph makh = new Paragraph("Mã khách hàng thanh toán: " + cmbMaKH.SelectedItem.ToString()).SetFont(font);
-                    doc.Add(makh);
 
                     Paragraph dssp = new Paragraph("Danh sách sản phẩm: ")
                         .SetFont(font);
@@ -583,7 +595,7 @@ namespace GUI
                         .SetFont(font);
                     doc.Add(ngaythanhtoan);
 
-                    Paragraph phonggym = new Paragraph("----------- PHÒNG GYM HCMUE - NÂNG CAO ĐỜI SỐNG KHÁCH HÀNG -----------")
+                    Paragraph phonggym = new Paragraph("----------- CỬA HÀNG HAPPY STORE, HÂN HẠNH ĐƯỢC PHỤC VỤ QUÝ KHÁCH -----------")
                         .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
                         .SetFont(font);
                     doc.Add(phonggym);
@@ -597,7 +609,7 @@ namespace GUI
                         Height = 100
                     };
                     qrWriter.Options = options;
-                    Bitmap qrCodeImage = qrWriter.Write("https://thavananh.github.io/SoftwareSustainIntro/");
+                    Bitmap qrCodeImage = qrWriter.Write(hoadon.MaHoaDon);
                     string qrPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "qrcode.png");
                     qrCodeImage.Save(qrPath, System.Drawing.Imaging.ImageFormat.Png);
                     ImageData qrImageData = ImageDataFactory.Create(qrPath);

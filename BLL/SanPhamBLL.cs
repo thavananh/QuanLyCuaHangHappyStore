@@ -27,8 +27,7 @@ namespace BLL
         SanPhamAccess spaccs = new SanPhamAccess();
         public bool themSP(SanPham sp)
         {
-            DateTime now = DateTime.Now;
-            sp.MaSP = sp.LoaiSP + now.Year.ToString() + now.Month.ToString() + now.Day.ToString() + now.Hour.ToString() + now.Minute.ToString() + now.Second.ToString();
+            sp.MaSP = Guid.NewGuid().ToString();
             return spaccs.themSP(sp);
         }
         public List<SanPham> xemListSP()

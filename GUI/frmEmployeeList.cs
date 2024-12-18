@@ -71,9 +71,7 @@ namespace GUI
 
         private void loadComboBox()
         {
-            
             listLoaiChucVu = loaiChucVuBLL.ReadLoaiChucVu();
-
             cbJobtitle.DisplayMember = "TenLoaiChucVu";
             cbJobtitle.ValueMember = "MaLoaiChucVu";
             cbJobtitle.DataSource = listLoaiChucVu;

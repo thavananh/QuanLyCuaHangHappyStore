@@ -69,7 +69,7 @@ namespace GUI
             // 
             // tbMembershipDuration
             // 
-            this.tbMembershipDuration.Location = new System.Drawing.Point(532, 252);
+            this.tbMembershipDuration.Location = new System.Drawing.Point(532, 214);
             this.tbMembershipDuration.Margin = new System.Windows.Forms.Padding(2);
             this.tbMembershipDuration.Name = "tbMembershipDuration";
             this.tbMembershipDuration.Size = new System.Drawing.Size(148, 20);
@@ -80,7 +80,7 @@ namespace GUI
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.Teal;
-            this.label19.Location = new System.Drawing.Point(427, 254);
+            this.label19.Location = new System.Drawing.Point(427, 213);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(97, 17);
@@ -92,19 +92,19 @@ namespace GUI
             this.lblGoiTap.AutoSize = true;
             this.lblGoiTap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGoiTap.ForeColor = System.Drawing.Color.Teal;
-            this.lblGoiTap.Location = new System.Drawing.Point(427, 225);
+            this.lblGoiTap.Location = new System.Drawing.Point(414, 182);
             this.lblGoiTap.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblGoiTap.Name = "lblGoiTap";
-            this.lblGoiTap.Size = new System.Drawing.Size(61, 17);
+            this.lblGoiTap.Size = new System.Drawing.Size(114, 17);
             this.lblGoiTap.TabIndex = 91;
-            this.lblGoiTap.Text = "Gói tập";
+            this.lblGoiTap.Text = "Gói thành viên";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Teal;
-            this.label10.Location = new System.Drawing.Point(290, 256);
+            this.label10.Location = new System.Drawing.Point(290, 214);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(69, 17);
@@ -113,7 +113,7 @@ namespace GUI
             // 
             // tbNote
             // 
-            this.tbNote.Location = new System.Drawing.Point(175, 412);
+            this.tbNote.Location = new System.Drawing.Point(175, 370);
             this.tbNote.Margin = new System.Windows.Forms.Padding(2);
             this.tbNote.Name = "tbNote";
             this.tbNote.Size = new System.Drawing.Size(233, 20);
@@ -121,7 +121,7 @@ namespace GUI
             // 
             // tbEMail
             // 
-            this.tbEMail.Location = new System.Drawing.Point(175, 381);
+            this.tbEMail.Location = new System.Drawing.Point(175, 339);
             this.tbEMail.Margin = new System.Windows.Forms.Padding(2);
             this.tbEMail.Name = "tbEMail";
             this.tbEMail.Size = new System.Drawing.Size(233, 20);
@@ -129,7 +129,7 @@ namespace GUI
             // 
             // tbPhoneNumber
             // 
-            this.tbPhoneNumber.Location = new System.Drawing.Point(175, 349);
+            this.tbPhoneNumber.Location = new System.Drawing.Point(175, 307);
             this.tbPhoneNumber.Margin = new System.Windows.Forms.Padding(2);
             this.tbPhoneNumber.Name = "tbPhoneNumber";
             this.tbPhoneNumber.Size = new System.Drawing.Size(233, 20);
@@ -137,7 +137,7 @@ namespace GUI
             // 
             // tbAddress
             // 
-            this.tbAddress.Location = new System.Drawing.Point(175, 317);
+            this.tbAddress.Location = new System.Drawing.Point(175, 275);
             this.tbAddress.Margin = new System.Windows.Forms.Padding(2);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(233, 20);
@@ -145,7 +145,7 @@ namespace GUI
             // 
             // tbNationalId
             // 
-            this.tbNationalId.Location = new System.Drawing.Point(175, 288);
+            this.tbNationalId.Location = new System.Drawing.Point(175, 246);
             this.tbNationalId.Margin = new System.Windows.Forms.Padding(2);
             this.tbNationalId.Name = "tbNationalId";
             this.tbNationalId.Size = new System.Drawing.Size(153, 20);
@@ -153,7 +153,7 @@ namespace GUI
             // 
             // tbDOB
             // 
-            this.tbDOB.Location = new System.Drawing.Point(175, 255);
+            this.tbDOB.Location = new System.Drawing.Point(175, 213);
             this.tbDOB.Margin = new System.Windows.Forms.Padding(2);
             this.tbDOB.Name = "tbDOB";
             this.tbDOB.Size = new System.Drawing.Size(110, 20);
@@ -162,7 +162,7 @@ namespace GUI
             // 
             // tbFullName
             // 
-            this.tbFullName.Location = new System.Drawing.Point(175, 225);
+            this.tbFullName.Location = new System.Drawing.Point(175, 183);
             this.tbFullName.Margin = new System.Windows.Forms.Padding(2);
             this.tbFullName.Name = "tbFullName";
             this.tbFullName.Size = new System.Drawing.Size(233, 20);
@@ -173,7 +173,7 @@ namespace GUI
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Teal;
-            this.label9.Location = new System.Drawing.Point(76, 412);
+            this.label9.Location = new System.Drawing.Point(76, 370);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(64, 17);
@@ -185,7 +185,7 @@ namespace GUI
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Teal;
-            this.label8.Location = new System.Drawing.Point(76, 381);
+            this.label8.Location = new System.Drawing.Point(76, 339);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(47, 17);
@@ -197,7 +197,7 @@ namespace GUI
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Teal;
-            this.label7.Location = new System.Drawing.Point(78, 349);
+            this.label7.Location = new System.Drawing.Point(78, 307);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(39, 17);
@@ -209,7 +209,7 @@ namespace GUI
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Teal;
-            this.label6.Location = new System.Drawing.Point(78, 317);
+            this.label6.Location = new System.Drawing.Point(78, 275);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(58, 17);
@@ -221,7 +221,7 @@ namespace GUI
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Teal;
-            this.label5.Location = new System.Drawing.Point(76, 288);
+            this.label5.Location = new System.Drawing.Point(76, 246);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 17);
@@ -233,7 +233,7 @@ namespace GUI
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Teal;
-            this.label4.Location = new System.Drawing.Point(78, 255);
+            this.label4.Location = new System.Drawing.Point(78, 213);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 17);
@@ -245,7 +245,7 @@ namespace GUI
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Teal;
-            this.label3.Location = new System.Drawing.Point(76, 225);
+            this.label3.Location = new System.Drawing.Point(76, 183);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 17);
@@ -260,7 +260,7 @@ namespace GUI
             this.btnLuu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnLuu.FlatAppearance.BorderSize = 0;
             this.btnLuu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLuu.Location = new System.Drawing.Point(654, 446);
+            this.btnLuu.Location = new System.Drawing.Point(654, 438);
             this.btnLuu.Margin = new System.Windows.Forms.Padding(2);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(120, 48);
@@ -276,7 +276,7 @@ namespace GUI
             this.btnBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnBack.FlatAppearance.BorderSize = 0;
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Location = new System.Drawing.Point(799, 514);
+            this.btnBack.Location = new System.Drawing.Point(799, 481);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(76, 38);
@@ -313,7 +313,7 @@ namespace GUI
             this.cmbGioiTinh.Items.AddRange(new object[] {
             "NAM",
             "NU"});
-            this.cmbGioiTinh.Location = new System.Drawing.Point(358, 255);
+            this.cmbGioiTinh.Location = new System.Drawing.Point(358, 213);
             this.cmbGioiTinh.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGioiTinh.Name = "cmbGioiTinh";
             this.cmbGioiTinh.Size = new System.Drawing.Size(50, 21);
@@ -324,7 +324,7 @@ namespace GUI
             // 
             this.cbMembership.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.cbMembership.FormattingEnabled = true;
-            this.cbMembership.Location = new System.Drawing.Point(532, 220);
+            this.cbMembership.Location = new System.Drawing.Point(532, 182);
             this.cbMembership.Margin = new System.Windows.Forms.Padding(2);
             this.cbMembership.Name = "cbMembership";
             this.cbMembership.Size = new System.Drawing.Size(148, 21);
@@ -338,7 +338,7 @@ namespace GUI
             this.btnXuatBienLai.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnXuatBienLai.FlatAppearance.BorderSize = 0;
             this.btnXuatBienLai.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXuatBienLai.Location = new System.Drawing.Point(532, 445);
+            this.btnXuatBienLai.Location = new System.Drawing.Point(532, 437);
             this.btnXuatBienLai.Margin = new System.Windows.Forms.Padding(2);
             this.btnXuatBienLai.Name = "btnXuatBienLai";
             this.btnXuatBienLai.Size = new System.Drawing.Size(118, 49);
@@ -350,7 +350,7 @@ namespace GUI
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 535);
+            this.label1.Location = new System.Drawing.Point(12, 492);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(197, 16);
             this.label1.TabIndex = 123;
@@ -379,7 +379,7 @@ namespace GUI
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(74)))), ((int)(((byte)(173)))));
-            this.label12.Location = new System.Drawing.Point(240, 127);
+            this.label12.Location = new System.Drawing.Point(258, 100);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(348, 31);
             this.label12.TabIndex = 152;
@@ -393,7 +393,7 @@ namespace GUI
             this.btnExportQR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnExportQR.FlatAppearance.BorderSize = 0;
             this.btnExportQR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExportQR.Location = new System.Drawing.Point(419, 445);
+            this.btnExportQR.Location = new System.Drawing.Point(419, 437);
             this.btnExportQR.Margin = new System.Windows.Forms.Padding(2);
             this.btnExportQR.Name = "btnExportQR";
             this.btnExportQR.Size = new System.Drawing.Size(105, 49);
@@ -410,7 +410,7 @@ namespace GUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(886, 560);
+            this.ClientSize = new System.Drawing.Size(886, 523);
             this.Controls.Add(this.btnExportQR);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.cboCameraSelect);

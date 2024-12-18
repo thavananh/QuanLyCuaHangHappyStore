@@ -161,7 +161,7 @@ namespace DAL
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "CREATE TABLE IF NOT EXISTS \"GOITHANHVIEN\" (\"MAGOITHANHVIEN\" TEXT NOT NULL, \"TENGOITHANHVIEN\" TEXT, \"THANG\" INTEGER, \"CHIPHI\" REAL, CONSTRAINT \"GT_MAGOITAP_PK\" PRIMARY KEY(\"MAGOITHANHVIEN\"));";
+                sql = "CREATE TABLE IF NOT EXISTS \"GOITHANHVIEN\" (\"MAGOITHANHVIEN\" TEXT NOT NULL, \"TENGOITHANHVIEN\" TEXT, \"THANG\" INTEGER, \"CHIPHI\" REAL, CONSTRAINT \"GT_MATHANHVIEN_PK\" PRIMARY KEY(\"MAGOITHANHVIEN\"));";
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
@@ -169,7 +169,7 @@ namespace DAL
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
-                sql = "CREATE TABLE IF NOT EXISTS \"KHACHHANG\" (\"MATHE\" TEXT NOT NULL, \"HOTEN\" TEXT, \"NGAYSINH\" TEXT, \"CMND\" TEXT, \"SDT\" TEXT, \"EMAIL\" TEXT, \"GHICHU\" TEXT, \"NGAYDANGKI\" TEXT, \"NGAYHETHAN\" TEXT, \"THOIHAN\" TEXT, \"ANH\" BLOB, \"GIOITINH\" TEXT, \"MAGOITHANHVIEN\", \"I_NGAYDANGKI\" INTEGER, \"DIACHI\" TEXT, CONSTRAINT \"KH_MATHE_PK\" PRIMARY KEY(\"MATHE\"), CONSTRAINT \"KH_MAGOITHANHVIEN_FK\" FOREIGN KEY(\"MAGOITHANHVIEN\") REFERENCES \"GOITHANHVIEN\"(\"MAGOITHANHVIEN\"));";
+                sql = "CREATE TABLE IF NOT EXISTS \"KHACHHANG\" (\"MATHE\" TEXT NOT NULL, \"HOTEN\" TEXT, \"NGAYSINH\" TEXT, \"CMND\" TEXT, \"SDT\" TEXT, \"EMAIL\" TEXT, \"GHICHU\" TEXT, \"NGAYDANGKI\" TEXT, \"NGAYHETHAN\" TEXT, \"THOIHAN\" TEXT, \"ANH\" BLOB, \"GIOITINH\" TEXT, \"MAGOITHANHVIEN\" TEXT, \"I_NGAYDANGKI\" INTEGER, \"DIACHI\" TEXT, CONSTRAINT \"KH_MATHE_PK\" PRIMARY KEY(\"MATHE\"), CONSTRAINT \"KH_MAGOITHANHVIEN_FK\" FOREIGN KEY(\"MAGOITHANHVIEN\") REFERENCES \"GOITHANHVIEN\"(\"MAGOITHANHVIEN\"));";
                 cmd = new SQLiteCommand(sql, conn);
                 cmd.ExecuteNonQuery();
 
@@ -724,6 +724,8 @@ namespace DAL
                 command.Parameters.AddWithValue("@GHICHU", kh.GhiChu);
                 command.Parameters.AddWithValue("@MAGOITHANHVIEN", kh.MaGoiThanhVien);
                 command.Parameters.AddWithValue("@THOIHAN", kh.ThoiHan);
+                command.Parameters.AddWithValue("@NGAYDANGKI", kh.NgayBatDau);
+                command.Parameters.AddWithValue("@NGAYHETHAN", kh.NgayHetHan);
                 command.Parameters.AddWithValue("@ANH", kh.Anh);
                 int rowsAffected = command.ExecuteNonQuery();
                 conn.Close();
@@ -1584,7 +1586,7 @@ namespace DAL
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
-                string readInf = "SELECT MATHE,MANHANVIEN,HOTEN,NGAYSINH,GIOITINH,CMND,DIACHI,SDT,EMAIL,GHICHU,MAGOITAP,NGAYDANGKI,NGAYHETHAN,TENPT,GOITAPPT,THOIHAN,ANH FROM KHACHHANG WHERE MATHE=@MATHE";
+                string readInf = "SELECT * FROM KHACHHANG WHERE MATHE=@MATHE";
                 var cmd = new SQLiteCommand(readInf, conn);
                 cmd.Parameters.AddWithValue("@MATHE", mathe);
                 var reader = cmd.ExecuteReader();
@@ -1599,7 +1601,7 @@ namespace DAL
                     kh.diaChi = reader["DIACHI"].ToString();
                     kh.SDT = reader["SDT"].ToString();
                     kh.GhiChu = reader["GHICHU"].ToString();
-                    kh.MaGoiThanhVien = reader["MAGOITAP"].ToString();
+                    kh.MaGoiThanhVien = reader["MAGOITHANHVIEN"].ToString();
                     kh.NgayBatDau = Convert.ToDateTime(reader["NGAYDANGKI"]);
                     kh.NgayHetHan = Convert.ToDateTime(reader["NGAYHETHAN"]);
                     kh.ThoiHan = Convert.ToDateTime(reader["THOIHAN"]);
@@ -1828,7 +1830,7 @@ namespace DAL
                         diaChi = reader["DIACHI"].ToString(),
                         SDT = reader["SDT"].ToString(),
                         GhiChu = reader["GHICHU"].ToString(),
-                        MaGoiThanhVien = reader["MAGOITAP"].ToString(),
+                        MaGoiThanhVien = reader["MAGOITHANHVIEN"].ToString(),
                         NgayBatDau = Convert.ToDateTime(reader["NGAYDANGKI"]),
                         NgayHetHan = Convert.ToDateTime(reader["NGAYHETHAN"]),
                         ThoiHan = Convert.ToDateTime(reader["THOIHAN"])
@@ -1976,6 +1978,7 @@ namespace DAL
                     int rows = cmd.ExecuteNonQuery();
                     return rows > 0;
                 }
+                conn.Close ();
             }
         }
 
@@ -2447,7 +2450,7 @@ namespace DAL
             using (SQLiteConnection conn = new SQLiteConnection(dbName))
             {
                 conn.Open();
-                string query = "SELECT MALOAICHUCVU, TENLOAICHUCVU FROM LOAICHUCVU;";
+                string query = "SELECT * FROM LOAICHUCVU;";
                 using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                 {
                     var reader123 = cmd.ExecuteReader();

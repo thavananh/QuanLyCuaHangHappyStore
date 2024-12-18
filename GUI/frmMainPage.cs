@@ -136,7 +136,7 @@ namespace GUI
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 string restoreDatabaseFrom = fileDialog.FileName;
-                var restoreDatabaseTo = Environment.CurrentDirectory + "\\" + "QuanLyPhongGym.db";
+                var restoreDatabaseTo = Environment.CurrentDirectory + "\\" + "QuanLyCuaHangHappyStore.db";
                 if (_db.Restore(restoreDatabaseFrom, restoreDatabaseTo))
                 {
                     MessageBox.Show("Restore thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

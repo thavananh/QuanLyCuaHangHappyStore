@@ -275,8 +275,7 @@ namespace GUI
                         MessageBox.Show(failedMessage, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
-                    // Reload permissions để cập nhật danh sách đã chọn và có sẵn
-                    LoadPermissionsForSelectedLoaiTaiKhoan();
+                    
                 }
                 else
                 {

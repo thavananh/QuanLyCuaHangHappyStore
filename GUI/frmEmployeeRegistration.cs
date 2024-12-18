@@ -53,6 +53,7 @@ namespace GUI
         LoaiChucVuBLL loaiChucVuBLL = new LoaiChucVuBLL();
         TaiKhoanBLL tkbll = new TaiKhoanBLL();
         LoaiTaiKhoanBLL loaiTaiKhoanBLL = new LoaiTaiKhoanBLL();
+        List<LOAITAIKHOAN> listLoaiTaiKhoan = new List<LOAITAIKHOAN>();
 
         private void loadLoaiChucVu()
         {
@@ -64,7 +65,7 @@ namespace GUI
 
         private void loadLoaiTaiKhoan()
         {
-            List<LOAITAIKHOAN> listLoaiTaiKhoan = loaiTaiKhoanBLL.GetAllLoaiTaiKhoan();
+            listLoaiTaiKhoan = loaiTaiKhoanBLL.GetAllLoaiTaiKhoan();
             cmbLoaiTaiKhoan.DisplayMember = "TenLoaiTaiKhoan";
             cmbLoaiTaiKhoan.ValueMember = "MaLoaiTaiKhoan";
             cmbLoaiTaiKhoan.DataSource = listLoaiTaiKhoan;
@@ -162,6 +163,7 @@ namespace GUI
            
              nv.Anh = imageToByteArray(ptbAvatar);
             nv.maNhanVien = Guid.NewGuid().ToString();
+            nv.MaLoaiChucVu = cbJobtitle.SelectedValue.ToString();  
             bool check = nvbll.themNV(nv);
            if(check == true)
             {
@@ -180,6 +182,7 @@ namespace GUI
                         taikhoan.MatKhau = tbPassword.Text.Trim();
                         taikhoan.Email = tbEmail.Text.Trim();
                         taikhoan.MaTaiKhoanNhanVien = nv.maNhanVien;
+                        taikhoan.LoaiTK = cmbLoaiTaiKhoan.SelectedValue.ToString();
                         if (tkbll.checkEmail(tbEmail.Text.Trim()) > 0)
                         {
                             MessageBox.Show("Email đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);

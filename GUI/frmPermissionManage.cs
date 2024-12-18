@@ -45,7 +45,7 @@ namespace GUI
         }
 
         private void LoadComboBox()
-         {
+        {
             if (isFirstTime)
             {
                 listLoaiTaiKhoan = loaiTaiKhoanBLL.GetAllLoaiTaiKhoan();
@@ -54,56 +54,37 @@ namespace GUI
                 cboLoaiTaiKhoan.DataSource = listLoaiTaiKhoan;
                 isFirstTime = false;
             }
-            // Lấy tất cả các loại tài khoản
-            
 
-            tmp = new List<QUYENTAIKHOAN>();
-
-            // Lấy tất cả các quyền tài khoản
+            // Fetch all permissions
             listQuyenTaiKhoan = quyenTaiKhoanBLL.GetAllQuyenTaiKhoan();
             listQuyenTaiKhoan_LoaiTaiKhoan = quyenTaiKhoan_LoaiTaiKhoanBLL.GetQuyenTaiKhoan_LoaiTaiKhoan_ByMaLoaiTaiKhoan(cboLoaiTaiKhoan.SelectedValue.ToString());
 
-            List<QUYENTAIKHOAN> tmp1 = new List<QUYENTAIKHOAN>();
+            // Determine assigned and available permissions
+            listAssignedQuyenTaiKhoan = listQuyenTaiKhoan_LoaiTaiKhoan
+                .Join(listQuyenTaiKhoan,
+                      ql => ql.MaQuyenTaiKhoan,
+                      q => q.MaQuyenTaiKhoan,
+                      (ql, q) => q)
+                .ToList();
 
-            foreach (var item in listQuyenTaiKhoan)
-            {
-                tmp1.Add(item);
-            }
+            listAvailableQuyenTaiKhoan = listQuyenTaiKhoan
+                .Where(q => !listAssignedQuyenTaiKhoan.Any(a => a.MaQuyenTaiKhoan == q.MaQuyenTaiKhoan))
+                .ToList();
 
-            foreach (var item in tmp1)
-            {
-                foreach (var item1 in listQuyenTaiKhoan_LoaiTaiKhoan)
-                {
-                    if (item.MaQuyenTaiKhoan == item1.MaQuyenTaiKhoan)
-                    {
-                        tmp.Add(item);
-                        listQuyenTaiKhoan.Remove(item);
-                    }
-                }
-            }
-
+            // Update ComboBoxes
             cbChonQuyenLoaiTaiKhoan.DataSource = null;
-            cboQuyenDaChon.DataSource = null;
-
-            // Xóa sạch dữ liệu trong các combo box
-            cbChonQuyenLoaiTaiKhoan.Items.Clear();
-            cboQuyenDaChon.Items.Clear();
-
             cbChonQuyenLoaiTaiKhoan.DisplayMember = "TenQuyenTaiKhoan";
             cbChonQuyenLoaiTaiKhoan.ValueMember = "MaQuyenTaiKhoan";
-            
-            cbChonQuyenLoaiTaiKhoan.DataSource = listQuyenTaiKhoan;
+            cbChonQuyenLoaiTaiKhoan.DataSource = listAvailableQuyenTaiKhoan;
 
+            cboQuyenDaChon.DataSource = null;
             cboQuyenDaChon.DisplayMember = "TenQuyenTaiKhoan";
             cboQuyenDaChon.ValueMember = "MaQuyenTaiKhoan";
-            
-            cboQuyenDaChon.DataSource = tmp;
-
-            // Nếu có loại tài khoản được chọn mặc định, load quyền tương ứng
-            
+            cboQuyenDaChon.DataSource = listAssignedQuyenTaiKhoan;
         }
 
-        
+
+
 
         private void LoadPermissionsForSelectedLoaiTaiKhoan()
         {
@@ -143,26 +124,33 @@ namespace GUI
         {
             if (cbChonQuyenLoaiTaiKhoan.SelectedItem != null)
             {
-                // Lấy quyền được chọn từ ComboBox quyền có sẵn
+                // Get the selected permission
                 QUYENTAIKHOAN selectedQuyen = (QUYENTAIKHOAN)cbChonQuyenLoaiTaiKhoan.SelectedItem;
 
-                // Thêm quyền vào danh sách quyền đã chọn
-                listAssignedQuyenTaiKhoan.Add(selectedQuyen);
+                // Add to assigned permissions if not already present
+                if (!listAssignedQuyenTaiKhoan.Any(q => q.MaQuyenTaiKhoan == selectedQuyen.MaQuyenTaiKhoan))
+                {
+                    listAssignedQuyenTaiKhoan.Add(selectedQuyen);
+                    listAvailableQuyenTaiKhoan.Remove(selectedQuyen);
 
-                // Xóa quyền khỏi danh sách quyền có sẵn
-                listAvailableQuyenTaiKhoan.Remove(selectedQuyen);
+                    // Update ComboBoxes
+                    cbChonQuyenLoaiTaiKhoan.DataSource = null;
+                    cbChonQuyenLoaiTaiKhoan.DataSource = listAvailableQuyenTaiKhoan;
+                    cbChonQuyenLoaiTaiKhoan.DisplayMember = "TenQuyenTaiKhoan";
+                    cbChonQuyenLoaiTaiKhoan.ValueMember = "MaQuyenTaiKhoan";
 
-                // Cập nhật lại DataSource cho các ComboBox
-                cbChonQuyenLoaiTaiKhoan.DataSource = null;
-                cbChonQuyenLoaiTaiKhoan.DataSource = listAvailableQuyenTaiKhoan;
-                cbChonQuyenLoaiTaiKhoan.DisplayMember = "TenQuyenTaiKhoan";
-                cbChonQuyenLoaiTaiKhoan.ValueMember = "MaQuyenTaiKhoan";
+                    cboQuyenDaChon.DataSource = null;
+                    cboQuyenDaChon.DataSource = listAssignedQuyenTaiKhoan;
+                    cboQuyenDaChon.DisplayMember = "TenQuyenTaiKhoan";
+                    cboQuyenDaChon.ValueMember = "MaQuyenTaiKhoan";
 
-                cboQuyenDaChon.DataSource = null;
-                cboQuyenDaChon.DataSource = listAssignedQuyenTaiKhoan;
-                cboQuyenDaChon.DisplayMember = "TenQuyenTaiKhoan";
-                cboQuyenDaChon.ValueMember = "MaQuyenTaiKhoan";
-                cboQuyenDaChon.SelectedIndex = cboQuyenDaChon.Items.Count - 1;
+                    // Optionally, select the newly added item
+                    cboQuyenDaChon.SelectedIndex = cboQuyenDaChon.Items.Count - 1;
+                }
+                else
+                {
+                    MessageBox.Show("Quyền này đã được cấp trước đó.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else
             {
@@ -170,11 +158,12 @@ namespace GUI
             }
         }
 
+
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (cboQuyenDaChon.SelectedItem != null)
             {
-                // Lấy quyền được chọn từ ComboBox quyền đã chọn
+                // Get the selected permission to remove
                 QUYENTAIKHOAN selectedQuyen = (QUYENTAIKHOAN)cboQuyenDaChon.SelectedItem;
                 LOAITAIKHOAN selectedLoai = (LOAITAIKHOAN)cboLoaiTaiKhoan.SelectedItem;
 
@@ -184,12 +173,16 @@ namespace GUI
 
                     if (result)
                     {
-                        // Thêm lại quyền vào danh sách quyền có sẵn
-                        listAvailableQuyenTaiKhoan.Add(selectedQuyen);
-                        // Xóa quyền khỏi danh sách quyền đã chọn
+                        // Add the permission back to available list if not already present
+                        if (!listAvailableQuyenTaiKhoan.Any(q => q.MaQuyenTaiKhoan == selectedQuyen.MaQuyenTaiKhoan))
+                        {
+                            listAvailableQuyenTaiKhoan.Add(selectedQuyen);
+                        }
+
+                        // Remove from assigned list
                         listAssignedQuyenTaiKhoan.Remove(selectedQuyen);
 
-                        // Cập nhật lại DataSource cho các ComboBox
+                        // Update ComboBoxes
                         cbChonQuyenLoaiTaiKhoan.DataSource = null;
                         cbChonQuyenLoaiTaiKhoan.DataSource = listAvailableQuyenTaiKhoan;
                         cbChonQuyenLoaiTaiKhoan.DisplayMember = "TenQuyenTaiKhoan";
@@ -199,10 +192,8 @@ namespace GUI
                         cboQuyenDaChon.DataSource = listAssignedQuyenTaiKhoan;
                         cboQuyenDaChon.DisplayMember = "TenQuyenTaiKhoan";
                         cboQuyenDaChon.ValueMember = "MaQuyenTaiKhoan";
-                        
 
                         MessageBox.Show("Xoá quyền thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        
                     }
                     else
                     {
@@ -220,29 +211,31 @@ namespace GUI
             }
         }
 
+
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // Lấy loại tài khoản được chọn
+            // Get the selected account type
             LOAITAIKHOAN selectedLoai = (LOAITAIKHOAN)cboLoaiTaiKhoan.SelectedItem;
 
             if (selectedLoai != null)
             {
-                // Lấy danh sách quyền đã chọn
+                // Get the list of permissions to assign
                 List<QUYENTAIKHOAN> selectedQuyen = listAssignedQuyenTaiKhoan;
 
                 if (selectedQuyen.Count > 0)
                 {
-                    // Lấy danh sách quyền hiện tại của loại tài khoản từ cơ sở dữ liệu
-                    List<QUYENTAIKHOAN_LOAITAIKHOAN> existingQuyen = quyenTaiKhoan_LoaiTaiKhoanBLL.GetQuyenTaiKhoan_LoaiTaiKhoan_ByMaLoaiTaiKhoan(selectedLoai.MaLoaiTaiKhoan);
+                    // Fetch existing permissions from the database
+                    List<QUYENTAIKHOAN_LOAITAIKHOAN> existingAssignments = quyenTaiKhoan_LoaiTaiKhoanBLL.GetQuyenTaiKhoan_LoaiTaiKhoan_ByMaLoaiTaiKhoan(selectedLoai.MaLoaiTaiKhoan);
+
+                    // Create a HashSet for efficient lookup
+                    HashSet<string> existingQuyenSet = new HashSet<string>(existingAssignments.Select(q => q.MaQuyenTaiKhoan));
 
                     bool isSuccess = true;
                     List<string> failedQuyen = new List<string>();
 
                     foreach (var quyen in selectedQuyen)
                     {
-                        // Kiểm tra quyền đã được gán hay chưa
-                        bool alreadyAssigned = existingQuyen.Exists(q => q.MaQuyenTaiKhoan == quyen.MaQuyenTaiKhoan);
-                        if (!alreadyAssigned)
+                        if (!existingQuyenSet.Contains(quyen.MaQuyenTaiKhoan))
                         {
                             QUYENTAIKHOAN_LOAITAIKHOAN entry = new QUYENTAIKHOAN_LOAITAIKHOAN
                             {
@@ -257,17 +250,11 @@ namespace GUI
                                 failedQuyen.Add(quyen.TenQuyenTaiKhoan);
                             }
                         }
-                        else
-                        {
-                            // Quyền đã được gán, bạn có thể thông báo hoặc bỏ qua
-                        }
                     }
 
                     if (isSuccess)
                     {
                         MessageBox.Show("Cấp quyền thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadComboBox();
-                        
                     }
                     else
                     {
@@ -275,7 +262,8 @@ namespace GUI
                         MessageBox.Show(failedMessage, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
-                    
+                    // Reload the ComboBoxes to reflect changes
+                    LoadComboBox();
                 }
                 else
                 {
@@ -287,6 +275,7 @@ namespace GUI
                 MessageBox.Show("Vui lòng chọn loại tài khoản.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
         private void btnBack_Click(object sender, EventArgs e)
         {

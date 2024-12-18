@@ -45,6 +45,11 @@ namespace GUI
         private void btnProductList_Click(object sender, EventArgs e)
         {
             frmProductList productList = new frmProductList();
+            if (!quanLyQuyenHanChucNang.KiemTraQuyenTruyCapVaoChucNang(frmProductList.tenChucNang, maTaiKhoan, maLoaiTaiKhoan))
+            {
+                MessageBox.Show("Bạn không đủ quyền hạn để sử dụng chức năng này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             this.Hide();
             productList.ShowDialog();
             this.Show();

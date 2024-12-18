@@ -64,7 +64,7 @@ namespace GUI
             cbProductType.DisplayMember = "TenLoaiSanPham";
             cbProductType.ValueMember = "MaLoaiSanPham";
             cbProductType.DataSource = listLoaiSanPham;
-            cbProductType.SelectedIndex = 0;
+           
         }
 
         private void loadProductList()
